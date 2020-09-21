@@ -19,6 +19,14 @@ enum class DrawerPage {
 }
 
 @OptIn(ExperimentalMaterialApi::class)
+val SwipeableState<DrawerPage>.drawerOffset: Int
+    get() = offset.value.toInt().coerceAtLeast(0)
+
+@OptIn(ExperimentalMaterialApi::class)
+val SwipeableState<DrawerPage>.detailOffset: Int
+    get() = offset.value.toInt().coerceAtMost(0)
+
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun BasilDrawer(
     peek: Dp,
@@ -30,6 +38,7 @@ fun BasilDrawer(
 ) {
     val screenHeightPx = ConfigurationAmbient.current.screenHeightDp.dp.toIntPx()
     val peekPx = peek.toIntPx()
+    // TODO remember?
     val anchors = mapOf(
         screenHeightPx.toFloat() to DRAWER,
         0f to LIST,
@@ -44,17 +53,13 @@ fun BasilDrawer(
             thresholds = { _, _ ->
                 FractionalThreshold(0.3f)
             }
-        ).offsetGetter(getY = {
-            state.offset.value.toInt().coerceAtLeast(0)
-        })
+        ).offsetGetter(getY = { state.drawerOffset })
     ) {
         DrawerSlot(drawerContent)
         ListSlot(listContent)
         DetailSlot(
             peek = peek,
-            modifier = Modifier.offsetGetter(getY = {
-                state.offset.value.toInt().coerceAtMost(0)
-            }),
+            modifier = Modifier.offsetGetter(getY = { state.detailOffset }),
             content = detailContent
         )
     }
