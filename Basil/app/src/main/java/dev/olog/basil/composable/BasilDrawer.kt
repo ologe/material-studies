@@ -43,7 +43,9 @@ fun BasilDrawer(
             state = state,
             anchors = anchors,
             orientation = Orientation.Vertical,
-            thresholds = { _, _ -> FixedThreshold(56.dp) }
+            thresholds = { _, _ ->
+                FractionalThreshold(0.3f)
+            }
         ).offsetGetter(getY = {
             state.offset.value.toInt().coerceAtLeast(0)
         })
