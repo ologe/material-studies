@@ -1,4 +1,4 @@
-package dev.olog.basil.list
+package dev.olog.basil.model
 
 data class Recipe(
     val url: String,
