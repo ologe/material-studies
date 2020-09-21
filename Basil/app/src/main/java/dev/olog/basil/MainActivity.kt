@@ -2,12 +2,15 @@ package dev.olog.basil
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.foundation.Text
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.setContent
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
 import androidx.ui.tooling.preview.Preview
+import dev.olog.basil.detail.DetailContent
+import dev.olog.basil.drawer.DrawerContent
+import dev.olog.basil.list.ListContent
 import dev.olog.basil.ui.BasilTheme
 
 class MainActivity : AppCompatActivity() {
@@ -15,24 +18,35 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             BasilTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(color = MaterialTheme.colors.background) {
-                    Greeting("Android")
-                }
+                MainActivityContent()
             }
         }
     }
 }
 
+@Preview
 @Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
+private fun MainActivityContentPreview() {
     BasilTheme {
-        Greeting("Android")
+        MainActivityContent()
     }
 }
+
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+private fun MainActivityContent(
+    peek: Dp = 200.dp
+) {
+    BasilDrawer(
+        peek = peek,
+        drawerContent = { DrawerContent() },
+        listContent = { ListContent() },
+        detailContent = { DetailContent() }
+    )
+}
+
+
+
+
+
+
