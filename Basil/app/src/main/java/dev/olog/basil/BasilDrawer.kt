@@ -63,8 +63,7 @@ private fun DrawerSlot(
         modifier = Modifier
             .offset(y = -(ConfigurationAmbient.current.screenHeightDp.dp))
             .fillMaxWidth()
-            .height(ConfigurationAmbient.current.screenHeightDp.dp)
-            .background(Color.Red),
+            .height(ConfigurationAmbient.current.screenHeightDp.dp),
         children = content
     )
 }
@@ -76,8 +75,7 @@ private fun ListSlot(
     Stack(
         modifier = Modifier
             .fillMaxWidth()
-            .height(ConfigurationAmbient.current.screenHeightDp.dp)
-            .background(Color.Green),
+            .height(ConfigurationAmbient.current.screenHeightDp.dp),
         children = content
     )
 }
@@ -91,8 +89,7 @@ private fun DetailSlot(
         modifier = Modifier
             .offset(y = ConfigurationAmbient.current.screenHeightDp.dp - peek)
             .fillMaxWidth()
-            .height(ConfigurationAmbient.current.screenHeightDp.dp)
-            .background(Color.Blue),
+            .height(ConfigurationAmbient.current.screenHeightDp.dp),
         children = content
     )
 }
