@@ -13,6 +13,7 @@ fun Background(
     Surface(
         modifier = modifier,
         color = MaterialTheme.colors.background,
+        contentColor = MaterialTheme.colors.onBackground,
         content = content
     )
 }
