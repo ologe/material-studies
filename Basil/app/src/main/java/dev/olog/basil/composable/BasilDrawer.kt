@@ -3,6 +3,7 @@ package dev.olog.basil.composable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.gesture.scrollorientationlocking.Orientation
 import androidx.compose.ui.platform.ConfigurationAmbient
@@ -29,7 +30,8 @@ val SwipeableState<DrawerPage>.detailOffset: Int
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun BasilDrawer(
-    peek: Dp,
+    topPeek: Dp,
+    bottomPeek: Dp,
     initialValue: DrawerPage = LIST,
     state: SwipeableState<DrawerPage> = rememberSwipeableState(initialValue),
     drawerContent: @Composable StackScope.() -> Unit,
@@ -37,12 +39,12 @@ fun BasilDrawer(
     detailContent: @Composable StackScope.() -> Unit
 ) {
     val screenHeightPx = ConfigurationAmbient.current.screenHeightDp.dp.toIntPx()
-    val peekPx = peek.toIntPx()
+    val bottomPeekPx = bottomPeek.toIntPx()
     // TODO remember?
     val anchors = mapOf(
         screenHeightPx.toFloat() to DRAWER,
         0f to LIST,
-        -(screenHeightPx - peekPx).toFloat() to DETAIL,
+        -(screenHeightPx - bottomPeekPx).toFloat() to DETAIL,
     )
 
     Stack(
@@ -55,23 +57,37 @@ fun BasilDrawer(
             }
         ).offsetGetter(getY = { state.drawerOffset })
     ) {
-        DrawerSlot(drawerContent)
-        ListSlot(listContent)
+        val offsetGetter = Modifier.offsetGetter(getY = { state.detailOffset })
+        DrawerSlot(
+            peek = topPeek,
+            // move content when detail is opening
+            modifier = offsetGetter,
+            content = drawerContent
+        )
+        ListSlot(
+            peek = topPeek,
+            modifier = Modifier.align(Alignment.BottomCenter),
+            content = listContent
+        )
         DetailSlot(
-            peek = peek,
-            modifier = Modifier.offsetGetter(getY = { state.detailOffset }),
+            peek = bottomPeek,
+            // scroll detail
+            modifier = offsetGetter,
             content = detailContent
         )
     }
 }
 
+// TODO content don't start from top, that gap is = peek.dp
 @Composable
 private fun DrawerSlot(
+    peek: Dp,
+    modifier: Modifier = Modifier,
     content: @Composable StackScope.() -> Unit
 ) {
     Stack(
-        modifier = Modifier
-            .offset(y = -(ConfigurationAmbient.current.screenHeightDp.dp))
+        modifier = modifier then Modifier
+            .offset(y = -(ConfigurationAmbient.current.screenHeightDp.dp - peek))
             .fillMaxWidth()
             .height(ConfigurationAmbient.current.screenHeightDp.dp),
         children = content
@@ -80,12 +96,14 @@ private fun DrawerSlot(
 
 @Composable
 private fun ListSlot(
+    peek: Dp,
+    modifier: Modifier = Modifier,
     content: @Composable StackScope.() -> Unit
 ) {
     Stack(
-        modifier = Modifier
+        modifier = modifier then Modifier
             .fillMaxWidth()
-            .height(ConfigurationAmbient.current.screenHeightDp.dp),
+            .height(ConfigurationAmbient.current.screenHeightDp.dp - peek),
         children = content
     )
 }

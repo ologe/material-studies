@@ -43,7 +43,8 @@ private fun MainActivityContentPreview() {
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 private fun MainActivityContent(
-    peek: Dp = 200.dp
+    topPeek: Dp = 45.dp,
+    bottomPeek: Dp = 200.dp
 ) {
 
     val items by remember {
@@ -56,11 +57,12 @@ private fun MainActivityContent(
     val state = rememberSwipeableState(DrawerPage.LIST)
 
     // TODO extract from BasilDrawer??
-    val detailPageHeight = (ConfigurationAmbient.current.screenHeightDp.dp - peek).toIntPx()
+    val detailPageHeight = (ConfigurationAmbient.current.screenHeightDp.dp - bottomPeek).toIntPx()
 
     Background {
         BasilDrawer(
-            peek = peek,
+            topPeek = topPeek,
+            bottomPeek = bottomPeek,
             state = state,
             drawerContent = { DrawerContent() },
             listContent = {
