@@ -23,15 +23,13 @@ enum class DrawerPage {
 fun BasilDrawer(
     peek: Dp,
     initialValue: DrawerPage = LIST,
+    state: SwipeableState<DrawerPage> = rememberSwipeableState(initialValue),
     drawerContent: @Composable StackScope.() -> Unit,
     listContent: @Composable StackScope.() -> Unit,
     detailContent: @Composable StackScope.() -> Unit
 ) {
     val screenHeightPx = ConfigurationAmbient.current.screenHeightDp.dp.toIntPx()
     val peekPx = peek.toIntPx()
-    val state = rememberSwipeableState(
-        initialValue = initialValue
-    )
     val anchors = mapOf(
         screenHeightPx.toFloat() to DRAWER,
         0f to LIST,
