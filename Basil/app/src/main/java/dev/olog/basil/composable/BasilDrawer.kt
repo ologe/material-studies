@@ -1,6 +1,5 @@
-package dev.olog.basil
+package dev.olog.basil.composable
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.FixedThreshold
@@ -9,7 +8,6 @@ import androidx.compose.material.swipeable
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.gesture.scrollorientationlocking.Orientation
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ConfigurationAmbient
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
