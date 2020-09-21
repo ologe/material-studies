@@ -9,6 +9,8 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.WithConstraints
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.annotation.FloatRange
 import androidx.ui.tooling.preview.Preview
@@ -29,15 +31,19 @@ fun ListContent(
     selected: Recipe,
     fraction: Float
 ) {
-    LazyRowFor(items) {
-        Stack(
-            Modifier.fillMaxSize()
+    WithConstraints {
+        LazyRowFor(
+            items = items,
+            modifier = Modifier.padding(bottom = maxHeight * 0.25f)
         ) {
-            Recipe(
-                item = it,
-                selected = selected,
-                fraction = fraction
-            )
+            Stack(Modifier.fillMaxSize()) {
+                Recipe(
+                    item = it,
+                    selected = selected,
+                    fraction = fraction,
+                    maxWidth = maxWidth
+                )
+            }
         }
     }
 }
@@ -46,14 +52,15 @@ fun ListContent(
 private fun StackScope.Recipe(
     item: Recipe,
     selected: Recipe,
-    @FloatRange(0.0, 1.0) fraction: Float
+    @FloatRange(0.0, 1.0) fraction: Float,
+    maxWidth: Dp
 ) {
     Stack(
         Modifier
             .align(Alignment.Center)
-            .fillMaxHeight(.5f)
+            .width(maxWidth)
             .aspectRatio(1f)
-            .padding(32.dp)
+            .padding(horizontal = 32.dp)
     ) {
         CoilImage(
             data = item.url,
