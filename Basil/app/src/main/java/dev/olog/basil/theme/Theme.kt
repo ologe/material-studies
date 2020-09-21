@@ -11,6 +11,7 @@ private val Palette = lightColors(
     primaryVariant = Color(0xFF_37966f),
     secondary = Color(0xFF_fd5523),
     secondaryVariant = Color(0xFF_fd5523),
+    surface = Color(0xFF_b9e4c9)
 )
 
 @Composable
