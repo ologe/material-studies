@@ -59,8 +59,8 @@ private fun StackScope.Recipe(
         Modifier
             .align(Alignment.Center)
             .width(maxWidth)
-            .aspectRatio(1f)
             .padding(horizontal = 32.dp)
+            .aspectRatio(1f)
     ) {
         CoilImage(
             data = item.url,
