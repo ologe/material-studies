@@ -1,16 +1,14 @@
 package dev.olog.basil.composable
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.FixedThreshold
-import androidx.compose.material.rememberSwipeableState
-import androidx.compose.material.swipeable
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.gesture.scrollorientationlocking.Orientation
 import androidx.compose.ui.platform.ConfigurationAmbient
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import dev.olog.basil.composable.DrawerPage.*
 import dev.olog.basil.utils.offsetGetter
 import dev.olog.basil.utils.toIntPx
 
@@ -24,7 +22,7 @@ enum class DrawerPage {
 @Composable
 fun BasilDrawer(
     peek: Dp,
-    initialValue: DrawerPage = DrawerPage.LIST,
+    initialValue: DrawerPage = LIST,
     drawerContent: @Composable StackScope.() -> Unit,
     listContent: @Composable StackScope.() -> Unit,
     detailContent: @Composable StackScope.() -> Unit
@@ -35,11 +33,10 @@ fun BasilDrawer(
         initialValue = initialValue
     )
     val anchors = mapOf(
-        screenHeightPx.toFloat() to DrawerPage.DRAWER,
-        0f to DrawerPage.LIST,
-        -(screenHeightPx - peekPx).toFloat() to DrawerPage.DETAIL,
+        screenHeightPx.toFloat() to DRAWER,
+        0f to LIST,
+        -(screenHeightPx - peekPx).toFloat() to DETAIL,
     )
-
 
     Stack(
         modifier = Modifier.swipeable(
