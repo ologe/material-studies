@@ -9,6 +9,7 @@
 /.idea/assetWizardSettings.xml
 /.idea/markdown*
 /.idea/gradle.xml
+/.idea/codeStyles
 .DS_Store
 /build
 /captures
