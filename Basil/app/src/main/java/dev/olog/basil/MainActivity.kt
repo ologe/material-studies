@@ -43,8 +43,8 @@ private fun MainActivityContentPreview() {
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 private fun MainActivityContent(
-    topPeek: Dp = 45.dp,
-    bottomPeek: Dp = 200.dp
+    topPeek: Dp = 50.dp,
+    bottomPeek: Dp = 300.dp
 ) {
 
     val items by remember {
@@ -58,6 +58,7 @@ private fun MainActivityContent(
 
     // TODO extract from BasilDrawer??
     val detailPageHeight = (ConfigurationAmbient.current.screenHeightDp.dp - bottomPeek).toIntPx()
+    val fraction = (abs(state.detailOffset.toFloat()) / detailPageHeight).coerceIn(0f, 1f)
 
     Background {
         BasilDrawer(
@@ -66,11 +67,10 @@ private fun MainActivityContent(
             state = state,
             drawerContent = { DrawerContent() },
             listContent = {
-                val fraction = abs(state.detailOffset.toFloat()) / detailPageHeight
                 ListContent(items, selected, fraction)
             },
             detailContent = {
-                DetailContent(selected)
+                DetailContent(bottomPeek, selected, fraction)
             }
         )
     }

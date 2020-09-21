@@ -34,7 +34,7 @@ fun ListContent(
     WithConstraints {
         LazyRowFor(
             items = items,
-            modifier = Modifier.padding(bottom = maxHeight * 0.25f)
+            modifier = Modifier.padding(bottom = maxHeight * 0.35f)
         ) {
             Stack(Modifier.fillMaxSize()) {
                 Recipe(
