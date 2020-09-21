@@ -11,6 +11,7 @@ import androidx.compose.ui.gesture.scrollorientationlocking.Orientation
 import androidx.compose.ui.platform.ConfigurationAmbient
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import dev.olog.basil.utils.offsetGetter
 import dev.olog.basil.utils.toIntPx
 
 enum class DrawerPage {
@@ -36,8 +37,9 @@ fun BasilDrawer(
     val anchors = mapOf(
         screenHeightPx.toFloat() to DrawerPage.DRAWER,
         0f to DrawerPage.LIST,
-        -peekPx.toFloat() to DrawerPage.DETAIL,
+        -(screenHeightPx - peekPx).toFloat() to DrawerPage.DETAIL,
     )
+
 
     Stack(
         modifier = Modifier.swipeable(
@@ -45,11 +47,19 @@ fun BasilDrawer(
             anchors = anchors,
             orientation = Orientation.Vertical,
             thresholds = { _, _ -> FixedThreshold(56.dp) }
-        ).offsetPx(y = state.offset)
+        ).offsetGetter(getY = {
+            state.offset.value.toInt().coerceAtLeast(0)
+        })
     ) {
         DrawerSlot(drawerContent)
         ListSlot(listContent)
-        DetailSlot(peek, detailContent)
+        DetailSlot(
+            peek = peek,
+            modifier = Modifier.offsetGetter(getY = {
+                state.offset.value.toInt().coerceAtMost(0)
+            }),
+            content = detailContent
+        )
     }
 }
 
@@ -81,10 +91,11 @@ private fun ListSlot(
 @Composable
 private fun DetailSlot(
     peek: Dp,
+    modifier: Modifier = Modifier,
     content: @Composable StackScope.() -> Unit
 ) {
     Stack(
-        modifier = Modifier
+        modifier = modifier then Modifier
             .offset(y = ConfigurationAmbient.current.screenHeightDp.dp - peek)
             .fillMaxWidth()
             .height(ConfigurationAmbient.current.screenHeightDp.dp),
