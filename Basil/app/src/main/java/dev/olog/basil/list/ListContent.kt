@@ -66,7 +66,9 @@ private fun StackScope.Recipe(
             data = item.url,
             modifier = Modifier.fillMaxSize(),
             loading = {
-                CircularProgressIndicator()
+                Stack(Modifier.fillMaxSize()) {
+                    CircularProgressIndicator(Modifier.align(Alignment.Center))
+                }
             }
         )
         if (item == selected) {
