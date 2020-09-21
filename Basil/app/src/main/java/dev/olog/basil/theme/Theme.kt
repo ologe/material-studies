@@ -7,7 +7,7 @@ import androidx.compose.ui.graphics.Color
 
 val green800 = Color(0xFF_356859)
 val green500 = Color(0xFF_37966f)
-val green100 = Color(0xFF_b9e4c9)
+val green100 = Color(0xFF_F2F5DF)
 val orange800 = Color(0xFF_fd5523)
 val yellow50 = Color(0xFF_fffbe6)
 
@@ -23,7 +23,7 @@ private val Palette = lightColors(
     secondaryVariant = orange800,
     onSecondary = Color.Black,
 
-    surface = yellow50,
+    surface = green100,
     onSurface = green800
 )
 
