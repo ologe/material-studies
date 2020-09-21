@@ -15,6 +15,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.annotation.FloatRange
 import androidx.ui.tooling.preview.Preview
 import dev.chrisbanes.accompanist.coil.CoilImage
+import dev.olog.basil.model.Recipe
 import dev.olog.basil.theme.BasilTheme
 
 @Preview

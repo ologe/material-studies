@@ -16,7 +16,7 @@ import dev.olog.basil.composable.*
 import dev.olog.basil.detail.DetailContent
 import dev.olog.basil.drawer.DrawerContent
 import dev.olog.basil.list.ListContent
-import dev.olog.basil.list.Recipe
+import dev.olog.basil.model.Recipe
 import dev.olog.basil.theme.BasilTheme
 import dev.olog.basil.utils.toIntPx
 import kotlin.math.abs

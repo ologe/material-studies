@@ -15,7 +15,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.annotation.FloatRange
-import dev.olog.basil.list.Recipe
+import dev.olog.basil.model.Recipe
 
 @Composable
 fun DetailContent(
