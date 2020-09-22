@@ -58,24 +58,22 @@ fun DetailContent(
                 DownArrow(eagerEndAlpha)
             }
             Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(bottom = 8.dp),
+                modifier = Modifier.fillMaxSize(),
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
                 RecipeTitle(item.title)
                 HorizontalSpacer(lateStartAlphaModifier)
-                Description(lateStartAlphaModifier)
+                RecipeDescription(Modifier.weight(1f).then(lateStartAlphaModifier))
             }
         }
-        Macros(
+        RecipeMacros(
             modifier = Modifier
                 .padding(horizontal = ListHorizontalPadding)
                 .fillMaxWidth()
                 .then(lateStartAlphaModifier)
         )
         HorizontalSpacer(lateStartAlphaModifier)
-        Allergens(
+        RecipeAllergens(
             modifier = Modifier
                 .padding(horizontal = ListHorizontalPadding)
                 .fillMaxWidth()
@@ -141,14 +139,12 @@ private fun HorizontalSpacer(
 }
 
 @Composable
-private fun Description(
+private fun RecipeDescription(
     modifier: Modifier = Modifier
 ) {
     Text(
         text = LoremIpsum(100).values.joinToString(),
-        modifier = modifier
-            .fillMaxSize()
-            .padding(horizontal = ListHorizontalPadding + 12.dp),
+        modifier = modifier.padding(horizontal = ListHorizontalPadding + 12.dp).padding(bottom = 32.dp),
         style = MaterialTheme.typography.h6,
         textAlign = TextAlign.Center,
         overflow = TextOverflow.Ellipsis
@@ -156,7 +152,7 @@ private fun Description(
 }
 
 @Composable
-private fun Macros(modifier: Modifier = Modifier) {
+private fun RecipeMacros(modifier: Modifier = Modifier) {
     Row(
         modifier = modifier,
         horizontalArrangement = Arrangement.SpaceAround
@@ -183,7 +179,7 @@ private fun Macro(
 }
 
 @Composable
-private fun Allergens(
+private fun RecipeAllergens(
     allergens: Set<Allergen>,
     modifier: Modifier = Modifier
 ) {
