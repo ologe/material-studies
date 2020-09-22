@@ -101,6 +101,7 @@ private fun UntilListContentImage(
 
 @Composable
 private fun RecipeTitle(text: String) {
+    // TODO animate scroll
     Text(
         text = text,
         modifier = Modifier.fillMaxWidth()

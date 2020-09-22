@@ -26,8 +26,19 @@ inline val screenHeightDp: Dp
     get() = ConfigurationAmbient.current.screenHeightDp.dp
 
 @Composable
+inline val screenWidthDp: Dp
+    get() = ConfigurationAmbient.current.screenWidthDp.dp
+
+@Composable
 inline val screenHeightPx: Int
     get() {
         val density = DensityAmbient.current.density
         return (screenHeightDp.value * density).toInt()
+    }
+
+@Composable
+inline val screenWidthPx: Int
+    get() {
+        val density = DensityAmbient.current.density
+        return (screenWidthDp.value * density).toInt()
     }

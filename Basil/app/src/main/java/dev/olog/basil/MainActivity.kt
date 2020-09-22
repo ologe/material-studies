@@ -2,17 +2,21 @@ package dev.olog.basil
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.material.*
+import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.rememberSwipeableState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.savedinstancestate.savedInstanceState
 import androidx.compose.ui.platform.setContent
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.ui.tooling.preview.Preview
-import dev.olog.basil.composable.*
+import dev.olog.basil.composable.Background
+import dev.olog.basil.composable.BasilDrawer
+import dev.olog.basil.composable.DrawerPage
+import dev.olog.basil.composable.detailOffset
 import dev.olog.basil.detail.DetailContent
 import dev.olog.basil.drawer.DrawerContent
 import dev.olog.basil.list.ListContent
@@ -49,17 +53,16 @@ private fun MainActivityContent(
     bottomPeek: Dp = 300.dp
 ) {
 
-    val items by remember {
-        mutableStateOf(Recipe.sample)
-    }
-    val selected by remember {
-        mutableStateOf(items.first())
-    }
-
-    val swipeableState = rememberSwipeableState(DrawerPage.LIST)
     val currentCategory = savedInstanceState {
         Category.Entrees
     }
+    // TODO change items based on category
+    val items by remember {
+        mutableStateOf(Recipe.sample)
+    }
+    val currentPage = savedInstanceState(items) { 0 }
+
+    val swipeableState = rememberSwipeableState(DrawerPage.LIST)
 
     // TODO extract from BasilDrawer??
     val detailPageHeight = (screenHeightDp - bottomPeek).toIntPx()
@@ -72,16 +75,23 @@ private fun MainActivityContent(
             state = swipeableState,
             drawerContent = { DrawerContent(currentCategory) },
             listContent = {
-                ListContent(items, selected, fraction)
+                ListContent(
+                    items = items,
+                    currentPage = currentPage,
+                    fraction = fraction
+                )
             },
             detailContent = {
-                DetailContent(topPeek, bottomPeek, selected, fraction)
+                DetailContent(
+                    topPeek = topPeek,
+                    bottomPeek = bottomPeek,
+                    item = items[currentPage.value],
+                    fraction = fraction
+                )
             }
         )
     }
 }
-
-
 
 
 
