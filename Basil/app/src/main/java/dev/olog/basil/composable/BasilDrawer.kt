@@ -77,7 +77,6 @@ fun BasilDrawer(
     }
 }
 
-// TODO content don't start from top, that gap is = peek.dp
 @Composable
 private fun DrawerSlot(
     peek: Dp,
@@ -86,9 +85,9 @@ private fun DrawerSlot(
 ) {
     Stack(
         modifier = modifier then Modifier
-            .offset(y = -(ConfigurationAmbient.current.screenHeightDp.dp - peek))
+            .offset(y = -(screenHeightDp - peek * 0.5f))
             .fillMaxWidth()
-            .height(ConfigurationAmbient.current.screenHeightDp.dp),
+            .height(screenHeightDp + peek),
         children = content
     )
 }
