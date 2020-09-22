@@ -27,6 +27,7 @@ import dev.olog.basil.model.Allergen
 import dev.olog.basil.model.Recipe
 import dev.olog.basil.theme.green500
 import dev.olog.basil.utils.fakeClickable
+import dev.olog.basil.utils.screenHeightDp
 import java.util.*
 
 @Composable
@@ -42,12 +43,7 @@ fun DetailContent(
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
         // title + description, same height as content list
-        Stack(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(bottom = topPeek)
-                .fillMaxHeight(ListHeightFraction * 0.9f) // TODO mmm check on different screen sizes
-        ) {
+        UntilListContentImage(topPeek) {
             Stack(Modifier.fillMaxWidth().preferredHeight(bottomPeek)) {
                 DownArrow(fraction)
             }
@@ -79,6 +75,20 @@ fun DetailContent(
         Spacer(Modifier.weight(1f))
         Buttons()
     }
+}
+
+@Composable
+private fun UntilListContentImage(
+    peek: Dp,
+    content: @Composable StackScope.() -> Unit
+) {
+    Stack(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(bottom = peek)
+            .height(screenHeightDp * ListHeightFraction - peek),
+        children = content
+    )
 }
 
 @Composable
