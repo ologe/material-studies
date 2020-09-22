@@ -1,11 +1,18 @@
 package dev.olog.basil.utils
 
+import androidx.compose.foundation.clickable
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.compose.ui.LayoutModifier
 import androidx.compose.ui.Measurable
 import androidx.compose.ui.MeasureScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Constraints
+
+@Composable
+fun Modifier.fakeClickable(): Modifier {
+    return this then clickable(onClick = {}, indication = null)
+}
 
 @Stable
 fun Modifier.offsetGetter(

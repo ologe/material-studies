@@ -70,7 +70,7 @@ private fun MainActivityContent(
                 ListContent(items, selected, fraction)
             },
             detailContent = {
-                DetailContent(bottomPeek, selected, fraction)
+                DetailContent(topPeek, bottomPeek, selected, fraction)
             }
         )
     }

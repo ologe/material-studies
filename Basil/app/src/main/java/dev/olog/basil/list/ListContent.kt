@@ -18,6 +18,9 @@ import dev.chrisbanes.accompanist.coil.CoilImage
 import dev.olog.basil.model.Recipe
 import dev.olog.basil.theme.BasilTheme
 
+val ListPadding = 32.dp
+val ListHeightFraction = 0.6f
+
 @Preview
 @Composable
 private fun ListContentPreview() {
@@ -32,11 +35,11 @@ fun ListContent(
     selected: Recipe,
     fraction: Float
 ) {
-    WithConstraints {
-        LazyRowFor(
-            items = items,
-            modifier = Modifier.padding(bottom = maxHeight * 0.35f)
-        ) {
+    WithConstraints(Modifier
+        .fillMaxWidth()
+        .fillMaxHeight(ListHeightFraction)
+    ) {
+        LazyRowFor(items = items) {
             Stack(Modifier.fillMaxSize()) {
                 Recipe(
                     item = it,
@@ -60,7 +63,7 @@ private fun StackScope.Recipe(
         Modifier
             .align(Alignment.Center)
             .width(maxWidth)
-            .padding(horizontal = 32.dp)
+            .padding(horizontal = ListPadding)
             .aspectRatio(1f)
     ) {
         CoilImage(
