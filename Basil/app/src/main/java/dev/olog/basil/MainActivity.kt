@@ -18,6 +18,7 @@ import dev.olog.basil.drawer.DrawerContent
 import dev.olog.basil.list.ListContent
 import dev.olog.basil.model.Recipe
 import dev.olog.basil.theme.BasilTheme
+import dev.olog.basil.utils.screenHeightDp
 import dev.olog.basil.utils.toIntPx
 import kotlin.math.abs
 
@@ -43,7 +44,7 @@ private fun MainActivityContentPreview() {
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 private fun MainActivityContent(
-    topPeek: Dp = 50.dp,
+    topPeek: Dp = 40.dp,
     bottomPeek: Dp = 300.dp
 ) {
 
@@ -57,7 +58,7 @@ private fun MainActivityContent(
     val state = rememberSwipeableState(DrawerPage.LIST)
 
     // TODO extract from BasilDrawer??
-    val detailPageHeight = (ConfigurationAmbient.current.screenHeightDp.dp - bottomPeek).toIntPx()
+    val detailPageHeight = (screenHeightDp - bottomPeek).toIntPx()
     val fraction = (abs(state.detailOffset.toFloat()) / detailPageHeight).coerceIn(0f, 1f)
 
     Background {

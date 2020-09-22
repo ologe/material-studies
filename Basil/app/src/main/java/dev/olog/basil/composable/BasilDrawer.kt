@@ -6,11 +6,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.gesture.scrollorientationlocking.Orientation
-import androidx.compose.ui.platform.ConfigurationAmbient
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
 import dev.olog.basil.composable.DrawerPage.*
 import dev.olog.basil.utils.offsetGetter
+import dev.olog.basil.utils.screenHeightDp
+import dev.olog.basil.utils.screenHeightPx
 import dev.olog.basil.utils.toIntPx
 
 enum class DrawerPage {
@@ -38,7 +38,6 @@ fun BasilDrawer(
     listContent: @Composable StackScope.() -> Unit,
     detailContent: @Composable StackScope.() -> Unit
 ) {
-    val screenHeightPx = ConfigurationAmbient.current.screenHeightDp.dp.toIntPx()
     val bottomPeekPx = bottomPeek.toIntPx()
     // TODO remember?
     val anchors = mapOf(
@@ -103,7 +102,7 @@ private fun ListSlot(
     Stack(
         modifier = modifier then Modifier
             .fillMaxWidth()
-            .height(ConfigurationAmbient.current.screenHeightDp.dp - peek),
+            .height(screenHeightDp - peek),
         children = content
     )
 }
@@ -116,9 +115,9 @@ private fun DetailSlot(
 ) {
     Stack(
         modifier = modifier then Modifier
-            .offset(y = ConfigurationAmbient.current.screenHeightDp.dp - peek)
+            .offset(y = screenHeightDp - peek)
             .fillMaxWidth()
-            .height(ConfigurationAmbient.current.screenHeightDp.dp),
+            .height(screenHeightDp),
         children = content
     )
 }
