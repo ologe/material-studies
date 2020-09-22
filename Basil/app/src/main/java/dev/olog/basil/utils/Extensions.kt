@@ -12,6 +12,12 @@ fun Dp.toIntPx(): Int {
     return (this.value * density).toInt()
 }
 
+@Composable
+fun Int.toDp(): Dp {
+    val density = DensityAmbient.current.density
+    return (this / density).dp
+}
+
 inline val <T> T.exhaustive: T
     get() = this
 

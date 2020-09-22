@@ -7,7 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.platform.ConfigurationAmbient
+import androidx.compose.runtime.savedinstancestate.savedInstanceState
 import androidx.compose.ui.platform.setContent
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -16,6 +16,7 @@ import dev.olog.basil.composable.*
 import dev.olog.basil.detail.DetailContent
 import dev.olog.basil.drawer.DrawerContent
 import dev.olog.basil.list.ListContent
+import dev.olog.basil.model.Category
 import dev.olog.basil.model.Recipe
 import dev.olog.basil.theme.BasilTheme
 import dev.olog.basil.utils.screenHeightDp
@@ -55,18 +56,21 @@ private fun MainActivityContent(
         mutableStateOf(items.first())
     }
 
-    val state = rememberSwipeableState(DrawerPage.LIST)
+    val swipeableState = rememberSwipeableState(DrawerPage.LIST)
+    val currentCategory = savedInstanceState {
+        Category.Entrees
+    }
 
     // TODO extract from BasilDrawer??
     val detailPageHeight = (screenHeightDp - bottomPeek).toIntPx()
-    val fraction = (abs(state.detailOffset.toFloat()) / detailPageHeight).coerceIn(0f, 1f)
+    val fraction = (abs(swipeableState.detailOffset.toFloat()) / detailPageHeight).coerceIn(0f, 1f)
 
     Background {
         BasilDrawer(
             topPeek = topPeek,
             bottomPeek = bottomPeek,
-            state = state,
-            drawerContent = { DrawerContent() },
+            state = swipeableState,
+            drawerContent = { DrawerContent(currentCategory) },
             listContent = {
                 ListContent(items, selected, fraction)
             },
