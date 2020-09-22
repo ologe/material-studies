@@ -9,3 +9,6 @@ fun Dp.toIntPx(): Int {
     val density = DensityAmbient.current.density
     return (this.value * density).toInt()
 }
+
+inline val <T> T.exhaustive: T
+    get() = this
