@@ -26,9 +26,14 @@ import dev.olog.basil.list.ListHorizontalPadding
 import dev.olog.basil.model.Allergen
 import dev.olog.basil.model.Recipe
 import dev.olog.basil.theme.green500
+import dev.olog.basil.utils.AnimationUtils.translateToEnd
+import dev.olog.basil.utils.AnimationUtils.translateToStart
 import dev.olog.basil.utils.fakeClickable
 import dev.olog.basil.utils.screenHeightDp
 import java.util.*
+
+private const val EAGER_END_THRESHOLD = 0.1f
+private const val LATE_START_THRESHOLD = 0.6f
 
 @Composable
 fun DetailContent(
@@ -42,34 +47,39 @@ fun DetailContent(
         modifier = Modifier.fillMaxSize().fakeClickable(),
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
+        val eagerEndAlpha = translateToStart(fraction, EAGER_END_THRESHOLD)
+        val lateStartAlpha = translateToEnd(fraction, LATE_START_THRESHOLD)
+
+        val lateStartAlphaModifier = Modifier.drawLayer(alpha = lateStartAlpha)
+
         // title + description, same height as content list
         UntilListContentImage(topPeek) {
             Stack(Modifier.fillMaxWidth().preferredHeight(bottomPeek)) {
-                DownArrow(fraction)
+                DownArrow(eagerEndAlpha)
             }
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(bottom = 0.dp),
+                    .padding(bottom = 8.dp),
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
                 RecipeTitle(item.title)
-                // val threshold = 0.4f TODO slow start
-                // val alpha = (fraction - threshold).coerceAtLeast(0f) * fraction
-                Spacer(fraction)
-                Description(fraction)
+                HorizontalSpacer(lateStartAlphaModifier)
+                Description(lateStartAlphaModifier)
             }
         }
         Macros(
             modifier = Modifier
                 .padding(horizontal = ListHorizontalPadding)
                 .fillMaxWidth()
+                .then(lateStartAlphaModifier)
         )
-        Spacer(1f)
+        HorizontalSpacer(lateStartAlphaModifier)
         Allergens(
             modifier = Modifier
                 .padding(horizontal = ListHorizontalPadding)
-                .fillMaxWidth(),
+                .fillMaxWidth()
+                .then(lateStartAlphaModifier),
             allergens = item.allergens
         )
         Spacer(Modifier.weight(1f))
@@ -118,10 +128,11 @@ private fun StackScope.DownArrow(fraction: Float) {
 }
 
 @Composable
-private fun Spacer(fraction: Float) {
+private fun HorizontalSpacer(
+    modifier: Modifier = Modifier
+) {
     Spacer(
-        Modifier
-            .drawLayer(alpha = fraction)
+        modifier
             .fillMaxWidth()
             .height(1.dp)
             .padding(horizontal = ListHorizontalPadding)
@@ -130,12 +141,13 @@ private fun Spacer(fraction: Float) {
 }
 
 @Composable
-private fun Description(fraction: Float) {
+private fun Description(
+    modifier: Modifier = Modifier
+) {
     Text(
         text = LoremIpsum(100).values.joinToString(),
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
-            .drawLayer(alpha = fraction)
             .padding(horizontal = ListHorizontalPadding + 12.dp),
         style = MaterialTheme.typography.h6,
         textAlign = TextAlign.Center,
@@ -189,7 +201,7 @@ private fun Allergens(
 @Composable
 private fun Buttons() {
     Stack {
-        Spacer(modifier = Modifier // TODO spacer is too high
+        Spacer(modifier = Modifier
             .background(Color.Black.copy(.2f))
             .fillMaxWidth()
             .height(1.dp)
