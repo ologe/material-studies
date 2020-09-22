@@ -18,8 +18,8 @@ import dev.chrisbanes.accompanist.coil.CoilImage
 import dev.olog.basil.model.Recipe
 import dev.olog.basil.theme.BasilTheme
 
-val ListPadding = 32.dp
-val ListHeightFraction = 0.6f
+val ListHorizontalPadding = 32.dp
+const val ListHeightFraction = 0.6f
 
 @Preview
 @Composable
@@ -63,7 +63,7 @@ private fun StackScope.Recipe(
         Modifier
             .align(Alignment.Center)
             .width(maxWidth)
-            .padding(horizontal = ListPadding)
+            .padding(horizontal = ListHorizontalPadding)
             .aspectRatio(1f)
     ) {
         CoilImage(

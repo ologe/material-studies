@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.annotation.FloatRange
 import androidx.ui.tooling.preview.datasource.LoremIpsum
 import dev.olog.basil.list.ListHeightFraction
-import dev.olog.basil.list.ListPadding
+import dev.olog.basil.list.ListHorizontalPadding
 import dev.olog.basil.model.Recipe
 import dev.olog.basil.theme.green500
 import dev.olog.basil.utils.fakeClickable
@@ -93,7 +93,7 @@ private fun DescriptionSpacer(fraction: Float) {
             .drawLayer(alpha = fraction)
             .fillMaxWidth()
             .height(1.dp)
-            .padding(horizontal = ListPadding)
+            .padding(horizontal = ListHorizontalPadding)
             .background(green500)
     )
 }
@@ -105,7 +105,7 @@ private fun Description(fraction: Float) {
         modifier = Modifier
             .fillMaxSize()
             .drawLayer(alpha = fraction)
-            .padding(horizontal = ListPadding + 12.dp),
+            .padding(horizontal = ListHorizontalPadding + 12.dp),
         style = MaterialTheme.typography.h6,
         textAlign = TextAlign.Center,
         overflow = TextOverflow.Ellipsis
