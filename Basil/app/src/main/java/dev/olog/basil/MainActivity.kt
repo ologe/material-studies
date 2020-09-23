@@ -64,7 +64,9 @@ private fun MainActivityContent(
 
     // TODO extract from BasilDrawer??
     val detailPageHeight = (screenHeightDp - bottomPeek).toIntPx()
-    val fraction = (abs(swipeableState.detailOffset.toFloat()) / detailPageHeight).coerceIn(0f, 1f)
+    val drawerPageHeight = (screenHeightDp + topPeek).toIntPx()
+    val detailFraction = (abs(swipeableState.detailOffset.toFloat()) / detailPageHeight).coerceIn(0f, 1f)
+    val drawerFraction = (abs(swipeableState.drawerOffset.toFloat()) / drawerPageHeight).coerceIn(0f, 1f)
 
     Background {
         BasilDrawer(
@@ -76,7 +78,8 @@ private fun MainActivityContent(
                 ListContent(
                     items = items,
                     state = viewPagerState,
-                    fraction = fraction
+                    drawerFraction = drawerFraction,
+                    detailFraction = detailFraction
                 )
             },
             detailContent = {
@@ -87,7 +90,7 @@ private fun MainActivityContent(
                     items = items,
                     state = viewPagerState,
                     item = items[0],
-                    fraction = fraction
+                    detailFraction = detailFraction
                 )
             }
         )

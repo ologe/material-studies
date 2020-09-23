@@ -47,15 +47,15 @@ fun DetailContent(
     item: Recipe,
     topPeek: Dp,
     bottomPeek: Dp,
-    @FloatRange(0.0, 1.0) fraction: Float
+    @FloatRange(0.0, 1.0) detailFraction: Float
 ) {
     Column(
         // made clickable so below content cannot be clicked
         modifier = Modifier.fillMaxSize().fakeClickable(),
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
-        val eagerEndAlpha = translateToStart(fraction, EAGER_END_THRESHOLD)
-        val lateStartAlpha = translateToEnd(fraction, LATE_START_THRESHOLD)
+        val eagerEndAlpha = translateToStart(detailFraction, EAGER_END_THRESHOLD)
+        val lateStartAlpha = translateToEnd(detailFraction, LATE_START_THRESHOLD)
 
         val lateStartAlphaModifier = Modifier.drawLayer(alpha = lateStartAlpha)
 
@@ -68,7 +68,7 @@ fun DetailContent(
                 modifier = Modifier.fillMaxSize(),
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
-                RecipeTitle(items, state, fraction)
+                RecipeTitle(items, state, detailFraction)
                 HorizontalSpacer(lateStartAlphaModifier)
                 RecipeDescription(Modifier.weight(1f).then(lateStartAlphaModifier))
             }
@@ -110,13 +110,13 @@ private fun UntilListContentImage(
 private fun RecipeTitle(
     items: List<Recipe>,
     state: ViewPagerState,
-    @FloatRange(0.0, 1.0) fraction: Float,
+    @FloatRange(0.0, 1.0) detailFraction: Float,
 ) {
     Stack(Modifier.fillMaxWidth()) {
         ViewPager(
             items = items,
             state = state,
-            isUserInputEnabled = fraction < 0.1f // enable touch only when detail is down
+            isUserInputEnabled = detailFraction < 0.1f // enable touch only when detail is down
         ) { item, itemFraction, isLeft ->
 
             val parallax = computeParallax(
