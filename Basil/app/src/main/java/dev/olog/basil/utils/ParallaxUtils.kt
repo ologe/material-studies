@@ -9,6 +9,7 @@ object ParallaxUtils {
 
     val ListParallaxDp = 30.dp
     val DetailParallaxDp = 30.dp * 3
+    val DrawerParallaxDp = ListParallaxDp * 3f
 
     @Composable
     fun computeParallax(

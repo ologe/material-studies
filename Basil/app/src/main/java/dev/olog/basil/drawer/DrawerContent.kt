@@ -21,7 +21,9 @@ import dev.olog.basil.composable.Background
 import dev.olog.basil.model.Category
 import dev.olog.basil.model.Category.Entrees
 import dev.olog.basil.theme.BasilTheme
+import dev.olog.basil.utils.ParallaxUtils.DrawerParallaxDp
 import dev.olog.basil.utils.toDp
+import dev.olog.basil.utils.toFloatPx
 import dev.olog.basil.utils.toIntPx
 import java.util.*
 
@@ -31,14 +33,15 @@ private fun DrawerContentPreview() {
     BasilTheme {
         Background {
             val state = mutableStateOf(Entrees)
-            DrawerContent(state)
+            DrawerContent(state, 0f)
         }
     }
 }
 
 @Composable
 fun DrawerContent(
-    selected: MutableState<Category>
+    selected: MutableState<Category>,
+    drawerFraction: Float,
 ) {
 
     Stack(Modifier.fillMaxSize()) {
@@ -46,8 +49,8 @@ fun DrawerContent(
             modifier = Modifier.fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            DrawerHeader()
-            DrawerCategories(selected)
+            DrawerHeader(drawerFraction)
+            DrawerCategories(selected, drawerFraction)
         }
 
         Text(
@@ -59,31 +62,39 @@ fun DrawerContent(
 }
 
 @Composable
-private fun DrawerHeader() {
-    Spacer(Modifier.height(96.dp))
-    Image(
-        asset = vectorResource(R.drawable.vd_shopping_list),
-        modifier = Modifier.size(48.dp),
-        colorFilter = ColorFilter.tint(MaterialTheme.colors.onPrimary)
-    )
-    Spacer(Modifier.height(16.dp))
-    Text(
-        text = "Shopping List".toUpperCase(Locale.ROOT),
-        style = MaterialTheme.typography.h5,
-        fontWeight = FontWeight.Normal,
-    )
-    Spacer(Modifier.height(64.dp))
-    // divider
-    Spacer(Modifier.width(96.dp)
-        .height(1.dp)
-        .background(MaterialTheme.colors.onPrimary)
-    )
-    Spacer(Modifier.height(24.dp))
+private fun DrawerHeader(
+    drawerFraction: Float,
+) {
+    Column(
+        modifier = Modifier.parallax(Category.values().size, drawerFraction),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Spacer(Modifier.height(96.dp))
+        Image(
+            asset = vectorResource(R.drawable.vd_shopping_list),
+            modifier = Modifier.size(48.dp),
+            colorFilter = ColorFilter.tint(MaterialTheme.colors.onPrimary)
+        )
+        Spacer(Modifier.height(16.dp))
+        Text(
+            text = "Shopping List".toUpperCase(Locale.ROOT),
+            style = MaterialTheme.typography.h5,
+            fontWeight = FontWeight.Normal,
+        )
+        Spacer(Modifier.height(64.dp))
+        // divider
+        Spacer(Modifier.width(96.dp)
+            .height(1.dp)
+            .background(MaterialTheme.colors.onPrimary)
+        )
+        Spacer(Modifier.height(24.dp))
+    }
 }
 
 @Composable
 private fun DrawerCategories(
-    selected: MutableState<Category>
+    selected: MutableState<Category>,
+    drawerFraction: Float,
 ) {
     val categories = Category.values().toList()
 
@@ -92,10 +103,14 @@ private fun DrawerCategories(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        for (category in categories) {
-            DrawerCategory(category.toString(), category == selected.value) {
-                selected.value = category
-            }
+        for ((index, category) in categories.withIndex()) {
+            val inverseIndex = categories.size - index
+            DrawerCategory(
+                text = category.toString(),
+                isSelected = category == selected.value,
+                modifier = Modifier.parallax(inverseIndex, drawerFraction),
+                onClick = { selected.value = category }
+            )
         }
     }
 }
@@ -104,10 +119,11 @@ private fun DrawerCategories(
 private fun DrawerCategory(
     text: String,
     isSelected: Boolean,
+    modifier: Modifier = Modifier,
     onClick: () -> Unit
 ) {
     Column(
-        modifier = Modifier
+        modifier = modifier
             .clickable(
                 onClick = onClick,
                 indication = null
@@ -139,4 +155,19 @@ private fun DrawerCategory(
         }
     }
 
+}
+
+/**
+ * @param position position in layout, 0 bottom, n top
+ * n
+ * n - 1
+ * ..
+ * 1
+ * 0
+ */
+@Composable
+private fun Modifier.parallax(position: Int, fraction: Float): Modifier {
+    return this then Modifier.drawLayer(
+        translationY = -DrawerParallaxDp.toFloatPx() * position * (1f - fraction)
+    )
 }

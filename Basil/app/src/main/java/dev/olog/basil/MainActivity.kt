@@ -77,7 +77,12 @@ private fun MainActivityContent(
             topPeek = topPeek,
             bottomPeek = bottomPeek,
             state = swipeableState,
-            drawerContent = { DrawerContent(currentCategory) },
+            drawerContent = {
+                DrawerContent(
+                    selected = currentCategory,
+                    drawerFraction = drawerFraction,
+                )
+            },
             listContent = {
                 ListContent(
                     items = items,
