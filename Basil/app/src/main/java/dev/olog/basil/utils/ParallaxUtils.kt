@@ -19,7 +19,7 @@ object ParallaxUtils {
         if (isLeft) {
             return -fraction * parallax.toIntPx()
         } else {
-            return (parallax - (parallax * fraction)).toIntPx().toFloat()
+            return (parallax - (parallax * fraction)).toFloatPx()
         }
     }
 

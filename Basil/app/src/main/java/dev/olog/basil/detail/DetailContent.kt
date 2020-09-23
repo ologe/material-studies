@@ -34,6 +34,7 @@ import dev.olog.basil.utils.ParallaxUtils.DetailParallaxDp
 import dev.olog.basil.utils.ParallaxUtils.computeParallax
 import dev.olog.basil.utils.fakeClickable
 import dev.olog.basil.utils.screenHeightDp
+import dev.olog.basil.utils.toFloatPx
 import java.util.*
 
 private const val EAGER_END_THRESHOLD = 0.1f
@@ -49,46 +50,63 @@ fun DetailContent(
     bottomPeek: Dp,
     @FloatRange(0.0, 1.0) detailFraction: Float
 ) {
+    val eagerEndFraction = translateToStart(detailFraction, EAGER_END_THRESHOLD)
+    val lateStartFraction = translateToEnd(detailFraction, LATE_START_THRESHOLD)
+
+    val lateStartModifier = Modifier.drawLayer(
+        translationY = -(50.dp * (1f - lateStartFraction)).toFloatPx()
+    )
+
     Column(
         // made clickable so below content cannot be clicked
         modifier = Modifier.fillMaxSize().fakeClickable(),
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
-        val eagerEndAlpha = translateToStart(detailFraction, EAGER_END_THRESHOLD)
-        val lateStartAlpha = translateToEnd(detailFraction, LATE_START_THRESHOLD)
 
-        val lateStartAlphaModifier = Modifier.drawLayer(alpha = lateStartAlpha)
+        val lateStartAlphaModifier = Modifier.drawLayer(alpha = lateStartFraction)
 
         // title + description, same height as content list
         UntilListContentImage(topPeek) {
             Stack(Modifier.fillMaxWidth().preferredHeight(bottomPeek)) {
-                DownArrow(eagerEndAlpha)
+                DownArrow(eagerEndFraction)
             }
             Column(
                 modifier = Modifier.fillMaxSize(),
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
+
                 RecipeTitle(items, state, detailFraction)
-                HorizontalSpacer(lateStartAlphaModifier)
-                RecipeDescription(Modifier.weight(1f).then(lateStartAlphaModifier))
+
+                Column(
+                    modifier = lateStartModifier,
+                    verticalArrangement = Arrangement.spacedBy(16.dp)
+                ) {
+                    HorizontalSpacer(lateStartAlphaModifier)
+                    RecipeDescription(Modifier.weight(1f).then(lateStartAlphaModifier))
+                }
             }
         }
-        RecipeMacros(
-            modifier = Modifier
-                .padding(horizontal = ListHorizontalPadding)
-                .fillMaxWidth()
-                .then(lateStartAlphaModifier)
-        )
-        HorizontalSpacer(lateStartAlphaModifier)
-        RecipeAllergens(
-            modifier = Modifier
-                .padding(horizontal = ListHorizontalPadding)
-                .fillMaxWidth()
-                .then(lateStartAlphaModifier),
-            allergens = item.allergens
-        )
-        Spacer(Modifier.weight(1f))
-        Buttons()
+        Column(
+            modifier = lateStartModifier,
+            verticalArrangement = Arrangement.spacedBy(16.dp),
+        ) {
+            RecipeMacros(
+                modifier = Modifier
+                    .padding(horizontal = ListHorizontalPadding)
+                    .fillMaxWidth()
+                    .then(lateStartAlphaModifier)
+            )
+            HorizontalSpacer(lateStartAlphaModifier)
+            RecipeAllergens(
+                modifier = Modifier
+                    .padding(horizontal = ListHorizontalPadding)
+                    .fillMaxWidth()
+                    .then(lateStartAlphaModifier),
+                allergens = item.allergens
+            )
+            Spacer(Modifier.weight(1f))
+            Buttons()
+        }
     }
 }
 
