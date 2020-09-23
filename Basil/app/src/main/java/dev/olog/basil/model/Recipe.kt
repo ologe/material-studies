@@ -1,19 +1,28 @@
 package dev.olog.basil.model
 
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.ImageAsset
+import androidx.compose.ui.res.imageResource
+import dev.olog.basil.R
+
 data class Recipe(
-    val url: String,
+    val image: ImageAsset,
     val title: String,
     val allergens: Set<Allergen> = emptySet()
 ) {
 
     companion object {
 
-        val sample = listOf(
-            Recipe("https://loremflickr.com/500/500", "Creamy Pesto Pasta", setOf(Allergen.GlutenFree, Allergen.EggFree)),
-            Recipe("https://loremflickr.com/500/500", "Beef Pot Pie", setOf(Allergen.EggFree)),
-            Recipe("https://loremflickr.com/500/500", "Herb Roasted Chicken"),
-            Recipe("https://loremflickr.com/500/500", "Spinach File Puffs", setOf(Allergen.GlutenFree)),
-        )
+        @Composable
+        val sample : List<Recipe>
+            get() {
+                return listOf(
+                    Recipe(imageResource(R.drawable.cat3), "Creamy Pesto Pasta", setOf(Allergen.GlutenFree, Allergen.EggFree)),
+                    Recipe(imageResource(R.drawable.cat2), "Beef Pot Pie", setOf(Allergen.EggFree)),
+                    Recipe(imageResource(R.drawable.cat1), "Herb Roasted Chicken"),
+                    Recipe(imageResource(R.drawable.cat4), "Spinach File Puffs", setOf(Allergen.GlutenFree)),
+                )
+            }
 
     }
 

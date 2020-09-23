@@ -5,14 +5,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.rememberSwipeableState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.savedinstancestate.savedInstanceState
 import androidx.compose.ui.platform.setContent
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.ui.tooling.preview.Preview
+import androidx.ui.tooling.preview.PreviewParameter
 import dev.olog.basil.composable.*
 import dev.olog.basil.detail.DetailContent
 import dev.olog.basil.drawer.DrawerContent
@@ -20,6 +18,7 @@ import dev.olog.basil.list.ListContent
 import dev.olog.basil.model.Category
 import dev.olog.basil.model.Recipe
 import dev.olog.basil.theme.BasilTheme
+import dev.olog.basil.utils.DrawerPagePreviewProvider
 import dev.olog.basil.utils.screenHeightDp
 import dev.olog.basil.utils.toIntPx
 import kotlin.math.abs
@@ -29,8 +28,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             BasilTheme {
-                val items by remember { mutableStateOf(Recipe.sample) }
-                MainActivityContent(items)
+                MainActivityContent(Recipe.sample)
             }
         }
     }
@@ -38,9 +36,14 @@ class MainActivity : AppCompatActivity() {
 
 @Preview
 @Composable
-private fun MainActivityContentPreview() {
+private fun MainActivityContentPreview(
+    @PreviewParameter(DrawerPagePreviewProvider::class) page: DrawerPage
+) {
     BasilTheme {
-        MainActivityContent(Recipe.sample)
+        MainActivityContent(
+            items = Recipe.sample,
+            initialPage = page
+        )
     }
 }
 
@@ -48,6 +51,7 @@ private fun MainActivityContentPreview() {
 @Composable
 private fun MainActivityContent(
     items: List<Recipe>,
+    initialPage: DrawerPage = DrawerPage.LIST,
     topPeek: Dp = 40.dp,
     bottomPeek: Dp = 300.dp
 ) {
@@ -56,7 +60,7 @@ private fun MainActivityContent(
 
     // TODO change items based on category
     val viewPagerState = rememberViewPagerState(initialPage = 0)
-    val swipeableState = rememberSwipeableState(DrawerPage.LIST)
+    val swipeableState = rememberSwipeableState(initialPage)
 
     // TODO extract from BasilDrawer??
     val detailPageHeight = (screenHeightDp - bottomPeek).toIntPx()

@@ -9,6 +9,9 @@ import androidx.compose.ui.gesture.scrollorientationlocking.Orientation
 import dev.olog.basil.utils.offsetGetter
 import kotlin.math.floor
 
+/**
+ * @param children T item, float (0..1) fraction offset, bool true when is left item
+ */
 @Composable
 fun <T> ViewPager(
     items: List<T>,
@@ -16,7 +19,7 @@ fun <T> ViewPager(
     modifier: Modifier = Modifier,
     orientation: Orientation = Orientation.Horizontal,
     isUserInputEnabled: Boolean = true,
-    children: @Composable StackScope.(T) -> Unit
+    children: @Composable StackScope.(T, Float, Boolean) -> Unit
 ) {
     val itemCount = items.size
 
@@ -42,14 +45,16 @@ fun <T> ViewPager(
             val leftPage = offset / pageSize // left or center
             val leftPageStartOffset = leftPage * pageSize - offset
 
+            val itemFraction = (state.offset % pageSize) / pageSize
+
             // left page
             Page(offset = leftPageStartOffset, orientation = orientation) {
-                children(items[leftPage])
+                children(items[leftPage], itemFraction, true)
             }
             // right page
             if (leftPage + 1 < itemCount) {
                 Page(offset = leftPageStartOffset + pageSize, orientation = orientation) {
-                    children(items[leftPage + 1])
+                    children(items[leftPage + 1], itemFraction, false)
                 }
             }
         }

@@ -32,10 +32,12 @@ import dev.olog.basil.utils.AnimationUtils.translateToEnd
 import dev.olog.basil.utils.AnimationUtils.translateToStart
 import dev.olog.basil.utils.fakeClickable
 import dev.olog.basil.utils.screenHeightDp
+import dev.olog.basil.utils.toIntPx
 import java.util.*
 
 private const val EAGER_END_THRESHOLD = 0.1f
 private const val LATE_START_THRESHOLD = 0.6f
+val DetailParallaxDp = 30.dp * 3
 
 @Composable
 fun DetailContent(
@@ -107,18 +109,26 @@ private fun UntilListContentImage(
 private fun RecipeTitle(
     items: List<Recipe>,
     state: ViewPagerState,
-    @FloatRange(0.0, 1.0) fraction: Float
+    @FloatRange(0.0, 1.0) fraction: Float,
 ) {
     Stack(Modifier.fillMaxWidth()) {
         ViewPager(
             items = items,
             state = state,
             isUserInputEnabled = fraction < 0.1f // enable touch only when detail is down
-        ) {
+        ) { item, itemFraction, isLeft ->
+
+            val translationX: Float = if (isLeft) {
+                -itemFraction * DetailParallaxDp.toIntPx()
+            } else {
+                (DetailParallaxDp - (DetailParallaxDp * itemFraction)).toIntPx().toFloat()
+            }
+
             Text(
-                text = it.title,
+                text = item.title,
                 modifier = Modifier.fillMaxWidth()
-                    .padding(top = 32.dp),
+                    .padding(top = 32.dp)
+                    .drawLayer(translationX = translationX),
                 style = MaterialTheme.typography.h2,
                 textAlign = TextAlign.Center,
                 color = MaterialTheme.colors.secondary,
