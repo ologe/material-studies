@@ -118,7 +118,6 @@ private fun UntilListContentImage(
     Stack(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(bottom = peek)
             .height(screenHeightDp * ListHeightFraction - peek),
         children = content
     )
