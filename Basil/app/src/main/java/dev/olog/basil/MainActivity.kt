@@ -80,6 +80,8 @@ private fun MainActivityContent(
                 DetailContent(
                     topPeek = topPeek,
                     bottomPeek = bottomPeek,
+                    items = items,
+                    state = viewPagerState,
                     item = items[0],
                     fraction = fraction
                 )

@@ -14,6 +14,7 @@ fun Modifier.viewPager(
     state: ViewPagerState,
     maxWidthPx: Int,
     orientation: Orientation = Orientation.Horizontal,
+    isUserInputEnabled: Boolean = true,
     threshold: Dp = 56.dp,
 ): Modifier = composed {
 
@@ -23,6 +24,9 @@ fun Modifier.viewPager(
     draggable(
         orientation = orientation,
         onDragStopped = { velocity ->
+            if (!isUserInputEnabled) {
+                return@draggable
+            }
             val mod = state.offset % maxWidthPx
             val left = state.offset - mod
             val right = left + maxWidthPx
@@ -37,6 +41,9 @@ fun Modifier.viewPager(
             state.animateTo(animateTo)
         },
         onDrag = { delta ->
+            if (!isUserInputEnabled) {
+                return@draggable
+            }
             val newAmount = (state.offset - delta)
                 .coerceIn(state.lowerBound, state.upperBound)
             state.snapTo(newAmount)

@@ -21,6 +21,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.annotation.FloatRange
 import androidx.ui.tooling.preview.datasource.LoremIpsum
 import dev.olog.basil.composable.AllergenRow
+import dev.olog.basil.composable.ViewPager
+import dev.olog.basil.composable.ViewPagerState
 import dev.olog.basil.list.ListHeightFraction
 import dev.olog.basil.list.ListHorizontalPadding
 import dev.olog.basil.model.Allergen
@@ -37,9 +39,11 @@ private const val LATE_START_THRESHOLD = 0.6f
 
 @Composable
 fun DetailContent(
+    items: List<Recipe>,
+    state: ViewPagerState,
+    item: Recipe,
     topPeek: Dp,
     bottomPeek: Dp,
-    item: Recipe,
     @FloatRange(0.0, 1.0) fraction: Float
 ) {
     Column(
@@ -61,7 +65,7 @@ fun DetailContent(
                 modifier = Modifier.fillMaxSize(),
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
-                RecipeTitle(item.title)
+                RecipeTitle(items, state, fraction)
                 HorizontalSpacer(lateStartAlphaModifier)
                 RecipeDescription(Modifier.weight(1f).then(lateStartAlphaModifier))
             }
@@ -100,16 +104,27 @@ private fun UntilListContentImage(
 }
 
 @Composable
-private fun RecipeTitle(text: String) {
-    // TODO animate scroll
-    Text(
-        text = text,
-        modifier = Modifier.fillMaxWidth()
-            .padding(top = 32.dp),
-        style = MaterialTheme.typography.h2,
-        textAlign = TextAlign.Center,
-        color = MaterialTheme.colors.secondary,
-    )
+private fun RecipeTitle(
+    items: List<Recipe>,
+    state: ViewPagerState,
+    @FloatRange(0.0, 1.0) fraction: Float
+) {
+    Stack(Modifier.fillMaxWidth()) {
+        ViewPager(
+            items = items,
+            state = state,
+            isUserInputEnabled = fraction < 0.1f // enable touch only when detail is down
+        ) {
+            Text(
+                text = it.title,
+                modifier = Modifier.fillMaxWidth()
+                    .padding(top = 32.dp),
+                style = MaterialTheme.typography.h2,
+                textAlign = TextAlign.Center,
+                color = MaterialTheme.colors.secondary,
+            )
+        }
+    }
 }
 
 @Composable

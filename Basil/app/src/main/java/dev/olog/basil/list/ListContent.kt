@@ -29,7 +29,8 @@ private fun ListContentPreview() {
     BasilTheme {
         ListContent(
             items = Recipe.sample,
-            fraction = 0f
+            fraction = 0f,
+            state = rememberViewPagerState(initialPage = 0)
         )
     }
 }
@@ -37,7 +38,7 @@ private fun ListContentPreview() {
 @Composable
 fun ListContent(
     items: List<Recipe>,
-    state: ViewPagerState = rememberViewPagerState(initialPage = 0),
+    state: ViewPagerState,
     fraction: Float
 ) {
 

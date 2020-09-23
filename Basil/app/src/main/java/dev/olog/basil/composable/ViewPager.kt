@@ -15,6 +15,7 @@ fun <T> ViewPager(
     state: ViewPagerState = rememberViewPagerState(initialPage = 0),
     modifier: Modifier = Modifier,
     orientation: Orientation = Orientation.Horizontal,
+    isUserInputEnabled: Boolean = true,
     children: @Composable StackScope.(T) -> Unit
 ) {
     val itemCount = items.size
@@ -33,7 +34,8 @@ fun <T> ViewPager(
             modifier = Modifier.viewPager(
                 state = state,
                 maxWidthPx = pageSize,
-                orientation = orientation
+                orientation = orientation,
+                isUserInputEnabled = isUserInputEnabled
             )
         ) {
             val offset = floor(state.offset).toInt()
