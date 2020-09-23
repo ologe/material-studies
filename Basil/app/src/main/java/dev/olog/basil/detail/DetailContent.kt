@@ -30,14 +30,15 @@ import dev.olog.basil.model.Recipe
 import dev.olog.basil.theme.green500
 import dev.olog.basil.utils.AnimationUtils.translateToEnd
 import dev.olog.basil.utils.AnimationUtils.translateToStart
+import dev.olog.basil.utils.ParallaxUtils.DetailParallaxDp
+import dev.olog.basil.utils.ParallaxUtils.computeParallax
 import dev.olog.basil.utils.fakeClickable
 import dev.olog.basil.utils.screenHeightDp
-import dev.olog.basil.utils.toIntPx
 import java.util.*
 
 private const val EAGER_END_THRESHOLD = 0.1f
 private const val LATE_START_THRESHOLD = 0.6f
-val DetailParallaxDp = 30.dp * 3
+
 
 @Composable
 fun DetailContent(
@@ -118,20 +119,22 @@ private fun RecipeTitle(
             isUserInputEnabled = fraction < 0.1f // enable touch only when detail is down
         ) { item, itemFraction, isLeft ->
 
-            val translationX: Float = if (isLeft) {
-                -itemFraction * DetailParallaxDp.toIntPx()
-            } else {
-                (DetailParallaxDp - (DetailParallaxDp * itemFraction)).toIntPx().toFloat()
-            }
+            val parallax = computeParallax(
+                fraction = itemFraction,
+                isLeft = isLeft,
+                parallax = DetailParallaxDp
+            )
 
+            // TODO size granularity
             Text(
                 text = item.title,
                 modifier = Modifier.fillMaxWidth()
                     .padding(top = 32.dp)
-                    .drawLayer(translationX = translationX),
+                    .drawLayer(translationX = parallax),
                 style = MaterialTheme.typography.h2,
                 textAlign = TextAlign.Center,
                 color = MaterialTheme.colors.secondary,
+                maxLines = 2
             )
         }
     }

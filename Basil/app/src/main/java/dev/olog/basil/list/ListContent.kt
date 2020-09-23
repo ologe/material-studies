@@ -11,17 +11,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.WithConstraints
 import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.drawLayer
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.annotation.FloatRange
 import dev.olog.basil.composable.ViewPager
 import dev.olog.basil.composable.ViewPagerState
 import dev.olog.basil.model.Recipe
-import dev.olog.basil.utils.toIntPx
+import dev.olog.basil.utils.ParallaxUtils
+import dev.olog.basil.utils.ParallaxUtils.ListParallaxDp
 
 val ListHorizontalPadding = 32.dp
 const val ListHeightFraction = 0.6f
-val ListParallaxDp = 30.dp
+
 
 @Composable
 fun ListContent(
@@ -37,13 +39,14 @@ fun ListContent(
         ViewPager(
             items = items,
             state = state
-        ) { item, itemFraction, _ ->
+        ) { item, itemFraction, isLeft ->
             Stack(Modifier.fillMaxSize()) {
                 Recipe(
                     item = item,
                     maxWidth = maxWidth,
                     fraction = fraction,
-                    itemFraction = itemFraction
+                    itemFraction = itemFraction,
+                    isLeft = isLeft
                 )
             }
         }
@@ -55,7 +58,8 @@ private fun StackScope.Recipe(
     item: Recipe,
     @FloatRange(0.0, 1.0) fraction: Float,
     @FloatRange(0.0, 1.0) itemFraction: Float,
-    maxWidth: Dp
+    maxWidth: Dp,
+    isLeft: Boolean
 ) {
     Stack(
         Modifier
@@ -65,12 +69,17 @@ private fun StackScope.Recipe(
             .aspectRatio(1f)
             .clipToBounds()
     ) {
+        val parallax = ParallaxUtils.computeParallax(
+            fraction = itemFraction,
+            isLeft = isLeft,
+            parallax = ListParallaxDp
+        )
         Image(
             asset = item.image,
             modifier = Modifier.fillMaxSize().drawLayer(
-                scaleY = 1.1f,
-                scaleX = 1.1f,
-                translationX = itemFraction * ListParallaxDp.toIntPx()
+                scaleY = 1.2f,
+                scaleX = 1.2f,
+                translationX = -parallax
             )
         )
         Scrim(fraction)

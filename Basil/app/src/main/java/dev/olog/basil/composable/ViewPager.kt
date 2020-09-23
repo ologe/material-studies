@@ -3,6 +3,7 @@ package dev.olog.basil.composable
 import androidx.compose.foundation.layout.Stack
 import androidx.compose.foundation.layout.StackScope
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.WithConstraints
 import androidx.compose.ui.gesture.scrollorientationlocking.Orientation
@@ -19,6 +20,7 @@ fun <T> ViewPager(
     modifier: Modifier = Modifier,
     orientation: Orientation = Orientation.Horizontal,
     isUserInputEnabled: Boolean = true,
+    alignment: Alignment = Alignment.Center,
     children: @Composable StackScope.(T, Float, Boolean) -> Unit
 ) {
     val itemCount = items.size
@@ -39,7 +41,8 @@ fun <T> ViewPager(
                 maxWidthPx = pageSize,
                 orientation = orientation,
                 isUserInputEnabled = isUserInputEnabled
-            )
+            ),
+            alignment = alignment
         ) {
             val offset = floor(state.offset).toInt()
             val leftPage = offset / pageSize // left or center
