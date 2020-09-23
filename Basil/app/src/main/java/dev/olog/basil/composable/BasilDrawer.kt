@@ -52,7 +52,7 @@ fun BasilDrawer(
             anchors = anchors,
             orientation = Orientation.Vertical,
             thresholds = { _, _ ->
-                FractionalThreshold(1f)
+                FractionalThreshold(0.9f)
             }
         ).offsetGetter(y = { state.drawerOffset })
     ) {
