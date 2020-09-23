@@ -51,10 +51,9 @@ fun DrawerContent(
         }
 
         Text(
-            text = "BASiL", // TODO use widget uppercase when avaialble
+            text = "BASiL",
             modifier = Modifier.align(Alignment.BottomCenter),
             style = MaterialTheme.typography.h2,
-            // TODO green
         )
     }
 }
