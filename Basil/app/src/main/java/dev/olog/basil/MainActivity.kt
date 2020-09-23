@@ -13,10 +13,7 @@ import androidx.compose.ui.platform.setContent
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.ui.tooling.preview.Preview
-import dev.olog.basil.composable.Background
-import dev.olog.basil.composable.BasilDrawer
-import dev.olog.basil.composable.DrawerPage
-import dev.olog.basil.composable.detailOffset
+import dev.olog.basil.composable.*
 import dev.olog.basil.detail.DetailContent
 import dev.olog.basil.drawer.DrawerContent
 import dev.olog.basil.list.ListContent
@@ -32,7 +29,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             BasilTheme {
-                MainActivityContent()
+                val items by remember { mutableStateOf(Recipe.sample) }
+                MainActivityContent(items)
             }
         }
     }
@@ -42,26 +40,22 @@ class MainActivity : AppCompatActivity() {
 @Composable
 private fun MainActivityContentPreview() {
     BasilTheme {
-        MainActivityContent()
+        MainActivityContent(Recipe.sample)
     }
 }
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 private fun MainActivityContent(
+    items: List<Recipe>,
     topPeek: Dp = 40.dp,
     bottomPeek: Dp = 300.dp
 ) {
 
-    val currentCategory = savedInstanceState {
-        Category.Entrees
-    }
-    // TODO change items based on category
-    val items by remember {
-        mutableStateOf(Recipe.sample)
-    }
-    val currentPage = savedInstanceState(items) { 0 }
+    val currentCategory = savedInstanceState { Category.Entrees }
 
+    // TODO change items based on category
+    val viewPagerState = rememberViewPagerState(initialPage = 0)
     val swipeableState = rememberSwipeableState(DrawerPage.LIST)
 
     // TODO extract from BasilDrawer??
@@ -77,15 +71,16 @@ private fun MainActivityContent(
             listContent = {
                 ListContent(
                     items = items,
-                    currentPage = currentPage,
+                    state = viewPagerState,
                     fraction = fraction
                 )
             },
             detailContent = {
+                // TODO use some sync viewpager for detail title?
                 DetailContent(
                     topPeek = topPeek,
                     bottomPeek = bottomPeek,
-                    item = items[currentPage.value],
+                    item = items[0],
                     fraction = fraction
                 )
             }

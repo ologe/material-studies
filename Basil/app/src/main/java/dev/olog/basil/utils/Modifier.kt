@@ -16,9 +16,9 @@ fun Modifier.fakeClickable(): Modifier {
 
 @Stable
 fun Modifier.offsetGetter(
-    getX: () -> Int = { 0 },
-    getY: () -> Int = { 0 },
-) = this.then(OffsetModifier(getX, getY, true))
+    x: () -> Int = { 0 },
+    y: () -> Int = { 0 },
+) = this.then(OffsetModifier(x, y, true))
 
 private data class OffsetModifier(
     val getX: () -> Int,

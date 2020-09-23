@@ -54,9 +54,9 @@ fun BasilDrawer(
             thresholds = { _, _ ->
                 FractionalThreshold(0.3f)
             }
-        ).offsetGetter(getY = { state.drawerOffset })
+        ).offsetGetter(y = { state.drawerOffset })
     ) {
-        val offsetGetter = Modifier.offsetGetter(getY = { state.detailOffset })
+        val offsetGetter = Modifier.offsetGetter(y = { state.detailOffset })
         DrawerSlot(
             peek = topPeek,
             // move content when detail is opening

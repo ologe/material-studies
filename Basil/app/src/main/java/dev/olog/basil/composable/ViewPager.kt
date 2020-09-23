@@ -1,127 +1,71 @@
 package dev.olog.basil.composable
 
-import androidx.compose.animation.asDisposableClock
-import androidx.compose.animation.core.TargetAnimation
-import androidx.compose.foundation.animation.defaultFlingConfig
-import androidx.compose.foundation.gestures.ScrollableController
-import androidx.compose.foundation.gestures.scrollable
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyItemScope
-import androidx.compose.runtime.*
-import androidx.compose.runtime.savedinstancestate.savedInstanceState
-import androidx.compose.ui.Alignment
+import androidx.compose.foundation.layout.Stack
+import androidx.compose.foundation.layout.StackScope
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clipToBounds
+import androidx.compose.ui.WithConstraints
 import androidx.compose.ui.gesture.scrollorientationlocking.Orientation
-import androidx.compose.ui.layout.ExperimentalSubcomposeLayoutApi
-import androidx.compose.ui.layout.SubcomposeLayout
-import androidx.compose.ui.platform.AnimationClockAmbient
-import androidx.compose.ui.platform.LayoutDirectionAmbient
-import androidx.compose.ui.unit.LayoutDirection
-import androidx.compose.ui.unit.dp
-import dev.olog.basil.utils.screenWidthPx
-import dev.olog.basil.utils.toIntPx
+import dev.olog.basil.utils.offsetGetter
+import kotlin.math.floor
 
-// TODO this is a dump custom implementation
-//  sometimes scroll breaks
-//  change with a real implementation when possible
 @Composable
-fun<T> ViewPager(
+fun <T> ViewPager(
     items: List<T>,
-    currentPage: MutableState<Int> = savedInstanceState { 0 } ,
+    state: ViewPagerState = rememberViewPagerState(initialPage = 0),
     modifier: Modifier = Modifier,
-    contentPadding: PaddingValues = PaddingValues(0.dp),
-    verticalAlignment: Alignment.Vertical = Alignment.Top,
-    itemContent: @Composable LazyItemScope.(Int, T) -> Unit
+    orientation: Orientation = Orientation.Horizontal,
+    children: @Composable StackScope.(T) -> Unit
 ) {
-    CustomLazyFor(
-        itemsCount = items.size,
-        currentPage = currentPage,
-        modifier = modifier,
-        contentPadding = contentPadding,
-        verticalAlignment = verticalAlignment,
-        isVertical = false
-    ) { index ->
-        val item = items[index]
-        {
-            key(index) {
-                itemContent(index, item)
+    val itemCount = items.size
+
+    WithConstraints(modifier) {
+        val pageSize = when (orientation) {
+            Orientation.Vertical -> constraints.maxHeight
+            Orientation.Horizontal -> constraints.maxWidth
+        }
+
+        val maxScroll = (pageSize * (itemCount - 1)).toFloat()
+        state.pageSize = pageSize
+        state.bounds = 0f.rangeTo(maxScroll)
+
+        Stack(
+            modifier = Modifier.viewPager(
+                state = state,
+                maxWidthPx = pageSize,
+                orientation = orientation
+            )
+        ) {
+            val offset = floor(state.offset).toInt()
+            val leftPage = offset / pageSize // left or center
+            val leftPageStartOffset = leftPage * pageSize - offset
+
+            // left page
+            Page(offset = leftPageStartOffset, orientation = orientation) {
+                children(items[leftPage])
+            }
+            // right page
+            if (leftPage + 1 < itemCount) {
+                Page(offset = leftPageStartOffset + pageSize, orientation = orientation) {
+                    children(items[leftPage + 1])
+                }
             }
         }
     }
 }
 
-@Suppress("NOTHING_TO_INLINE")
 @Composable
-@OptIn(ExperimentalSubcomposeLayoutApi::class)
-internal inline fun CustomLazyFor(
-    itemsCount: Int,
-    currentPage: MutableState<Int>,
-    modifier: Modifier = Modifier,
-    contentPadding: PaddingValues,
-    horizontalAlignment: Alignment.Horizontal = Alignment.Start,
-    verticalAlignment: Alignment.Vertical = Alignment.Top,
-    isVertical: Boolean,
-    noinline itemContentFactory: LazyItemScope.(Int) -> @Composable () -> Unit
+private fun Page(
+    offset: Int,
+    orientation: Orientation,
+    children: @Composable StackScope.() -> Unit
 ) {
-    val state = remember { CustomLazyForState(isVertical = isVertical) }
-    val scrollController = rememberViewPagerController(
-        itemsCount = itemsCount,
-        currentPage = currentPage,
-        consumeScrollDelta = state.onScrollDelta
+    val modifier = when (orientation) {
+        Orientation.Horizontal -> Modifier.offsetGetter(x = { offset })
+        Orientation.Vertical -> Modifier.offsetGetter(y = { offset })
+    }
+    Stack(
+        modifier = modifier,
+        children = children
     )
-    state.scrollableController = scrollController
-    val reverseDirection = LayoutDirectionAmbient.current == LayoutDirection.Rtl && !isVertical
-    SubcomposeLayout<DataIndex>(
-        modifier
-            .scrollable(
-                orientation = if (isVertical) Orientation.Vertical else Orientation.Horizontal,
-                reverseDirection = reverseDirection,
-                controller = scrollController
-            )
-            .clipToBounds()
-            .padding(contentPadding)
-            .then(state.remeasurementModifier)
-    ) { constraints ->
-        state.measure(
-            this,
-            constraints,
-            horizontalAlignment,
-            verticalAlignment,
-            itemsCount,
-            itemContentFactory
-        )
-    }
-}
-
-@Composable
-private fun rememberViewPagerController(
-    itemsCount: Int,
-    currentPage: MutableState<Int>,
-    consumeScrollDelta: (Float) -> Float
-): ScrollableController {
-    val screenWidth = screenWidthPx
-
-    val minFlingVelocity = 100.dp.toIntPx().toFloat()
-
-    val clocks = AnimationClockAmbient.current.asDisposableClock()
-    val flingConfig = defaultFlingConfig {
-        // negative velocity -> page = page + 1
-        // positive velocity -> page = page - 1
-
-        val newPage = when {
-            it in -minFlingVelocity..minFlingVelocity -> currentPage.value
-            it < 0 -> currentPage.value + 1
-            it > 0 -> currentPage.value - 1
-            else -> throw IllegalArgumentException(it.toString())
-        }.coerceIn(0, itemsCount - 1)
-        val target = newPage * screenWidth
-        currentPage.value = newPage
-        TargetAnimation(-target.toFloat())
-    }
-
-    return remember(clocks, flingConfig) {
-        ScrollableController(consumeScrollDelta, flingConfig, clocks)
-    }
 }

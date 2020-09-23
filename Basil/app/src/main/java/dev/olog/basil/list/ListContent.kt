@@ -6,8 +6,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.WithConstraints
@@ -17,6 +15,8 @@ import androidx.compose.ui.util.annotation.FloatRange
 import androidx.ui.tooling.preview.Preview
 import dev.chrisbanes.accompanist.coil.CoilImage
 import dev.olog.basil.composable.ViewPager
+import dev.olog.basil.composable.ViewPagerState
+import dev.olog.basil.composable.rememberViewPagerState
 import dev.olog.basil.model.Recipe
 import dev.olog.basil.theme.BasilTheme
 
@@ -27,28 +27,31 @@ const val ListHeightFraction = 0.6f
 @Composable
 private fun ListContentPreview() {
     BasilTheme {
-        ListContent(Recipe.sample, mutableStateOf(0), 0f)
+        ListContent(
+            items = Recipe.sample,
+            fraction = 0f
+        )
     }
 }
 
 @Composable
 fun ListContent(
     items: List<Recipe>,
-    currentPage: MutableState<Int> ,
+    state: ViewPagerState = rememberViewPagerState(initialPage = 0),
     fraction: Float
 ) {
+
     WithConstraints(Modifier
         .fillMaxWidth()
         .fillMaxHeight(ListHeightFraction)
     ) {
         ViewPager(
             items = items,
-            currentPage
-        ) { index, item ->
+            state = state
+        ) { item ->
             Stack(Modifier.fillMaxSize()) {
                 Recipe(
                     item = item,
-                    selected = items[currentPage.value],
                     fraction = fraction,
                     maxWidth = maxWidth
                 )
@@ -60,7 +63,6 @@ fun ListContent(
 @Composable
 private fun StackScope.Recipe(
     item: Recipe,
-    selected: Recipe,
     @FloatRange(0.0, 1.0) fraction: Float,
     maxWidth: Dp
 ) {
@@ -80,9 +82,7 @@ private fun StackScope.Recipe(
                 }
             }
         )
-        if (item == selected) {
-            Scrim(fraction)
-        }
+        Scrim(fraction)
     }
 }
 
