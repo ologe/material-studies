@@ -2,6 +2,7 @@ package dev.olog.basil
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.animation.core.SpringSpec
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.rememberSwipeableState
 import androidx.compose.runtime.Composable
@@ -60,7 +61,10 @@ private fun MainActivityContent(
 
     // TODO change items based on category
     val viewPagerState = rememberViewPagerState(initialPage = 0)
-    val swipeableState = rememberSwipeableState(initialPage)
+    val swipeableState = rememberSwipeableState(
+        initialValue = initialPage,
+        animationSpec = SpringSpec(stiffness = 100f)
+    )
 
     // TODO extract from BasilDrawer??
     val detailPageHeight = (screenHeightDp - bottomPeek).toIntPx()
