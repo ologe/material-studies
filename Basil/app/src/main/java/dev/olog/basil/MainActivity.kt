@@ -13,6 +13,7 @@ import androidx.compose.ui.unit.dp
 import androidx.ui.tooling.preview.Preview
 import androidx.ui.tooling.preview.PreviewParameter
 import dev.olog.basil.composable.*
+import dev.olog.basil.composable.viewpager.rememberViewPagerState
 import dev.olog.basil.detail.DetailContent
 import dev.olog.basil.drawer.DrawerContent
 import dev.olog.basil.list.ListContent

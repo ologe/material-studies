@@ -1,4 +1,4 @@
-package dev.olog.basil.composable
+package dev.olog.basil.composable.viewpager
 
 import androidx.compose.foundation.gestures.draggable
 import androidx.compose.ui.Modifier

@@ -14,8 +14,8 @@ import androidx.compose.ui.drawLayer
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.annotation.FloatRange
-import dev.olog.basil.composable.ViewPager
-import dev.olog.basil.composable.ViewPagerState
+import dev.olog.basil.composable.viewpager.ViewPager
+import dev.olog.basil.composable.viewpager.ViewPagerState
 import dev.olog.basil.model.Recipe
 import dev.olog.basil.utils.ParallaxUtils
 import dev.olog.basil.utils.ParallaxUtils.ListParallaxDp

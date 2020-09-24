@@ -1,4 +1,4 @@
-package dev.olog.basil.composable
+package dev.olog.basil.composable.viewpager
 
 import androidx.compose.foundation.layout.Stack
 import androidx.compose.foundation.layout.StackScope

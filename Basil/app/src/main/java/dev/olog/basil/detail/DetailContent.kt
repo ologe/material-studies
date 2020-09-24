@@ -21,8 +21,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.annotation.FloatRange
 import androidx.ui.tooling.preview.datasource.LoremIpsum
 import dev.olog.basil.composable.AllergenRow
-import dev.olog.basil.composable.ViewPager
-import dev.olog.basil.composable.ViewPagerState
+import dev.olog.basil.composable.viewpager.ViewPager
+import dev.olog.basil.composable.viewpager.ViewPagerState
 import dev.olog.basil.list.ListHeightFraction
 import dev.olog.basil.list.ListHorizontalPadding
 import dev.olog.basil.model.Allergen
