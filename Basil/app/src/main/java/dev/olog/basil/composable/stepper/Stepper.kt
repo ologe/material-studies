@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.drawLayer
 import androidx.compose.ui.onPositioned
@@ -41,7 +42,8 @@ fun<T> Stepper(
                     state.snapTo(currentPage.value)
                 }
             },
-            scrollState = scrollState
+            scrollState = scrollState,
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
             StepperSlots(
                 items = items,
