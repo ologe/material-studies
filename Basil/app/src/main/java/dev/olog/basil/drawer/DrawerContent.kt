@@ -33,7 +33,7 @@ private fun DrawerContentPreview() {
     BasilTheme {
         Background {
             val state = mutableStateOf(Entrees)
-            DrawerContent(state, 0f)
+            DrawerContent(state, 1f)
         }
     }
 }
