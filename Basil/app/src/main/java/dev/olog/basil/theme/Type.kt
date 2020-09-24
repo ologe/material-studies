@@ -8,14 +8,15 @@ import androidx.compose.ui.text.font.fontFamily
 import androidx.compose.ui.unit.sp
 import dev.olog.basil.R
 
-private val montserrat = fontFamily(
+val montserrat = fontFamily(
     font(R.font.montserrat_bold, FontWeight.Bold),
     font(R.font.montserrat_medium, FontWeight.Medium),
     font(R.font.montserrat_regular, FontWeight.Normal),
     font(R.font.montserrat_semibold, FontWeight.SemiBold),
 )
 
-private val lekton = fontFamily(
+val lekton = fontFamily(
+    font(R.font.lekton_regular, FontWeight.Normal),
     font(R.font.lekton_bold, FontWeight.Bold),
 )
 

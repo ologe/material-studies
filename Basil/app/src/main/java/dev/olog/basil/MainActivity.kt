@@ -15,6 +15,7 @@ import androidx.ui.tooling.preview.PreviewParameter
 import dev.olog.basil.composable.*
 import dev.olog.basil.composable.viewpager.rememberViewPagerState
 import dev.olog.basil.detail.DetailContent
+import dev.olog.basil.detail.DetailTabDrawerState
 import dev.olog.basil.drawer.DrawerContent
 import dev.olog.basil.list.ListContent
 import dev.olog.basil.model.Category
@@ -72,6 +73,10 @@ private fun MainActivityContent(
     val drawerPageHeight = (screenHeightDp + topPeek).toIntPx()
     val detailFraction = (abs(swipeableState.detailOffset.toFloat()) / detailPageHeight).coerceIn(0f, 1f)
     val drawerFraction = (abs(swipeableState.drawerOffset.toFloat()) / drawerPageHeight).coerceIn(0f, 1f)
+    val tabDrawerState = rememberSwipeableState(
+        initialValue = DetailTabDrawerState.Collapsed,
+        animationSpec = SpringSpec(stiffness = 150f)
+    )
 
     Background {
         BasilDrawer(
@@ -87,7 +92,8 @@ private fun MainActivityContent(
             listContent = {
                 ListContent(
                     items = items,
-                    state = viewPagerState,
+                    viewPagerState = viewPagerState,
+                    tabDrawerState = tabDrawerState,
                     drawerFraction = drawerFraction,
                     detailFraction = detailFraction
                 )
@@ -98,7 +104,8 @@ private fun MainActivityContent(
                     topPeek = topPeek,
                     bottomPeek = bottomPeek,
                     items = items,
-                    state = viewPagerState,
+                    viewPagerState = viewPagerState,
+                    tabDrawerState = tabDrawerState,
                     item = items[0],
                     detailFraction = detailFraction
                 )

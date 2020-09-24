@@ -4,7 +4,9 @@ import androidx.compose.foundation.Box
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.SwipeableState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -16,19 +18,24 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.annotation.FloatRange
 import dev.olog.basil.composable.viewpager.ViewPager
 import dev.olog.basil.composable.viewpager.ViewPagerState
+import dev.olog.basil.detail.DetailTabDrawerState
+import dev.olog.basil.detail.offset
 import dev.olog.basil.model.Recipe
 import dev.olog.basil.utils.ParallaxUtils
 import dev.olog.basil.utils.ParallaxUtils.ListParallaxDp
+import dev.olog.basil.utils.scaleDown
 import dev.olog.basil.utils.toIntPx
 
 val ListHorizontalPadding = 32.dp
 const val ListHeightFraction = 0.6f
 
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun ListContent(
     items: List<Recipe>,
-    state: ViewPagerState,
+    viewPagerState: ViewPagerState,
+    tabDrawerState: SwipeableState<DetailTabDrawerState>,
     drawerFraction: Float,
     detailFraction: Float
 ) {
@@ -36,10 +43,11 @@ fun ListContent(
     WithConstraints(Modifier
         .fillMaxWidth()
         .fillMaxHeight(ListHeightFraction)
+        .scaleDown(tabDrawerState.progress.offset)
     ) {
         ViewPager(
             items = items,
-            state = state
+            state = viewPagerState,
         ) { item, itemFraction, isLeft ->
             Stack(Modifier.fillMaxSize()) {
                 Recipe(

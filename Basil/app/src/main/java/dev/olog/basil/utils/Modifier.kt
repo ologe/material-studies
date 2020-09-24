@@ -3,11 +3,9 @@ package dev.olog.basil.utils
 import androidx.compose.foundation.clickable
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
-import androidx.compose.ui.LayoutModifier
-import androidx.compose.ui.Measurable
-import androidx.compose.ui.MeasureScope
-import androidx.compose.ui.Modifier
+import androidx.compose.ui.*
 import androidx.compose.ui.unit.Constraints
+import androidx.compose.ui.util.annotation.FloatRange
 
 @Composable
 fun Modifier.fakeClickable(): Modifier {
@@ -39,3 +37,11 @@ private data class OffsetModifier(
         }
     }
 }
+
+fun Modifier.scaleDown(
+    @FloatRange(0.0, 1.0) offset: Float,
+    amount: Float = 0.05f
+) = this then Modifier.drawLayer(
+    scaleX = 1 - offset * amount,
+    scaleY = 1 - offset * amount,
+)

@@ -4,14 +4,13 @@ import androidx.compose.foundation.Icon
 import androidx.compose.foundation.Text
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.layout.RowScope.weight
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.TextButton
+import androidx.compose.material.SwipeableState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.drawLayer
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -34,17 +33,19 @@ import dev.olog.basil.utils.ParallaxUtils.computeParallax
 import dev.olog.basil.utils.fakeClickable
 import dev.olog.basil.utils.screenHeightDp
 import dev.olog.basil.utils.toFloatPx
-import java.util.*
 import dev.olog.basil.R
+import dev.olog.basil.utils.scaleDown
 
 private const val EAGER_END_THRESHOLD = 0.1f
 private const val LATE_START_THRESHOLD = 0.6f
 
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun DetailContent(
     items: List<Recipe>,
-    state: ViewPagerState,
+    viewPagerState: ViewPagerState,
+    tabDrawerState: SwipeableState<DetailTabDrawerState>,
     item: Recipe,
     topPeek: Dp,
     bottomPeek: Dp,
@@ -57,56 +58,64 @@ fun DetailContent(
         translationY = -(50.dp * (1f - lateStartFraction)).toFloatPx()
     )
 
-    Column(
-        // made clickable so below content cannot be clicked
-        modifier = Modifier.fillMaxSize().fakeClickable(),
-        verticalArrangement = Arrangement.spacedBy(16.dp),
-    ) {
-
-        val lateStartAlphaModifier = Modifier.drawLayer(alpha = lateStartFraction)
-
-        // title + description, same height as content list
-        UntilListContentImage(topPeek) {
-            Stack(Modifier.fillMaxWidth().preferredHeight(bottomPeek)) {
-                DownArrow(eagerEndFraction)
-            }
-            Column(
-                modifier = Modifier.fillMaxSize(),
-                verticalArrangement = Arrangement.spacedBy(16.dp)
-            ) {
-
-                RecipeTitle(items, state, detailFraction)
-
-                Column(
-                    modifier = lateStartModifier,
-                    verticalArrangement = Arrangement.spacedBy(16.dp)
-                ) {
-                    HorizontalSpacer(lateStartAlphaModifier)
-                    RecipeDescription(Modifier.weight(1f).then(lateStartAlphaModifier))
-                }
-            }
-        }
+    Stack {
         Column(
-            modifier = lateStartModifier,
+            // made clickable so below content cannot be clicked
+            modifier = Modifier
+                .fillMaxSize()
+                .fakeClickable()
+                .scaleDown(tabDrawerState.progress.offset),
             verticalArrangement = Arrangement.spacedBy(16.dp),
         ) {
-            RecipeMacros(
-                modifier = Modifier
-                    .padding(horizontal = ListHorizontalPadding)
-                    .fillMaxWidth()
-                    .then(lateStartAlphaModifier)
-            )
-            HorizontalSpacer(lateStartAlphaModifier)
-            RecipeAllergens(
-                modifier = Modifier
-                    .padding(horizontal = ListHorizontalPadding)
-                    .fillMaxWidth()
-                    .then(lateStartAlphaModifier),
-                allergens = item.allergens
-            )
-            Spacer(Modifier.weight(1f))
-            Buttons()
+
+            val lateStartAlphaModifier = Modifier.drawLayer(alpha = lateStartFraction)
+
+            // title + description, same height as content list
+            UntilListContentImage(topPeek) {
+                Stack(Modifier.fillMaxWidth().preferredHeight(bottomPeek)) {
+                    DownArrow(eagerEndFraction)
+                }
+                Column(
+                    modifier = Modifier.fillMaxSize(),
+                    verticalArrangement = Arrangement.spacedBy(16.dp)
+                ) {
+
+                    RecipeTitle(items, viewPagerState, detailFraction)
+
+                    Column(
+                        modifier = lateStartModifier,
+                        verticalArrangement = Arrangement.spacedBy(16.dp)
+                    ) {
+                        HorizontalSpacer(lateStartAlphaModifier)
+                        RecipeDescription(Modifier.weight(1f).then(lateStartAlphaModifier))
+                    }
+                }
+            }
+            Column(
+                modifier = lateStartModifier,
+                verticalArrangement = Arrangement.spacedBy(16.dp),
+            ) {
+                RecipeMacros(
+                    modifier = Modifier
+                        .padding(horizontal = ListHorizontalPadding)
+                        .fillMaxWidth()
+                        .then(lateStartAlphaModifier)
+                )
+                HorizontalSpacer(lateStartAlphaModifier)
+                RecipeAllergens(
+                    modifier = Modifier
+                        .padding(horizontal = ListHorizontalPadding)
+                        .fillMaxWidth()
+                        .then(lateStartAlphaModifier),
+                    allergens = item.allergens
+                )
+                Spacer(Modifier.weight(1f))
+            }
         }
+        DetailTabDrawer(
+            state = tabDrawerState,
+            modifier = Modifier.align(Alignment.BottomCenter)
+        )
     }
 }
 
@@ -237,34 +246,5 @@ private fun RecipeAllergens(
         for (allergen in allergens) {
             AllergenRow(allergen)
         }
-    }
-}
-
-@Composable
-private fun Buttons() {
-    Stack {
-        Spacer(modifier = Modifier
-            .background(Color.Black.copy(.2f))
-            .fillMaxWidth()
-            .height(1.dp)
-        )
-        Row(
-            Modifier.fillMaxWidth().height(56.dp),
-        ) {
-            Button("Ingredients".toUpperCase(Locale.ROOT))
-            Button("Directions".toUpperCase(Locale.ROOT))
-        }
-    }
-}
-
-@Composable
-private fun Button(
-    text: String
-) {
-    TextButton(onClick = {},
-        Modifier.weight(1f)
-            .fillMaxHeight()
-    ) {
-        Text(text)
     }
 }
