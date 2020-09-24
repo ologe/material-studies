@@ -17,7 +17,7 @@ import dev.olog.basil.utils.toDp
 @Composable
 fun<T> Stepper(
     items: List<T>,
-    currentPage: MutableState<Int> = mutableStateOf(1),
+    currentPage: MutableState<Int> = mutableStateOf(0),
     modifier: Modifier = Modifier,
     indicatorModifier: Modifier = Modifier.border(3.dp, MaterialTheme.colors.secondary, CircleShape),
     children: @Composable (T, Int) -> Unit,
