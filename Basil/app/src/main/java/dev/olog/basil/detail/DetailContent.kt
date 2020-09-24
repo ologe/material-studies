@@ -7,13 +7,12 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.layout.RowScope.weight
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.TextButton
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.drawLayer
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
@@ -36,6 +35,7 @@ import dev.olog.basil.utils.fakeClickable
 import dev.olog.basil.utils.screenHeightDp
 import dev.olog.basil.utils.toFloatPx
 import java.util.*
+import dev.olog.basil.R
 
 private const val EAGER_END_THRESHOLD = 0.1f
 private const val LATE_START_THRESHOLD = 0.6f
@@ -160,14 +160,14 @@ private fun RecipeTitle(
 @Composable
 private fun StackScope.DownArrow(fraction: Float) {
     Icon(
-        asset = Icons.Default.KeyboardArrowDown,
+        asset = vectorResource(R.drawable.vd_fat_arrow),
         modifier = Modifier
             .align(Alignment.BottomCenter)
             .drawLayer(
                 alpha = (1 - fraction * 3).coerceIn(0f, 1f),
-                scaleX = 1.2f,
-                scaleY = 1f
-            ).padding(bottom = 8.dp)
+                scaleX = 1.2f
+            )
+            .padding(bottom = 8.dp)
     )
 }
 
