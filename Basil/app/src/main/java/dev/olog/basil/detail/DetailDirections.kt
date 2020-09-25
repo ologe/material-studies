@@ -59,8 +59,9 @@ fun RecipeDirections() {
         ) { item, _, underIndicator ->
             Text(
                 text = item.toString().padStart(2, '0'),
-                fontSize = 18.sp,
+                fontSize = 16.sp,
                 style = MaterialTheme.typography.body1,
+                fontWeight = if (underIndicator) FontWeight.Bold else FontWeight.SemiBold,
                 color = MaterialTheme.colors.onBackground,
                 modifier = Modifier.padding(12.dp)
             )
