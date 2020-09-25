@@ -3,6 +3,7 @@ package dev.olog.basil.composable.viewpager
 import androidx.compose.foundation.layout.Stack
 import androidx.compose.foundation.layout.StackScope
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.onCommit
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.WithConstraints
@@ -31,9 +32,11 @@ fun <T> ViewPager(
             Orientation.Horizontal -> constraints.maxWidth
         }
 
-        val maxScroll = (pageSize * (itemCount - 1)).toFloat()
-        state.pageSize = pageSize
-        state.bounds = 0f.rangeTo(maxScroll)
+        onCommit {
+            val maxScroll = (pageSize * (itemCount - 1)).toFloat()
+            state.pageSize = pageSize
+            state.bounds = 0f.rangeTo(maxScroll)
+        }
 
         Stack(
             modifier = Modifier.viewPager(
