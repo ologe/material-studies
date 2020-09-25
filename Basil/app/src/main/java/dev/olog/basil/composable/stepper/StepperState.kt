@@ -37,8 +37,9 @@ class StepperState(
 ) {
 
     companion object {
-        private val DURATION = DefaultDurationMillis
-        private const val DELAY = 50
+        private const val DURATION = 400
+        private const val DELAY_FRACTION =  0.16f
+        private const val DELAY: Int = (DURATION.toFloat() * DELAY_FRACTION).toInt()
 
         fun Saver(
             top: AnimatedFloat,

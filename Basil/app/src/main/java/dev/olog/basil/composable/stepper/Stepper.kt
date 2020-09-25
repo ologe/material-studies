@@ -21,7 +21,7 @@ fun<T> Stepper(
     currentPage: MutableState<Int> = mutableStateOf(0),
     modifier: Modifier = Modifier,
     indicatorModifier: Modifier = Modifier.border(3.dp, MaterialTheme.colors.secondary, CircleShape),
-    children: @Composable (T, Int) -> Unit,
+    children: @Composable (T, Int, Boolean) -> Unit,
 ) {
     val itemCount = items.size
 
@@ -47,6 +47,7 @@ fun<T> Stepper(
         ) {
             StepperSlots(
                 items = items,
+                state = state,
                 onClick = { _, index -> state.animate(index) },
                 children = children
             )
@@ -66,19 +67,34 @@ fun<T> Stepper(
 @Composable
 private fun<T> StepperSlots(
     items: List<T>,
+    state: StepperState,
     onClick: (T, Int) -> Unit,
-    children: @Composable (T, Int) -> Unit
+    children: @Composable (T, Int, Boolean) -> Unit
 ) {
+    val slotHeight = state.slotHeight
+    val top = state.topOffset
+    val bottom = state.bottomOffset
+    val delta = slotHeight / 3f
+
     items.forEachIndexed { index, item ->
+
+        val thisTop = index * slotHeight + delta
+        val thisBottom = thisTop + delta
+
+        val isUnderIndicator = top <= thisTop && thisBottom <= bottom
+        val scale = if (isUnderIndicator) 1.1f else 1f
 
         val modifier = Modifier
             .clickable(
                 onClick = { onClick(item, index) },
                 indication = null
+            ).drawLayer(
+                scaleX = scale,
+                scaleY = scale,
             )
 
         Stack(modifier = modifier) {
-            children(item, index)
+            children(item, index, isUnderIndicator)
         }
     }
 }

@@ -13,6 +13,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.imageResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.ui.tooling.preview.datasource.LoremIpsum
@@ -55,7 +56,7 @@ fun RecipeDirections() {
             currentPage = currentPage,
             modifier = Modifier.padding(16.dp).padding(top = 4.dp),
             indicatorModifier = Modifier.border(3.dp, MaterialTheme.colors.onPrimary, CircleShape),
-        ) { item, _ ->
+        ) { item, _, underIndicator ->
             Text(
                 text = item.toString().padStart(2, '0'),
                 fontSize = 18.sp,
