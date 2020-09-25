@@ -52,8 +52,9 @@ fun BasilDrawer(
             anchors = anchors,
             orientation = Orientation.Vertical,
             thresholds = { _, _ ->
-                FractionalThreshold(0.7f)
-            }
+                // TODO didn't understand too much this api, with this value, viewpager works half the time
+                FractionalThreshold(0.8f)
+            },
         ).offsetGetter(y = { state.drawerOffset })
     ) {
         val offsetGetter = Modifier.offsetGetter(y = { state.detailOffset })
