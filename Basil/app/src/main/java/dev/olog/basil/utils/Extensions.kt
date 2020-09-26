@@ -48,3 +48,11 @@ inline val screenWidthPx: Int
         val density = DensityAmbient.current.density
         return (screenWidthDp.value * density).toInt()
     }
+
+operator fun String.times(times: Int): String {
+    return buildString {
+        repeat(times) {
+            append(this@times)
+        }
+    }
+}
