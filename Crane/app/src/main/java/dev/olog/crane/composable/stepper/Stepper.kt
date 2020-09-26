@@ -1,17 +1,20 @@
 package dev.olog.crane.composable.stepper
 
-import androidx.compose.foundation.*
-import androidx.compose.foundation.layout.Stack
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.Box
+import androidx.compose.foundation.ContentGravity
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.MaterialTheme
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.drawLayer
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.onPositioned
-import androidx.compose.ui.platform.DensityAmbient
 import androidx.compose.ui.unit.dp
 import dev.olog.crane.utils.toDp
 
@@ -20,47 +23,43 @@ fun<T> Stepper(
     items: List<T>,
     currentPage: MutableState<Int> = mutableStateOf(0),
     modifier: Modifier = Modifier,
-    indicatorModifier: Modifier = Modifier.border(3.dp, MaterialTheme.colors.secondary, CircleShape),
     children: @Composable (T, Int, Boolean) -> Unit,
 ) {
     val itemCount = items.size
 
     val state = rememberStepperState(currentPage)
-    var slotWidth by remember { mutableStateOf(0.dp) }
-    val scrollState = rememberScrollState()
 
-    Stack(modifier) {
+    Stack(
+        modifier,
+        alignment = Alignment.CenterStart
+    ) {
 
-        val density = DensityAmbient.current.density
-        ScrollableColumn(
+        Row(
             modifier = Modifier.onPositioned {
                 // TODO find another way
-                if (state.slotHeight == 0f) {
-                    state.slotHeight = (it.size.height / itemCount).toFloat()
-                    state.maxBound = it.size.height.toFloat()
-                    slotWidth = (it.size.width / density).dp
+                if (state.slotWidth == 0f) {
+                    state.slotWidth = (it.size.width / itemCount).toFloat()
+                    state.maxBound = it.size.width.toFloat()
                     state.snapTo(currentPage.value)
                 }
             },
-            scrollState = scrollState,
-            horizontalAlignment = Alignment.CenterHorizontally
-            // TODO allow spaced by
+            verticalAlignment = Alignment.CenterVertically
         ) {
             StepperSlots(
                 items = items,
                 state = state,
+                modifier = Modifier.weight(1f),
                 onClick = { _, index -> state.animate(index) },
                 children = children
             )
         }
 
-        // TODO magnify content behind?? is this even possible
         Box(
             Modifier
-                .height(state.height().toDp())
-                .width(slotWidth)
-                .drawLayer(translationY = state.topOffset - scrollState.value)
-                .then(indicatorModifier)
+                .fillMaxHeight(0.9f)
+                .width(state.width().toDp())
+                .drawLayer(translationX = state.leftOffset)
+                .border(3.dp, Color.White, CircleShape),
         )
     }
 }
@@ -69,32 +68,33 @@ fun<T> Stepper(
 private fun<T> StepperSlots(
     items: List<T>,
     state: StepperState,
+    modifier: Modifier = Modifier,
     onClick: (T, Int) -> Unit,
     children: @Composable (T, Int, Boolean) -> Unit
 ) {
-    val slotHeight = state.slotHeight
-    val top = state.topOffset
-    val bottom = state.bottomOffset
-    val delta = slotHeight / 3f
+    val slotWidth = state.slotWidth
+    val top = state.leftOffset
+    val bottom = state.rightOffset
+    val delta = slotWidth / 3f
 
     items.forEachIndexed { index, item ->
 
-        val thisTop = index * slotHeight + delta
-        val thisBottom = thisTop + delta
+        val thisLeft = index * slotWidth + delta
+        val thisRight = thisLeft + delta
 
-        val isUnderIndicator = top <= thisTop && thisBottom <= bottom
-        val scale = if (isUnderIndicator) 1.1f else 1f
+        val isUnderIndicator = top <= thisLeft && thisRight <= bottom
 
-        val modifier = Modifier
-            .clickable(
-                onClick = { onClick(item, index) },
-                indication = null
-            ).drawLayer(
-                scaleX = scale,
-                scaleY = scale,
-            )
 
-        Stack(modifier = modifier) {
+        Box(
+            modifier = modifier
+                .fillMaxHeight(0.9f)
+                .clip(CircleShape)
+                .clickable(
+                    onClick = { onClick(item, index) },
+//                    indication = Indica
+                ),
+            gravity = ContentGravity.Center,
+        ) {
             children(item, index, isUnderIndicator)
         }
     }

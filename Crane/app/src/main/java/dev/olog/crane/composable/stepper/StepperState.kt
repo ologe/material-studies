@@ -3,6 +3,7 @@ package dev.olog.crane.composable.stepper
 import androidx.compose.animation.animatedFloat
 import androidx.compose.animation.asDisposableClock
 import androidx.compose.animation.core.AnimatedFloat
+import androidx.compose.animation.core.AnimationConstants
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.TweenSpec
 import androidx.compose.runtime.Composable
@@ -30,15 +31,13 @@ fun rememberStepperState(
 }
 
 class StepperState(
-    private val top: AnimatedFloat,
-    private val bottom: AnimatedFloat,
+    private val left: AnimatedFloat,
+    private val right: AnimatedFloat,
     private val currentPageState: MutableState<Int>
 ) {
 
     companion object {
-        private const val DURATION = 400
-        private const val DELAY_FRACTION =  0.16f
-        private const val DELAY: Int = (DURATION.toFloat() * DELAY_FRACTION).toInt()
+        private const val DURATION = 200
 
         fun Saver(
             top: AnimatedFloat,
@@ -50,48 +49,48 @@ class StepperState(
     }
 
     var maxBound = 0f
-    var slotHeight = 0f
+    var slotWidth = 0f
 
     fun snapTo(page: Int) {
-        val newTop = heightOf(page)
-        val newBottom = heightOf(page + 1)
-        top.animateTo(newTop, TweenSpec(1, easing = LinearEasing))
-        bottom.animateTo(newBottom, TweenSpec(1, easing = LinearEasing))
+        val newLeft = widthOf(page)
+        val newRight = widthOf(page + 1)
+        left.animateTo(newLeft, TweenSpec(1, easing = LinearEasing))
+        right.animateTo(newRight, TweenSpec(1, easing = LinearEasing))
     }
 
     fun animate(toPage: Int) {
         val currentPage = currentPageState.value
         when {
             toPage > currentPage -> {
-                top.animateTo(heightOf(toPage), TweenSpec(DURATION, delay = DELAY))
-                bottom.animateTo(heightOf(toPage + 1), TweenSpec(DURATION))
+                left.animateTo(widthOf(toPage), TweenSpec(DURATION))
+                right.animateTo(widthOf(toPage + 1), TweenSpec(DURATION))
             }
             currentPage > toPage -> {
-                top.animateTo(heightOf(toPage), TweenSpec(DURATION, ))
-                bottom.animateTo(heightOf(toPage + 1), TweenSpec(DURATION, delay = DELAY))
+                left.animateTo(widthOf(toPage), TweenSpec(DURATION, ))
+                right.animateTo(widthOf(toPage + 1), TweenSpec(DURATION))
             }
         }
 
         currentPageState.value = toPage
     }
 
-    private fun heightOf(page: Int): Float {
-        return slotHeight * page
+    private fun widthOf(page: Int): Float {
+        return slotWidth * page
     }
 
 
-    fun height(): Int {
-        val targetValue = abs(topOffset - bottomOffset)
-        if (targetValue + topOffset > maxBound) {
-            return (maxBound - topOffset).toInt()
+    fun width(): Int {
+        val targetValue = abs(leftOffset - rightOffset)
+        if (targetValue + leftOffset > maxBound) {
+            return (maxBound - leftOffset).toInt()
         }
         return targetValue.toInt()
     }
 
-    val topOffset: Float
-        get() = top.value
+    val leftOffset: Float
+        get() = left.value
 
-    val bottomOffset: Float
-        get() = bottom.value
+    val rightOffset: Float
+        get() = right.value
 
 }
