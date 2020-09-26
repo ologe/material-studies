@@ -44,6 +44,7 @@ fun<T> Stepper(
             },
             scrollState = scrollState,
             horizontalAlignment = Alignment.CenterHorizontally
+            // TODO allow spaced by
         ) {
             StepperSlots(
                 items = items,
