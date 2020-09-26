@@ -1,0 +1,9 @@
+apply from: rootProject.file("../buildscripts/android-defaults.gradle")
+
+android {
+
+    defaultConfig {
+        applicationId "dev.olog.crane"
+    }
+
+}
