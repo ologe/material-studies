@@ -7,8 +7,10 @@ import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.Box
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.Text
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.SwipeableConstants
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.Composable
@@ -21,89 +23,79 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import dev.olog.crane.Tab
+import dev.olog.crane.composable.TabActionsConstants.itemHeight
+import dev.olog.crane.composable.TabActionsConstants.itemSpacing
+import dev.olog.crane.utils.animateSpec
 import dev.olog.crane.utils.exhaustive
+
+object TabActionsConstants {
+    val itemHeight = 48.dp
+    val itemSpacing = 8.dp
+}
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
-fun CraneTabsActions(
-    tab: Tab,
-    itemHeight: Dp,
-    itemSpacing: Dp,
-) {
+fun CraneTabsActions(tab: Tab) {
     Column(
         modifier = Modifier.padding(horizontal = 24.dp),
         verticalArrangement = Arrangement.spacedBy(itemSpacing)
     ) {
-        CraneTabsActionOne(itemHeight, tab)
-        CraneTabsActionTwo(itemHeight, tab)
-        CraneTabsActionThree(itemHeight, tab)
-        CraneTabsActionFour(itemHeight, tab)
+        CraneTabsActionOne(tab)
+        CraneTabsActionTwo(tab)
+        CraneTabsActionThree(tab)
+        CraneTabsActionFour(tab)
     }
 }
 
 @Composable
-private fun CraneTabsActionOne(
-    height: Dp,
-    tab: Tab,
-) {
+private fun CraneTabsActionOne(tab: Tab) {
     val text = when (tab) {
         Tab.Fly -> "1 Adult, Economy"
         Tab.Sleep -> "1 Adult"
         Tab.Eat -> "1 Adult"
     }
-    PeopleAction(height, text)
+    PeopleAction(text)
 }
 
 @Composable
-private fun CraneTabsActionTwo(
-    height: Dp,
-    tab: Tab,
-) {
+private fun CraneTabsActionTwo(tab: Tab) {
     when (tab) {
-        Tab.Fly -> LocationAction(height, Icons.Default.LocationOn, "Seoul, Korea")
-        Tab.Sleep -> CalendarAction(height, "")
-        Tab.Eat -> CalendarAction(height, "Sept 4")
+        Tab.Fly -> LocationAction(Icons.Default.LocationOn, "Seoul, Korea")
+        Tab.Sleep -> CalendarAction("")
+        Tab.Eat -> CalendarAction("Sept 4")
     }.exhaustive
 }
 
 @Composable
-private fun CraneTabsActionThree(
-    height: Dp,
-    tab: Tab,
-) {
+private fun CraneTabsActionThree(tab: Tab) {
     when (tab) {
-        Tab.Fly -> LocationAction(height, Icons.Default.Flight, "")
-        Tab.Sleep -> LocationAction(height, Icons.Default.Hotel, "")
-        Tab.Eat -> TimeAction(height, "")
+        Tab.Fly -> LocationAction(Icons.Default.Flight, "")
+        Tab.Sleep -> LocationAction(Icons.Default.Hotel, "")
+        Tab.Eat -> TimeAction("")
     }.exhaustive
 }
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
-private fun CraneTabsActionFour(
-    height: Dp,
-    tab: Tab,
-) {
+private fun CraneTabsActionFour(tab: Tab) {
     AnimatedVisibility(
         visible = tab != Tab.Sleep,
-        enter = fadeIn(),
-        exit = fadeOut()
+        enter = fadeIn(animSpec = SwipeableConstants.animateSpec),
+        exit = fadeOut(animSpec = SwipeableConstants.animateSpec)
     ) {
         when (tab) {
-            Tab.Fly -> LocationAction(height = height, icon = Icons.Default.LocalDining, text = "")
-            Tab.Sleep -> {}
-            Tab.Eat -> CalendarAction(height = height, text = "")
+            Tab.Fly -> LocationAction(Icons.Default.LocalDining,"")
+            Tab.Sleep -> {
+                // TODO fade out don't work because it don't fade out last tab, but this one
+            }
+            Tab.Eat -> CalendarAction("")
         }.exhaustive
     }
 }
 
 @Composable
-private fun PeopleAction(
-    height: Dp,
-    text: String
-) {
+private fun PeopleAction(text: String) {
     CraneTabsAction(
-        height = height,
         icon = Icons.Default.Person,
         text = text,
         placeholder = "no placeholder"
@@ -112,12 +104,10 @@ private fun PeopleAction(
 
 @Composable
 private fun LocationAction(
-    height: Dp,
     icon: VectorAsset,
     text: String,
 ) {
     CraneTabsAction(
-        height = height,
         icon = icon,
         text = text,
         placeholder = "Select Location"
@@ -125,12 +115,8 @@ private fun LocationAction(
 }
 
 @Composable
-private fun CalendarAction(
-    height: Dp,
-    text: String,
-) {
+private fun CalendarAction(text: String) {
     CraneTabsAction(
-        height = height,
         icon = Icons.Default.CalendarToday,
         text = text,
         placeholder = "Select Dates"
@@ -138,12 +124,8 @@ private fun CalendarAction(
 }
 
 @Composable
-private fun TimeAction(
-    height: Dp,
-    text: String,
-) {
+private fun TimeAction(text: String) {
     CraneTabsAction(
-        height = height,
         icon = Icons.Default.History,
         text = text,
         placeholder = "Select Time"
@@ -152,13 +134,13 @@ private fun TimeAction(
 
 @Composable
 private fun CraneTabsAction(
-    height: Dp,
     icon: VectorAsset,
     text: String,
     placeholder: String
 ) {
     Box(
-        modifier = Modifier.fillMaxWidth().height(height), // TODO ripple not working with clickable, why??
+        // TODO touches don't passes to this because list is on top
+        modifier = Modifier.fillMaxWidth().height(itemHeight).clickable(onClick = {}),
         shape = MaterialTheme.shapes.small,
         backgroundColor = MaterialTheme.colors.primary
     ) {

@@ -23,6 +23,7 @@ fun<T> Stepper(
     items: List<T>,
     currentPage: MutableState<Int> = mutableStateOf(0),
     modifier: Modifier = Modifier,
+    onClick: (T, Int) -> Unit = { _, _ -> },
     children: @Composable (T, Int, Boolean) -> Unit,
 ) {
     val itemCount = items.size
@@ -49,7 +50,10 @@ fun<T> Stepper(
                 items = items,
                 state = state,
                 modifier = Modifier.weight(1f),
-                onClick = { _, index -> state.animate(index) },
+                onClick = { item, index ->
+                    onClick(item, index)
+                    state.animate(index)
+                },
                 children = children
             )
         }
