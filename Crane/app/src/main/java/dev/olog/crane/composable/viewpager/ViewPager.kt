@@ -48,17 +48,11 @@ fun <T> ViewPager(
             alignment = alignment
         ) {
             val offset = floor(state.offset).toInt()
-            val leftPage = offset / pageSize // left or center
-            val leftPageStartOffset = leftPage * pageSize - offset
 
-            // left page
-            Page(offset = leftPageStartOffset, orientation = orientation) {
-                children(items[leftPage])
-            }
-            // right page
-            if (leftPage + 1 < itemCount) {
-                Page(offset = leftPageStartOffset + pageSize, orientation = orientation) {
-                    children(items[leftPage + 1])
+            for ((index, item) in items.withIndex()) {
+                val leftPageStartOffset = index * pageSize - offset
+                Page(offset = leftPageStartOffset, orientation = orientation) {
+                    children(item)
                 }
             }
         }

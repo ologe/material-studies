@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import dev.chrisbanes.accompanist.coil.CoilImage
+import dev.chrisbanes.accompanist.coil.CoilImageWithCrossfade
 import dev.olog.crane.composable.Background
 import dev.olog.crane.composable.CraneTabsActions
 import dev.olog.crane.composable.TabActionsConstants.itemHeight
@@ -194,7 +195,7 @@ private fun ListItem(item: ExploreModel) {
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(24.dp)
         ) {
-            CoilImage(
+            CoilImageWithCrossfade(
                 data = item.imageUrl,
                 modifier = Modifier
                     .fillMaxHeight()
