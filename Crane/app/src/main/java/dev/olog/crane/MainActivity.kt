@@ -21,6 +21,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import dev.olog.crane.composable.Background
+import dev.olog.crane.composable.CraneTabsActions
 import dev.olog.crane.composable.stepper.Stepper
 import dev.olog.crane.theme.CraneTheme
 import dev.olog.crane.utils.toFloatPx

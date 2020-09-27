@@ -1,4 +1,4 @@
-package dev.olog.crane
+package dev.olog.crane.composable
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
@@ -20,6 +20,7 @@ import androidx.compose.ui.graphics.vector.VectorAsset
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import dev.olog.crane.Tab
 import dev.olog.crane.utils.exhaustive
 
 @OptIn(ExperimentalAnimationApi::class)
