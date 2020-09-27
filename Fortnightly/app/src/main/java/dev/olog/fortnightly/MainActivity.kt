@@ -16,7 +16,6 @@ import androidx.compose.ui.unit.dp
 import dev.olog.fortnightly.composable.FortnightlyToolbar
 import dev.olog.fortnightly.ui.FortnightlyTheme
 
-// TODO add chomsky font license
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
