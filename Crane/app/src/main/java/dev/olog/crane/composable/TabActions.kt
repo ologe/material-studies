@@ -151,19 +151,6 @@ private fun TimeAction(
 }
 
 @Composable
-private fun PlaceAction(
-    height: Dp,
-    text: String
-) {
-    CraneTabsAction(
-        height = height,
-        icon = Icons.Default.Person,
-        text = text,
-        placeholder = "Select a place"
-    )
-}
-
-@Composable
 private fun CraneTabsAction(
     height: Dp,
     icon: VectorAsset,
@@ -171,7 +158,7 @@ private fun CraneTabsAction(
     placeholder: String
 ) {
     Box(
-        modifier = Modifier.fillMaxWidth().height(height),
+        modifier = Modifier.fillMaxWidth().height(height), // TODO ripple not working with clickable, why??
         shape = MaterialTheme.shapes.small,
         backgroundColor = MaterialTheme.colors.primary
     ) {
