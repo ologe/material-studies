@@ -9,6 +9,10 @@ import androidx.compose.ui.text.font.fontFamily
 import androidx.compose.ui.unit.sp
 import dev.olog.fortnightly.R
 
+val oldlondon = fontFamily(
+    font(R.font.old_london, FontWeight.Normal)
+)
+
 val merryweather = fontFamily(
     font(R.font.merriweather_black, FontWeight.Black),
     font(R.font.merriweather_blackitalic, FontWeight.Black, style = FontStyle.Italic),
