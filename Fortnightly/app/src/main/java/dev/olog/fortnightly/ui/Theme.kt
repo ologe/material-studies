@@ -1,42 +1,33 @@
 package dev.olog.fortnightly.ui
 
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
 
-private val DarkColorPalette = darkColors(
-    primary = purple200,
-    primaryVariant = purple700,
-    secondary = teal200
-)
+val purple700 = Color(0xff_6b38fb)
+val grey100 = Color(0xff_e8e8e8)
 
-private val LightColorPalette = lightColors(
-    primary = purple500,
-    primaryVariant = purple700,
-    secondary = teal200
-
-    /* Other default colors to override
+private val Palette = lightColors(
     background = Color.White,
-    surface = Color.White,
-    onPrimary = Color.White,
-    onSecondary = Color.Black,
     onBackground = Color.Black,
-    onSurface = Color.Black,
-    */
+
+    primary = Color.White,
+    primaryVariant = grey100,
+    onPrimary = Color.Black,
+
+    secondary = purple700,
+    secondaryVariant = purple700,
+    onSecondary = Color.White,
+
+    surface = Color.White,
+    onSurface = Color.Black
 )
 
 @Composable
-fun FortnightlyTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable() () -> Unit) {
-    val colors = if (darkTheme) {
-        DarkColorPalette
-    } else {
-        LightColorPalette
-    }
-
+fun FortnightlyTheme(content: @Composable() () -> Unit) {
     MaterialTheme(
-        colors = colors,
+        colors = Palette,
         typography = typography,
         shapes = shapes,
         content = content
