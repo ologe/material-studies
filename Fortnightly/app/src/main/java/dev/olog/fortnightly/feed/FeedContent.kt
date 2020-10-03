@@ -25,12 +25,15 @@ private fun FeedContentPreview() {
 }
 
 @Composable
-fun FeedContent() {
+fun FeedContent(onDrawerClick: () -> Unit = {}) {
     Surface(Modifier.fillMaxSize()) {
         val scrollState = rememberLazyListState()
         Box {
             FortnightlyList(FeedState.sample, scrollState)
-            CollapsibleToolbar(scrollState)
+            CollapsibleToolbar(
+                scrollState = scrollState,
+                onDrawerClick = onDrawerClick
+            )
         }
     }
 }

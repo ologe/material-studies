@@ -153,7 +153,7 @@ private fun ToolbarFullText(
             .drawLayer(translationX = offset * -leftTextWidth),
     ) {
         val leftTextAlpha = 1f - translateToStart(1f - alpha, .8f)
-        ToolbarText(
+        FortnightlyText(
             text = "The ",
             modifier = Modifier
                 .drawLayer(alpha = leftTextAlpha)
@@ -161,28 +161,15 @@ private fun ToolbarFullText(
                     leftTextWidth = it.size.width.toFloat()
                 }
         )
-        ToolbarText(
+        FortnightlyText(
             text = "F"
         )
         val rightTextAlpha = 1f - translateToStart(1f - alpha, .4f)
         if (rightTextAlpha >= 0.1f) {
-            ToolbarText(
+            FortnightlyText(
                 text = "ortnightly",
                 modifier = Modifier.drawLayer(alpha = rightTextAlpha)
             )
         }
     }
-}
-
-@Composable
-private fun ToolbarText(
-    text: String,
-    modifier: Modifier = Modifier
-) {
-    Text(
-        text = text,
-        modifier = modifier,
-        fontSize = 28.sp,
-        fontFamily = oldlondon
-    )
 }
