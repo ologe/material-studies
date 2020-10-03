@@ -69,7 +69,7 @@ private fun FortnightlyList(
             )
         }.exhaustive
         if (item is FeedState.BigItem || item is FeedState.Item) {
-            DottedDividerVertical(Modifier.fillMaxWidth().then(itemPadding))
+            DottedDividerHorizontal(Modifier.fillMaxWidth().then(itemPadding))
         }
     }
 }

@@ -23,12 +23,12 @@ private fun DottedDividerVerticalPreview() {
             .padding(vertical = 12.dp, horizontal = 4.dp)
             .background(Color.White),
     ) {
-        DottedDividerVertical(Modifier.align(Alignment.Center))
+        DottedDividerHorizontal(Modifier.align(Alignment.Center))
     }
 }
 
 @Composable
-fun DottedDividerVertical(
+fun DottedDividerHorizontal(
     modifier: Modifier = Modifier,
     strokeSize: Int = 1.5.dp.toIntPx(),
     strokeOffset: Int = 3.dp.toIntPx(),
