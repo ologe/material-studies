@@ -59,14 +59,14 @@ private val definition = transitionDefinition<ToolbarState> {
 
 @Preview
 @Composable
-fun FortnightlyToolbarPreview() {
+fun CollapsibleToolbarPreview() {
     FortnightlyTheme {
-        FortnightlyToolbar(rememberLazyListState())
+        CollapsibleToolbar(rememberLazyListState())
     }
 }
 
 @Composable
-fun FortnightlyToolbar(
+fun CollapsibleToolbar(
     scrollState: LazyListState,
     height: Dp = 56.dp,
     onDrawerClick: () -> Unit = {},

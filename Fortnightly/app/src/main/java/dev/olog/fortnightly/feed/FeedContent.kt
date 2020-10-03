@@ -1,11 +1,9 @@
 package dev.olog.fortnightly.feed
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumnFor
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -32,7 +30,7 @@ fun FeedContent() {
         val scrollState = rememberLazyListState()
         Box {
             FortnightlyList(FeedState.sample, scrollState)
-            FortnightlyToolbar(scrollState)
+            CollapsibleToolbar(scrollState)
         }
     }
 }
