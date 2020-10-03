@@ -7,12 +7,10 @@ import androidx.compose.foundation.ScrollableColumn
 import androidx.compose.foundation.Text
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
-import androidx.compose.material.icons.filled.Close
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -22,6 +20,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.ui.tooling.preview.Preview
 import dev.olog.fortnightly.composable.FortnightlyText
 import dev.olog.fortnightly.ui.FortnightlyTheme
@@ -41,11 +40,7 @@ private fun DrawerContentPreview() {
 
 @Suppress("unused")
 @Composable
-fun ColumnScope.DrawerContent(
-    onCloseClick: () -> Unit = {}
-) {
-    DrawerHeader(onCloseClick)
-
+fun ColumnScope.DrawerContent() {
     var selectedCategory by remember {
         mutableStateOf(DrawerCategory.World)
     }
@@ -55,7 +50,13 @@ fun ColumnScope.DrawerContent(
             .fillMaxSize()
             .padding(start = 8.dp)
     ) {
-        Spacer(modifier = Modifier.height(64.dp))
+        Spacer(modifier = Modifier.height(48.dp))
+        FortnightlyText(
+            text = "F",
+            fontSize = 72.sp,
+            modifier = Modifier.padding(start = 24.dp)
+        )
+        Spacer(modifier = Modifier.height(36.dp))
 
         for (value in DrawerCategory.values()) {
             DrawerItemCategory(
@@ -64,22 +65,6 @@ fun ColumnScope.DrawerContent(
                 onClick = { selectedCategory = it }
             )
         }
-    }
-}
-
-@Composable
-private fun DrawerHeader(
-    onCloseClick: () -> Unit = {}
-) {
-    Row(
-        modifier = Modifier.fillMaxWidth(),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(12.dp)
-    ) {
-        IconButton(onClick = onCloseClick) {
-            Icon(asset = Icons.Default.Close)
-        }
-        FortnightlyText()
     }
 }
 
