@@ -43,7 +43,7 @@ private fun FortnightlyList(
     items: List<FeedState>,
     scrollState: LazyListState
 ) {
-    val itemPadding = Modifier.padding(horizontal = 16.dp)
+    val itemHorizontalPadding = 16.dp
     val itemVerticalPadding = 28.dp
     LazyColumnFor(
         items = items,
@@ -53,23 +53,33 @@ private fun FortnightlyList(
             FeedState.ToolbarSpacer -> Spacer(modifier = Modifier.height(56.dp))
             is FeedState.Hashtags -> HashtagsContent(
                 items = item.value,
-                modifier = itemPadding.padding(vertical = 8.dp) // todo move padding inside
+                modifier = Modifier.padding(vertical = 8.dp),
+                horizontalPadding = itemHorizontalPadding
             )
             is FeedState.BigItem -> BigFeedItemContent(
                 image = item.image,
                 title = item.title,
                 tags = item.tags,
-                modifier = itemPadding.padding(bottom = itemVerticalPadding)
+                modifier = Modifier
+                    .padding(bottom = itemVerticalPadding)
+                    .padding(horizontal = itemHorizontalPadding)
             )
             is FeedState.Item -> FeedItemContent(
                 image = item.image,
                 title = item.title,
                 tags = item.tags,
-                modifier = itemPadding.padding(vertical = itemVerticalPadding)
+                modifier = Modifier.padding(
+                    vertical = itemVerticalPadding,
+                    horizontal = itemHorizontalPadding
+                )
             )
         }.exhaustive
         if (item is FeedState.BigItem || item is FeedState.Item) {
-            DottedDividerHorizontal(Modifier.fillMaxWidth().then(itemPadding))
+            DottedDividerHorizontal(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = itemHorizontalPadding)
+            )
         }
     }
 }
