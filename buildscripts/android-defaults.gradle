@@ -57,7 +57,7 @@ dependencies {
 
     implementation "dev.chrisbanes.accompanist:accompanist-coil:0.2.2"
 
-    testImplementation 'junit:junit:4.+'
+    testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 }
