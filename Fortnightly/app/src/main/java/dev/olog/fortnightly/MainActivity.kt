@@ -3,10 +3,8 @@ package dev.olog.fortnightly
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.*
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.Stack
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -31,7 +29,7 @@ class MainActivity : AppCompatActivity() {
 private fun FortnightlyContent() {
     Surface {
         val scrollState = rememberScrollState()
-        Stack {
+        Box {
             FortnightlyList(scrollState)
             FortnightlyToolbar(scrollState)
         }
@@ -47,7 +45,7 @@ private fun FortnightlyList(scrollState: ScrollState) {
             if (index == 0) {
                 Spacer(modifier = Modifier.height(56.dp))
             }
-            Stack(Modifier.fillMaxWidth().height(80.dp)) {
+            Box(Modifier.fillMaxWidth().height(80.dp)) {
                 Text(text = "item $index")
             }
             Spacer(modifier = Modifier.fillMaxWidth().height(1.dp).background(Color.LightGray))
