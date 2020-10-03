@@ -1,0 +1,137 @@
+package dev.olog.fortnightly.composable
+
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.Text
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.MaterialTheme
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.ImageAsset
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.ui.tooling.preview.Preview
+import androidx.ui.tooling.preview.datasource.LoremIpsum
+import dev.olog.fortnightly.feed.FeedState
+import dev.olog.fortnightly.ui.FortnightlyTheme
+
+@Preview
+@Composable
+private fun BigFeedItemPreview() {
+    FortnightlyTheme {
+        val item = FeedState.sample.filterIsInstance<FeedState.BigItem>().first()
+        BigFeedItemContent(
+            image = item.image,
+            title = item.title,
+            tags = item.tags,
+            modifier = Modifier.padding(16.dp)
+        )
+    }
+}
+
+@Preview
+@Composable
+private fun FeedItemSingleLinePreview() {
+    FortnightlyTheme {
+        val item = FeedState.sample.filterIsInstance<FeedState.Item>().first()
+        FeedItemContent(
+            image = item.image,
+            title = "The Future of Gasoline",
+            tags = item.tags,
+            modifier = Modifier.padding(16.dp)
+        )
+    }
+}
+
+@Preview
+@Composable
+private fun FeedItemMultiLinePreview() {
+    FortnightlyTheme {
+        val item = FeedState.sample.filterIsInstance<FeedState.Item>().first()
+        FeedItemContent(
+            image = item.image,
+            title = item.title,
+            tags = item.tags,
+            modifier = Modifier.padding(16.dp)
+        )
+    }
+}
+
+@Preview
+@Composable
+private fun FeedItemTextTooLongPreview() {
+    FortnightlyTheme {
+        val item = FeedState.sample.filterIsInstance<FeedState.Item>().first()
+        FeedItemContent(
+            image = item.image,
+            title = LoremIpsum(50).values.joinToString(),
+            tags = item.tags,
+            modifier = Modifier.padding(16.dp)
+        )
+    }
+}
+
+@Composable
+fun BigFeedItemContent(
+    image: ImageAsset,
+    title: String,
+    tags: List<String>,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier.fillMaxWidth(),
+        verticalArrangement = Arrangement.spacedBy(12.dp)
+    ) {
+        Image(
+            asset = image,
+            modifier = Modifier.fillMaxWidth().aspectRatio(1.25f),
+            contentScale = ContentScale.Crop
+        )
+        TagsContent(tags = tags)
+        Text(
+            text = title,
+            maxLines = 2,
+            style = MaterialTheme.typography.subtitle1,
+            fontWeight = FontWeight.SemiBold,
+            fontSize = 24.sp
+        )
+    }
+}
+
+@Composable
+fun FeedItemContent(
+    image: ImageAsset,
+    title: String,
+    tags: List<String>,
+    modifier: Modifier = Modifier
+) {
+    Row(
+        modifier = modifier.fillMaxWidth().height(72.dp),
+        horizontalArrangement = Arrangement.spacedBy(12.dp)
+    ) {
+        Column(
+            modifier = Modifier
+                .padding(vertical = 4.dp)
+                .weight(1f)
+                .fillMaxHeight(),
+            verticalArrangement = Arrangement.spacedBy(4.dp),
+        ) {
+            TagsContent(tags = tags)
+            Text(
+                text = title,
+                maxLines = 2,
+                overflow = TextOverflow.Ellipsis,
+                style = MaterialTheme.typography.subtitle1,
+                fontWeight = FontWeight.Medium,
+                fontSize = 18.sp
+            )
+        }
+        Image(
+            asset = image,
+            modifier = Modifier.aspectRatio(1f).fillMaxHeight(),
+            contentScale = ContentScale.Crop
+        )
+    }
+}

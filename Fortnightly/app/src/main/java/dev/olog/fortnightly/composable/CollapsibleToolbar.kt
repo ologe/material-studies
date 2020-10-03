@@ -5,10 +5,10 @@ import androidx.compose.animation.core.FloatPropKey
 import androidx.compose.animation.core.transitionDefinition
 import androidx.compose.animation.transition
 import androidx.compose.foundation.Icon
-import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.Text
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.lazy.LazyListState
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
@@ -27,7 +27,7 @@ import androidx.ui.tooling.preview.Preview
 import dev.olog.fortnightly.ui.FortnightlyTheme
 import dev.olog.fortnightly.ui.oldlondon
 import dev.olog.fortnightly.utils.AnimationUtils.translateToStart
-import dev.olog.fortnightly.utils.toFloatPx
+import dev.olog.fortnightly.utils.toIntPx
 
 private enum class ToolbarState {
     Expanded,
@@ -61,20 +61,20 @@ private val definition = transitionDefinition<ToolbarState> {
 @Composable
 fun FortnightlyToolbarPreview() {
     FortnightlyTheme {
-        FortnightlyToolbar(rememberScrollState())
+        FortnightlyToolbar(rememberLazyListState())
     }
 }
 
 @Composable
 fun FortnightlyToolbar(
-    scrollState: ScrollState,
+    scrollState: LazyListState,
     height: Dp = 56.dp,
     onDrawerClick: () -> Unit = {},
     onSearchClick: () -> Unit = {},
 ) {
-    val heightPx = 2.dp.toFloatPx() // TODO test different values
-
-    val moreThanToolbar = scrollState.value >= heightPx
+    val heightPx = height.toIntPx()
+    val canSeeFirstItem = scrollState.firstVisibleItemIndex == 0
+    val moreThanToolbar = !canSeeFirstItem || (canSeeFirstItem && scrollState.firstVisibleItemScrollOffset > (heightPx / 3))
     val scrollValue by remember(moreThanToolbar) {
         mutableStateOf(if (moreThanToolbar) ToolbarState.Collapsed else ToolbarState.Expanded)
     }
