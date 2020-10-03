@@ -1,13 +1,11 @@
 package dev.olog.fortnightly.composable
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.Text
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ImageAsset
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -84,10 +82,9 @@ fun BigFeedItemContent(
         modifier.fillMaxWidth(),
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
-        Image(
+        FilterImage(
             asset = image,
-            modifier = Modifier.fillMaxWidth().aspectRatio(1.25f),
-            contentScale = ContentScale.Crop
+            modifier = Modifier.fillMaxWidth().aspectRatio(1.25f)
         )
         TagsContent(tags = tags)
         Text(
@@ -128,10 +125,9 @@ fun FeedItemContent(
                 fontSize = 18.sp
             )
         }
-        Image(
+        FilterImage(
             asset = image,
-            modifier = Modifier.aspectRatio(1f).fillMaxHeight(),
-            contentScale = ContentScale.Crop
+            modifier = Modifier.aspectRatio(1f).fillMaxHeight()
         )
     }
 }
