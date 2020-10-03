@@ -8,6 +8,7 @@ import androidx.compose.foundation.Icon
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.Text
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
@@ -22,6 +23,8 @@ import androidx.compose.ui.onPositioned
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.ui.tooling.preview.Preview
+import dev.olog.fortnightly.ui.FortnightlyTheme
 import dev.olog.fortnightly.ui.oldlondon
 import dev.olog.fortnightly.utils.AnimationUtils.translateToStart
 import dev.olog.fortnightly.utils.toFloatPx
@@ -38,19 +41,27 @@ private val alphaPercent = FloatPropKey("alphaPercent")
 private val offsetPercent = FloatPropKey("offsetPercent")
 
 private val definition = transitionDefinition<ToolbarState> {
-    state(ToolbarState.Collapsed) {
-        this[cornerRadius] = 28.dp
-        this[elevation] = 8.dp
-        this[widthPercent] = 0f // TODO reduce
-        this[alphaPercent] = 0f
-        this[offsetPercent] = 1f
-    }
     state(ToolbarState.Expanded) {
         this[cornerRadius] = 0.dp
         this[elevation] = 0.dp
         this[widthPercent] = 1f
         this[alphaPercent] = 1f
         this[offsetPercent] = 0f
+    }
+    state(ToolbarState.Collapsed) {
+        this[cornerRadius] = 28.dp
+        this[elevation] = 8.dp
+        this[widthPercent] = 0f
+        this[alphaPercent] = 0f
+        this[offsetPercent] = 1f
+    }
+}
+
+@Preview
+@Composable
+fun FortnightlyToolbarPreview() {
+    FortnightlyTheme {
+        FortnightlyToolbar(rememberScrollState())
     }
 }
 
