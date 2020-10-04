@@ -25,7 +25,7 @@ fun FilterImage(
     val filterAlpha = if (isClicked) filterMaxAlpha else 0.01f
     val colorFilter = ColorFilter(
         color = animate(filterColor.copy(alpha = filterAlpha)),
-        blendMode = BlendMode.Hardlight
+        blendMode = BlendMode.Hardlight // TODO find the correct filter
     )
 
     Image(
