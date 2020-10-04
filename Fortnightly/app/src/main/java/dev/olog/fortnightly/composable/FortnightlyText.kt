@@ -27,6 +27,7 @@ fun FortnightlyText(
     Text(
         text = text,
         modifier = modifier,
+        letterSpacing = (-0.01).em,
         fontSize = fontSize,
         fontFamily = oldlondon
     )
