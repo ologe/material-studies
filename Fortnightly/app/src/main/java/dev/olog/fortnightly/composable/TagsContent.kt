@@ -12,11 +12,13 @@ import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.drawLayer
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.ui.tooling.preview.Preview
 import dev.olog.fortnightly.ui.FortnightlyTheme
+import dev.olog.fortnightly.utils.toFloatPx
 import java.util.*
 
 @Preview
@@ -38,7 +40,7 @@ fun TagsContent(
     modifier: Modifier = Modifier
 ) {
     ScrollableRow(
-        modifier = modifier,
+        modifier = modifier.drawLayer(translationY = 2.dp.toFloatPx()),
         horizontalArrangement = Arrangement.spacedBy(12.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
