@@ -40,7 +40,7 @@ fun TagsContent(
     modifier: Modifier = Modifier
 ) {
     ScrollableRow(
-        modifier = modifier.drawLayer(translationY = 2.dp.toFloatPx()),
+        modifier = modifier.drawLayer(translationY = 5.dp.toFloatPx()),
         horizontalArrangement = Arrangement.spacedBy(12.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {

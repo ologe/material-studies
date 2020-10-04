@@ -45,7 +45,7 @@ private fun FortnightlyList(
     scrollState: LazyListState
 ) {
     val itemHorizontalPadding = 16.dp
-    val itemVerticalPadding = 28.dp
+    val itemVerticalPadding = 20.dp
     LazyColumnFor(
         items = items,
         state = scrollState,
@@ -62,7 +62,7 @@ private fun FortnightlyList(
                 title = item.title,
                 tags = item.tags,
                 modifier = Modifier
-                    .padding(bottom = itemVerticalPadding)
+                    .padding(top = 16.dp, bottom = itemVerticalPadding)
                     .padding(horizontal = itemHorizontalPadding)
             )
             is FeedState.Item -> FeedItemContent(

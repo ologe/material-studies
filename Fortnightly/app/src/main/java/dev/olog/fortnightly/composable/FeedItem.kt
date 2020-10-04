@@ -80,11 +80,11 @@ fun BigFeedItemContent(
 ) {
     Column(
         modifier.fillMaxWidth(),
-        verticalArrangement = Arrangement.spacedBy(12.dp)
+        verticalArrangement = Arrangement.spacedBy(14.dp)
     ) {
         FilterImage(
             asset = image,
-            modifier = Modifier.fillMaxWidth().aspectRatio(1.25f)
+            modifier = Modifier.fillMaxWidth().aspectRatio(1.35f)
         )
         TagsContent(tags = tags)
         Text(
@@ -92,7 +92,7 @@ fun BigFeedItemContent(
             maxLines = 2,
             style = MaterialTheme.typography.subtitle1,
             fontWeight = FontWeight.SemiBold,
-            fontSize = 24.sp
+            fontSize = 22.sp
         )
     }
 }
