@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.drawLayer
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.em
 import androidx.ui.tooling.preview.Preview
 import dev.olog.fortnightly.feed.FeedState
 import dev.olog.fortnightly.ui.FortnightlyTheme
@@ -47,7 +48,8 @@ fun HashtagsContent(
         Text(
             text = "#$item",
             style = MaterialTheme.typography.body1,
-            fontFamily = librefranklyn
+            fontFamily = librefranklyn,
+            letterSpacing = 0.em,
         )
         if (index != items.lastIndex) {
             DottedDividerVertical(
