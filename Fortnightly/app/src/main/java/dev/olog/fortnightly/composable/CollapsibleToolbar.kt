@@ -149,6 +149,7 @@ private fun ToolbarFullText(
 
     Row(
         modifier = modifier
+            .padding(start = 6.dp)
             .padding(bottom = 4.dp) // center text
             .drawLayer(translationX = offset * -leftTextWidth),
     ) {
