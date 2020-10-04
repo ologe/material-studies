@@ -54,7 +54,7 @@ private fun FortnightlyList(
             FeedState.ToolbarSpacer -> Spacer(modifier = Modifier.height(56.dp))
             is FeedState.Hashtags -> HashtagsContent(
                 items = item.value,
-                modifier = Modifier.padding(vertical = 8.dp),
+                modifier = Modifier.padding(vertical = 2.dp),
                 horizontalPadding = itemHorizontalPadding
             )
             is FeedState.BigItem -> BigFeedItemContent(
