@@ -4,6 +4,7 @@ import androidx.compose.foundation.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.TextUnit
+import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.sp
 import androidx.ui.tooling.preview.Preview
 import dev.olog.fortnightly.ui.FortnightlyTheme
@@ -21,7 +22,7 @@ private fun FortnightlyTextPreview() {
 fun FortnightlyText(
     text: String = "The Fortnightly",
     modifier: Modifier = Modifier,
-    fontSize: TextUnit = 28.sp
+    fontSize: TextUnit = 22.sp
 ) {
     Text(
         text = text,
