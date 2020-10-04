@@ -5,7 +5,6 @@ import androidx.compose.animation.core.FloatPropKey
 import androidx.compose.animation.core.transitionDefinition
 import androidx.compose.animation.transition
 import androidx.compose.foundation.Icon
-import androidx.compose.foundation.Text
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -22,12 +21,12 @@ import androidx.compose.ui.drawLayer
 import androidx.compose.ui.onPositioned
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.ui.tooling.preview.Preview
 import dev.olog.fortnightly.ui.FortnightlyTheme
-import dev.olog.fortnightly.ui.oldlondon
 import dev.olog.fortnightly.utils.AnimationUtils.translateToStart
 import dev.olog.fortnightly.utils.toIntPx
+
+private val toolbarHeight = 56.dp
 
 private enum class ToolbarState {
     Expanded,
@@ -68,7 +67,8 @@ fun CollapsibleToolbarPreview() {
 @Composable
 fun CollapsibleToolbar(
     scrollState: LazyListState,
-    height: Dp = 56.dp,
+    modifier: Modifier = Modifier,
+    height: Dp = toolbarHeight,
     onDrawerClick: () -> Unit = {},
     onSearchClick: () -> Unit = {},
 ) {
@@ -97,7 +97,7 @@ fun CollapsibleToolbar(
     ) {
 
         ConstraintLayout(
-            modifier = Modifier.fillMaxSize()
+            modifier = modifier.fillMaxSize()
         ) {
 
             val (drawer, header, search) = createRefs()

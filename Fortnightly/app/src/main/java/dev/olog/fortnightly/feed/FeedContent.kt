@@ -32,7 +32,8 @@ fun FeedContent(onDrawerClick: () -> Unit = {}) {
             FortnightlyList(FeedState.sample, scrollState)
             CollapsibleToolbar(
                 scrollState = scrollState,
-                onDrawerClick = onDrawerClick
+                onDrawerClick = onDrawerClick,
+                modifier = Modifier.padding(horizontal = 6.dp)
             )
         }
     }
