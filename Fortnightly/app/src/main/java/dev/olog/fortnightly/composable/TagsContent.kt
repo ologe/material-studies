@@ -37,10 +37,10 @@ private fun TagsContentPreview() {
 @Composable
 fun TagsContent(
     tags: List<String>,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier.drawLayer(translationY = 2.dp.toFloatPx())
 ) {
     ScrollableRow(
-        modifier = modifier.drawLayer(translationY = 5.dp.toFloatPx()),
+        modifier = modifier,
         horizontalArrangement = Arrangement.spacedBy(12.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {

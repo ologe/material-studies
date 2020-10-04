@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.drawLayer
 import androidx.compose.ui.graphics.ImageAsset
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -14,6 +15,7 @@ import androidx.ui.tooling.preview.Preview
 import androidx.ui.tooling.preview.datasource.LoremIpsum
 import dev.olog.fortnightly.feed.FeedState
 import dev.olog.fortnightly.ui.FortnightlyTheme
+import dev.olog.fortnightly.utils.toFloatPx
 
 @Preview
 @Composable
@@ -86,7 +88,10 @@ fun BigFeedItemContent(
             asset = image,
             modifier = Modifier.fillMaxWidth().aspectRatio(1.35f)
         )
-        TagsContent(tags = tags)
+        TagsContent(
+            tags = tags,
+            modifier = Modifier.drawLayer(translationY = 5.dp.toFloatPx()),
+        )
         Text(
             text = title,
             maxLines = 2,
@@ -110,7 +115,6 @@ fun FeedItemContent(
     ) {
         Column(
             modifier = Modifier
-                .padding(vertical = 4.dp)
                 .weight(1f)
                 .fillMaxHeight(),
             verticalArrangement = Arrangement.spacedBy(4.dp),
