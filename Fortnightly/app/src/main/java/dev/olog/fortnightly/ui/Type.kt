@@ -6,6 +6,7 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.font.font
 import androidx.compose.ui.text.font.fontFamily
+import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.sp
 import dev.olog.fortnightly.R
 
@@ -102,7 +103,8 @@ val typography = typographyFromDefaults(
     overline = TextStyle(
         fontFamily = librefranklyn,
         fontWeight = FontWeight.Bold,
-        fontSize = 11.sp
+        fontSize = 12.sp,
+        letterSpacing = 0.05.em
     )
 )
 
