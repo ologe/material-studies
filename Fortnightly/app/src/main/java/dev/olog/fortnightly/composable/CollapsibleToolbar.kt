@@ -89,7 +89,7 @@ fun CollapsibleToolbar(
 
     Surface(
         modifier = Modifier
-            .defaultMinSizeConstraints(minWidth = 92.dp)
+            .defaultMinSizeConstraints(minWidth = height * 1.75f)
             .fillMaxWidth(widthPercent)
             .height(height),
         shape = CutCornerShape(bottomRight = cornerRadius),
