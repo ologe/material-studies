@@ -110,14 +110,14 @@ fun FeedItemContent(
     modifier: Modifier = Modifier
 ) {
     Row(
-        modifier = modifier.fillMaxWidth().height(72.dp),
+        modifier = modifier.fillMaxWidth().height(76.dp),
         horizontalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         Column(
             modifier = Modifier
                 .weight(1f)
                 .fillMaxHeight(),
-            verticalArrangement = Arrangement.spacedBy(4.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp),
         ) {
             TagsContent(tags = tags)
             Text(
