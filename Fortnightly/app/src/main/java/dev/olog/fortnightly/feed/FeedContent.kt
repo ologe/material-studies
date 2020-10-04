@@ -51,7 +51,7 @@ private fun FortnightlyList(
         state = scrollState,
     ) { item ->
         when (item) {
-            FeedState.ToolbarSpacer -> Spacer(modifier = Modifier.height(56.dp))
+            FeedState.ToolbarSpacer -> Spacer(modifier = Modifier.height(toolbarHeight))
             is FeedState.Hashtags -> HashtagsContent(
                 items = item.value,
                 modifier = Modifier.padding(vertical = 2.dp),

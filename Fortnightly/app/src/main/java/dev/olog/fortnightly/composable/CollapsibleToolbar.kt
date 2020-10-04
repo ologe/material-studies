@@ -26,7 +26,7 @@ import dev.olog.fortnightly.ui.FortnightlyTheme
 import dev.olog.fortnightly.utils.AnimationUtils.translateToStart
 import dev.olog.fortnightly.utils.toIntPx
 
-private val toolbarHeight = 56.dp
+val toolbarHeight = 56.dp
 
 private enum class ToolbarState {
     Expanded,
