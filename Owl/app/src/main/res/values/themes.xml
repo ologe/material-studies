@@ -1,0 +1,8 @@
+<resources>
+
+    <style name="Theme.Owl" parent="Theme.MaterialComponents.Light.NoActionBar">
+
+    </style>
+
+
+</resources>
