@@ -1,7 +1,8 @@
 <resources>
 
-    <style name="Theme.Owl" parent="Theme.MaterialComponents.Light.NoActionBar">
-
+    <style name="Theme.Owl" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:statusBarColor">#33000000</item>
+        <item name="android:navigationBarColor">#33000000</item>
     </style>
 
 
