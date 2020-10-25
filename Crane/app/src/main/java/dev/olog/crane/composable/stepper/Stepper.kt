@@ -7,12 +7,9 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
+import androidx.compose.ui.*
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.drawLayer
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.onPositioned
 import androidx.compose.ui.unit.dp
 import dev.olog.crane.utils.toDp
 
@@ -34,7 +31,7 @@ fun<T> Stepper(
     ) {
 
         Row(
-            modifier = Modifier.onPositioned {
+            modifier = Modifier.onGloballyPositioned {
                 // TODO find another way
                 if (state.slotWidth == 0f) {
                     state.slotWidth = (it.size.width / itemCount).toFloat()
