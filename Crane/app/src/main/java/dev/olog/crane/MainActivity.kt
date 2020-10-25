@@ -70,7 +70,7 @@ private fun CraneContent() {
         Column {
             val toolbarHeight = 56.dp
             CraneMainToolbar(toolbarHeight, tabs, currentPage, viewPagerState)
-            Stack(Modifier.fillMaxSize()) {
+            Box(Modifier.fillMaxSize()) {
                 CraneTabsActions(tabs[currentPage.value])
                 CraneViewPager(viewPagerState)
             }
@@ -99,7 +99,7 @@ private fun CraneMainToolbar(
             modifier = Modifier.fillMaxHeight().drawLayer(translationY = 4.dp.toFloatPx())
         )
         Spacer(modifier = Modifier.width(24.dp))
-        Stack(Modifier.weight(1f).fillMaxHeight()) {
+        Box(Modifier.weight(1f).fillMaxHeight()) {
             Stepper(
                 items = tabs,
                 currentPage = currentPage,

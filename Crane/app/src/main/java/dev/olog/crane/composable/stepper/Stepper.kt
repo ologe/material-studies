@@ -1,7 +1,5 @@
 package dev.olog.crane.composable.stepper
 
-import androidx.compose.foundation.Box
-import androidx.compose.foundation.ContentGravity
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -30,7 +28,7 @@ fun<T> Stepper(
 
     val state = rememberStepperState(currentPage)
 
-    Stack(
+    Box(
         modifier,
         alignment = Alignment.CenterStart
     ) {
@@ -97,7 +95,7 @@ private fun<T> StepperSlots(
                     onClick = { onClick(item, index) },
 //                    indication = Indica
                 ),
-            gravity = ContentGravity.Center,
+            alignment = Alignment.Center,
         ) {
             children(item, index, isUnderIndicator)
         }

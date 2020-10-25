@@ -1,7 +1,7 @@
 package dev.olog.crane.composable.viewpager
 
-import androidx.compose.foundation.layout.Stack
-import androidx.compose.foundation.layout.StackScope
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.onCommit
 import androidx.compose.ui.Alignment
@@ -22,7 +22,7 @@ fun <T> ViewPager(
     orientation: Orientation = Orientation.Horizontal,
     isUserInputEnabled: Boolean = true,
     alignment: Alignment = Alignment.Center,
-    children: @Composable StackScope.(T) -> Unit
+    children: @Composable BoxScope.(T) -> Unit
 ) {
     val itemCount = items.size
 
@@ -38,7 +38,7 @@ fun <T> ViewPager(
             state.bounds = 0f.rangeTo(maxScroll)
         }
 
-        Stack(
+        Box(
             modifier = Modifier.viewPager(
                 state = state,
                 maxWidthPx = pageSize,
@@ -63,13 +63,13 @@ fun <T> ViewPager(
 private fun Page(
     offset: Int,
     orientation: Orientation,
-    children: @Composable StackScope.() -> Unit
+    children: @Composable BoxScope.() -> Unit
 ) {
     val modifier = when (orientation) {
         Orientation.Horizontal -> Modifier.offsetGetter(x = { offset })
         Orientation.Vertical -> Modifier.offsetGetter(y = { offset })
     }
-    Stack(
+    Box(
         modifier = modifier,
         children = children
     )

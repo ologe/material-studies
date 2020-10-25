@@ -4,9 +4,9 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
-import androidx.compose.foundation.Box
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.Text
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
@@ -16,6 +16,7 @@ import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.vector.VectorAsset
@@ -140,9 +141,11 @@ private fun CraneTabsAction(
 ) {
     Box(
         // TODO touches don't passes to this because list is on top
-        modifier = Modifier.fillMaxWidth().height(itemHeight).clickable(onClick = {}),
-        shape = MaterialTheme.shapes.small,
-        backgroundColor = MaterialTheme.colors.primary
+        modifier = Modifier.fillMaxWidth()
+            .height(itemHeight)
+            .clickable(onClick = {})
+            .clip(MaterialTheme.shapes.small)
+            .background(MaterialTheme.colors.primary),
     ) {
         Row(
             Modifier.fillMaxSize().padding(horizontal = 12.dp),
