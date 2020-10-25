@@ -135,7 +135,6 @@ private fun CategoryContent(
     }
 }
 
-@OptIn(ExperimentalAnimationApi::class)
 @Composable
 private fun SubCategoryContent(
     isSelected: Boolean,
