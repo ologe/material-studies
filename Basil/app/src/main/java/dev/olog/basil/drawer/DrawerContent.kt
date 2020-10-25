@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.*
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -75,7 +76,7 @@ private fun DrawerHeader(
         )
         Spacer(Modifier.height(16.dp))
         Text(
-            text = "Shopping List".toUpperCase(Locale.ROOT),
+            text = stringResource(R.string.shopping_list).toUpperCase(Locale.getDefault()),
             style = MaterialTypography.h5,
             fontWeight = FontWeight.Normal,
         )
