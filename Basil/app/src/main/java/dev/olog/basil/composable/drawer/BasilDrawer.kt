@@ -10,8 +10,8 @@ import androidx.compose.ui.gesture.scrollorientationlocking.Orientation
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import dev.olog.basil.composable.drawer.DrawerPage.*
-import dev.olog.basil.utils.*
 import dev.olog.shared.extension.toFloatPx
+import dev.olog.shared.offsetGetter
 import dev.olog.shared.utils.screenHeightDp
 import dev.olog.shared.utils.screenHeightPx
 
