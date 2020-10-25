@@ -1,2 +1,5 @@
 rootProject.name = "Owl"
 include ':app'
+
+include ':shared'
+project(':shared').projectDir = new File(rootDir.parent, "Shared/shared")
