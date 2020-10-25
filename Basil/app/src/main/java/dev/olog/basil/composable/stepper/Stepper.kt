@@ -61,7 +61,6 @@ fun<T> VerticalStepper(
         val density = DensityAmbient.current.density
         ScrollableColumn(
             modifier = Modifier.onGloballyPositioned {
-                // TODO find another way
                 if (state.slotHeight == 0f) {
                     state.slotHeight = (it.size.height / itemCount).toFloat()
                     state.maxBound = it.size.height.toFloat()
@@ -71,7 +70,6 @@ fun<T> VerticalStepper(
             },
             scrollState = scrollState,
             horizontalAlignment = Alignment.CenterHorizontally
-            // TODO allow spaced by
         ) {
             StepperSlots(
                 items = items,
