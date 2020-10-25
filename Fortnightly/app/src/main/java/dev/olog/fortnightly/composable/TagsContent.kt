@@ -16,8 +16,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.ui.tooling.preview.Preview
 import dev.olog.fortnightly.ui.FortnightlyTheme
-import dev.olog.fortnightly.utils.toFloatPx
 import dev.olog.shared.MediumEmphasis
+import dev.olog.shared.extension.toFloatPx
 import java.util.*
 
 @Preview

@@ -15,7 +15,7 @@ import androidx.ui.tooling.preview.Preview
 import androidx.ui.tooling.preview.datasource.LoremIpsum
 import dev.olog.fortnightly.feed.FeedState
 import dev.olog.fortnightly.ui.FortnightlyTheme
-import dev.olog.fortnightly.utils.toFloatPx
+import dev.olog.shared.extension.toFloatPx
 
 @Preview
 @Composable

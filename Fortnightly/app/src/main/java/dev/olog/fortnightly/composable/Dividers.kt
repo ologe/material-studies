@@ -10,7 +10,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.ui.tooling.preview.Preview
-import dev.olog.fortnightly.utils.toIntPx
+import dev.olog.shared.extension.toIntPx
 
 @Preview
 @Composable

@@ -23,7 +23,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.ui.tooling.preview.Preview
 import dev.olog.fortnightly.ui.FortnightlyTheme
-import dev.olog.fortnightly.utils.toIntPx
+import dev.olog.shared.extension.toIntPx
 import dev.olog.shared.utils.AnimationUtils.translateToStart
 
 val toolbarHeight = 56.dp
