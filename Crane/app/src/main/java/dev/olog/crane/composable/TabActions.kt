@@ -28,6 +28,8 @@ import dev.olog.crane.composable.TabActionsConstants.itemHeight
 import dev.olog.crane.composable.TabActionsConstants.itemSpacing
 import dev.olog.crane.utils.animateSpec
 import dev.olog.crane.utils.exhaustive
+import dev.olog.shared.extension.MaterialColors
+import dev.olog.shared.extension.MaterialShape
 
 object TabActionsConstants {
     val itemHeight = 48.dp
@@ -142,8 +144,8 @@ private fun CraneTabsAction(
         modifier = Modifier.fillMaxWidth()
             .height(itemHeight)
             .clickable(onClick = {})
-            .clip(MaterialTheme.shapes.small)
-            .background(MaterialTheme.colors.primary),
+            .clip(MaterialShape.small)
+            .background(MaterialColors.primary),
     ) {
         Row(
             Modifier.fillMaxSize().padding(horizontal = 12.dp),

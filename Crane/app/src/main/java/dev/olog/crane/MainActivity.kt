@@ -43,6 +43,9 @@ import dev.olog.crane.theme.CraneTheme
 import dev.olog.crane.utils.exhaustive
 import dev.olog.crane.utils.toFloatPx
 import dev.olog.shared.MediumEmphasis
+import dev.olog.shared.extension.MaterialColors
+import dev.olog.shared.extension.MaterialShape
+import dev.olog.shared.extension.MaterialTypography
 import java.util.*
 
 // TODO draw over navigation bar + made it transaprent
@@ -106,7 +109,7 @@ private fun CraneMainToolbar(
                 modifier = Modifier.fillMaxSize().padding(8.dp),
                 onClick = { _, index -> state.animateTo(index) }
             ) { item, _, selected ->
-                val textColor = MaterialTheme.colors.onBackground
+                val textColor = MaterialColors.onBackground
                 Text(
                     text = item.toString().toUpperCase(Locale.ROOT),
                     color = if (selected) textColor else textColor.copy(alpha = 0.6f),
@@ -171,13 +174,13 @@ private fun ListHeader(text: String) {
         modifier = Modifier
             .fillMaxWidth()
             .height(56.dp),
-        shape = MaterialTheme.shapes.large
+        shape = MaterialShape.large
     ) {
         MediumEmphasis {
             Text(
                 text = text,
                 modifier = Modifier.padding(horizontal = 24.dp, vertical = 16.dp),
-                style = MaterialTheme.typography.body1
+                style = MaterialTypography.body1
             )
         }
     }
@@ -200,10 +203,10 @@ private fun ListItem(item: ExploreModel) {
                 modifier = Modifier
                     .fillMaxHeight()
                     .aspectRatio(1f)
-                    .clip(MaterialTheme.shapes.small),
+                    .clip(MaterialShape.small),
                 contentScale = ContentScale.Crop,
                 loading = {
-                    Spacer(modifier = Modifier.fillMaxSize().background(MaterialTheme.colors.primary))
+                    Spacer(modifier = Modifier.fillMaxSize().background(MaterialColors.primary))
                 }
             )
             Column(
@@ -212,14 +215,14 @@ private fun ListItem(item: ExploreModel) {
             ) {
                 Text(
                     text = item.city.nameToDisplay,
-                    style = MaterialTheme.typography.subtitle1,
+                    style = MaterialTypography.subtitle1,
                     fontWeight = FontWeight.Medium,
                     fontSize = 20.sp
                 )
                 MediumEmphasis {
                     Text(
                         text = item.description,
-                        style = MaterialTheme.typography.subtitle1,
+                        style = MaterialTypography.subtitle1,
                         fontWeight = FontWeight.Medium,
                         fontSize = 16.sp
                     )
