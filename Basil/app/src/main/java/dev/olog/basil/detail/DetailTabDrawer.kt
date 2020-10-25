@@ -3,7 +3,6 @@ package dev.olog.basil.detail
 import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.layout.RowScope.weight
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -36,7 +35,6 @@ enum class DetailTabDrawerPage {
 }
 
 @Composable
-@OptIn(ExperimentalMaterialApi::class)
 fun DetailTabDrawer(
     state: SwipeableState<DetailTabDrawerState> = rememberSwipeableState(Collapsed),
     modifier: Modifier = Modifier,
@@ -123,7 +121,7 @@ private fun Buttons(
 }
 
 @Composable
-private fun Button(
+private fun RowScope.Button(
     text: String,
     onClick: () -> Unit
 ) {
@@ -136,23 +134,18 @@ private fun Button(
 }
 
 
-@OptIn(ExperimentalMaterialApi::class)
 val SwipeProgress<DetailTabDrawerState>.isExpanded: Boolean
     get() = from == Expanded && to == Expanded
 
-@OptIn(ExperimentalMaterialApi::class)
 val SwipeProgress<DetailTabDrawerState>.isCollapsed: Boolean
     get() = from == Collapsed && to == Collapsed
 
-@OptIn(ExperimentalMaterialApi::class)
 val SwipeProgress<DetailTabDrawerState>.isExpanding: Boolean
     get() = from == Collapsed && to == Expanded
 
-@OptIn(ExperimentalMaterialApi::class)
 val SwipeProgress<DetailTabDrawerState>.isCollapsing: Boolean
     get() = from == Expanded && to == Collapsed
 
-@OptIn(ExperimentalMaterialApi::class)
 val SwipeProgress<DetailTabDrawerState>.offset: Float
     get() {
         return when {

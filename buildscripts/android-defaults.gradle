@@ -25,7 +25,8 @@ android {
         useIR = true
         freeCompilerArgs += [
             "-Xallow-jvm-ir-dependencies",
-            "-Xskip-prerelease-check"
+            "-Xskip-prerelease-check",
+            "-Xopt-in=androidx.compose.material.ExperimentalMaterialApi"
         ]
     }
     buildFeatures {

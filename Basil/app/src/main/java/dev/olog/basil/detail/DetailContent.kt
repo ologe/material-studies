@@ -40,7 +40,6 @@ private const val EAGER_END_THRESHOLD = 0.1f
 private const val LATE_START_THRESHOLD = 0.6f
 
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun DetailContent(
     items: List<Recipe>,

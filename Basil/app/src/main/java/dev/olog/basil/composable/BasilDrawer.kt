@@ -19,15 +19,12 @@ enum class DrawerPage {
     DETAIL
 }
 
-@OptIn(ExperimentalMaterialApi::class)
 val SwipeableState<DrawerPage>.drawerOffset: Int
     get() = offset.value.toInt().coerceAtLeast(0)
 
-@OptIn(ExperimentalMaterialApi::class)
 val SwipeableState<DrawerPage>.detailOffset: Int
     get() = offset.value.toInt().coerceAtMost(0)
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun BasilDrawer(
     topPeek: Dp,

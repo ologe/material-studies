@@ -30,7 +30,6 @@ val ListHorizontalPadding = 32.dp
 const val ListHeightFraction = 0.6f
 
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun ListContent(
     items: List<Recipe>,

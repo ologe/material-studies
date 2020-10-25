@@ -50,7 +50,6 @@ private fun MainActivityContentPreview(
     }
 }
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 private fun MainActivityContent(
     items: List<Recipe>,
