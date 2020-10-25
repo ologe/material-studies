@@ -1,14 +1,18 @@
 package dev.olog.basil.composable.drawer
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.gesture.scrollorientationlocking.Orientation
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import dev.olog.basil.composable.drawer.DrawerPage.*
 import dev.olog.basil.utils.*
+
+private val DEBUG = false
 
 @Composable
 fun BasilDrawer(
@@ -71,7 +75,11 @@ private fun DrawerSlot(
             .fillMaxWidth()
             .height(screenHeightDp + peek)
     ) {
-        content()
+        if (DEBUG) {
+            Box(modifier = Modifier.fillMaxSize().background(Color.Black))
+        } else {
+            content()
+        }
     }
 }
 
@@ -86,7 +94,11 @@ private fun ListSlot(
             .fillMaxWidth()
             .height(screenHeightDp - peek)
     ) {
-        content()
+        if (DEBUG) {
+            Box(modifier = Modifier.fillMaxSize().background(Color.Red))
+        } else {
+            content()
+        }
     }
 }
 
@@ -102,6 +114,10 @@ private fun DetailSlot(
             .fillMaxWidth()
             .height(screenHeightDp)
     ) {
-        content()
+        if (DEBUG) {
+            Box(modifier = Modifier.fillMaxSize().background(Color.Blue))
+        } else {
+            content()
+        }
     }
 }
