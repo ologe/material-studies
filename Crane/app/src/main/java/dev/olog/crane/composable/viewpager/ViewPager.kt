@@ -8,7 +8,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.WithConstraints
 import androidx.compose.ui.gesture.scrollorientationlocking.Orientation
-import dev.olog.crane.utils.offsetGetter
+import dev.olog.shared.offsetGetter
 import kotlin.math.floor
 
 /**
