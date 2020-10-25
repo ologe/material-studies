@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.annotation.FloatRange
 import dev.olog.basil.detail.DetailTabDrawerState.Collapsed
 import dev.olog.basil.detail.DetailTabDrawerState.Expanded
+import dev.olog.basil.theme.MaterialColors
 import dev.olog.basil.utils.AnimationUtils
 import dev.olog.basil.utils.exhaustive
 import dev.olog.basil.utils.screenHeightPx
@@ -59,7 +60,7 @@ fun DetailTabDrawer(
                 enabled = state.value == Expanded
             )
             .fillMaxSize()
-            .background(MaterialTheme.colors.background.copy(alpha = .95f))
+            .background(MaterialColors.background.copy(alpha = .95f))
             .clickable(indication = null) {
 
             }
@@ -114,7 +115,7 @@ private fun Buttons(
         Spacer(
             modifier = Modifier
                 .drawLayer(alpha = AnimationUtils.translateToEnd(offset, 0.6f))
-                .background(MaterialTheme.colors.onBackground.copy(alpha = .2f))
+                .background(MaterialColors.onBackground.copy(alpha = .2f))
                 .fillMaxWidth()
                 .height(1.dp)
         )

@@ -4,7 +4,6 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.layout.Box
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.SwipeableState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -20,6 +19,7 @@ import dev.olog.basil.composable.viewpager.ViewPagerState
 import dev.olog.basil.detail.DetailTabDrawerState
 import dev.olog.basil.detail.offset
 import dev.olog.basil.model.Recipe
+import dev.olog.basil.theme.MaterialColors
 import dev.olog.basil.utils.ParallaxUtils
 import dev.olog.basil.utils.ParallaxUtils.ListParallaxDp
 import dev.olog.basil.utils.scaleDown
@@ -103,7 +103,7 @@ private fun BoxScope.Scrim(fraction: Float) {
         Modifier
             .fillMaxWidth()
             .fillMaxHeight(fraction * 2f)
-            .background(MaterialTheme.colors.surface)
+            .background(MaterialColors.surface)
             .align(Alignment.BottomCenter)
     )
 }

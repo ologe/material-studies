@@ -3,7 +3,6 @@ package dev.olog.basil.composable
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.Text
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -16,6 +15,8 @@ import androidx.ui.tooling.preview.PreviewParameter
 import dev.olog.basil.R
 import dev.olog.basil.model.Allergen
 import dev.olog.basil.theme.BasilTheme
+import dev.olog.basil.theme.MaterialColors
+import dev.olog.basil.theme.MaterialTypography
 import dev.olog.basil.utils.AllergenPreviewProvider
 import dev.olog.basil.utils.exhaustive
 
@@ -70,15 +71,15 @@ private fun AllergenUi(
             Image(
                 asset = asset,
                 modifier = Modifier.matchParentSize(),
-                colorFilter = ColorFilter.tint(MaterialTheme.colors.onPrimary)
+                colorFilter = ColorFilter.tint(MaterialColors.onPrimary)
             )
             Image(
                 asset = vectorResource(R.drawable.vd_crossed_circle),
                 modifier = Modifier.matchParentSize(),
-                colorFilter = ColorFilter.tint(MaterialTheme.colors.secondary)
+                colorFilter = ColorFilter.tint(MaterialColors.secondary)
             )
         }
         Spacer(Modifier.width(8.dp))
-        Text(text = text, style = MaterialTheme.typography.subtitle1)
+        Text(text = text, style = MaterialTypography.subtitle1)
     }
 }

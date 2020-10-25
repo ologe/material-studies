@@ -5,7 +5,6 @@ import androidx.compose.foundation.Text
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.*
 import androidx.compose.ui.graphics.ColorFilter
@@ -18,6 +17,8 @@ import dev.olog.basil.composable.Background
 import dev.olog.basil.model.Category
 import dev.olog.basil.model.Category.Entrees
 import dev.olog.basil.theme.BasilTheme
+import dev.olog.basil.theme.MaterialColors
+import dev.olog.basil.theme.MaterialTypography
 import dev.olog.basil.utils.ParallaxUtils.DrawerParallaxDp
 import dev.olog.basil.utils.toDp
 import dev.olog.basil.utils.toFloatPx
@@ -53,7 +54,7 @@ fun DrawerContent(
         Text(
             text = "BASiL",
             modifier = Modifier.align(Alignment.BottomCenter),
-            style = MaterialTheme.typography.h2,
+            style = MaterialTypography.h2,
         )
     }
 }
@@ -70,19 +71,19 @@ private fun DrawerHeader(
         Image(
             asset = vectorResource(R.drawable.vd_shopping_list),
             modifier = Modifier.size(48.dp),
-            colorFilter = ColorFilter.tint(MaterialTheme.colors.onPrimary)
+            colorFilter = ColorFilter.tint(MaterialColors.onPrimary)
         )
         Spacer(Modifier.height(16.dp))
         Text(
             text = "Shopping List".toUpperCase(Locale.ROOT),
-            style = MaterialTheme.typography.h5,
+            style = MaterialTypography.h5,
             fontWeight = FontWeight.Normal,
         )
         Spacer(Modifier.height(64.dp))
         // divider
         Spacer(Modifier.width(96.dp)
             .height(1.dp)
-            .background(MaterialTheme.colors.onPrimary)
+            .background(MaterialColors.onPrimary)
         )
         Spacer(Modifier.height(24.dp))
     }
@@ -131,7 +132,7 @@ private fun DrawerCategory(
 
         Text(
             text = text.toUpperCase(Locale.ROOT),
-            style = MaterialTheme.typography.h5,
+            style = MaterialTypography.h5,
             fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Normal,
             modifier = Modifier
                 .padding(24.dp)
@@ -142,12 +143,12 @@ private fun DrawerCategory(
 
         if (isSelected) {
             // TODO now showing in the preview
-            Spacer(
+            Box(
                 modifier = Modifier
                     .height(2.dp)
                     .width(width.toDp())
                     .drawLayer(translationY = -20.dp.toIntPx().toFloat())
-                    .background(MaterialTheme.colors.onPrimary)
+                    .background(MaterialColors.onPrimary)
             )
         }
     }

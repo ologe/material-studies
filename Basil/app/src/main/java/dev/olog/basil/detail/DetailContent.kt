@@ -4,7 +4,6 @@ import androidx.compose.foundation.Icon
 import androidx.compose.foundation.Text
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.SwipeableState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -33,6 +32,8 @@ import dev.olog.basil.utils.fakeClickable
 import dev.olog.basil.utils.screenHeightDp
 import dev.olog.basil.utils.toFloatPx
 import dev.olog.basil.R
+import dev.olog.basil.theme.MaterialColors
+import dev.olog.basil.theme.MaterialTypography
 import dev.olog.basil.utils.scaleDown
 
 private const val EAGER_END_THRESHOLD = 0.1f
@@ -155,9 +156,9 @@ private fun RecipeTitle(
                 modifier = Modifier.fillMaxWidth()
                     .padding(top = 32.dp)
                     .drawLayer(translationX = parallax),
-                style = MaterialTheme.typography.h2,
+                style = MaterialTypography.h2,
                 textAlign = TextAlign.Center,
-                color = MaterialTheme.colors.secondary,
+                color = MaterialColors.secondary,
                 maxLines = 2
             )
         }
@@ -198,7 +199,7 @@ private fun RecipeDescription(
     Text(
         text = LoremIpsum(100).values.joinToString(),
         modifier = modifier.padding(horizontal = ListHorizontalPadding + 12.dp).padding(bottom = 32.dp),
-        style = MaterialTheme.typography.h6,
+        style = MaterialTypography.h6,
         textAlign = TextAlign.Center,
         overflow = TextOverflow.Ellipsis
     )
@@ -226,8 +227,8 @@ private fun Macro(
     modifier: Modifier = Modifier
 ) {
     Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = modifier) {
-        Text(text = title, style = MaterialTheme.typography.subtitle1)
-        Text(text = amount, style = MaterialTheme.typography.subtitle2)
+        Text(text = title, style = MaterialTypography.subtitle1)
+        Text(text = amount, style = MaterialTypography.subtitle2)
     }
 }
 

@@ -5,11 +5,11 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.*
 import androidx.compose.ui.platform.DensityAmbient
 import androidx.compose.ui.unit.dp
+import dev.olog.basil.theme.MaterialColors
 import dev.olog.basil.utils.toDp
 
 @Composable
@@ -17,7 +17,7 @@ fun<T> Stepper(
     items: List<T>,
     currentPage: MutableState<Int> = mutableStateOf(0),
     modifier: Modifier = Modifier,
-    indicatorModifier: Modifier = Modifier.border(3.dp, MaterialTheme.colors.secondary, CircleShape),
+    indicatorModifier: Modifier = Modifier.border(3.dp, MaterialColors.secondary, CircleShape),
     children: @Composable (T, Int, Boolean) -> Unit,
 ) {
     val itemCount = items.size

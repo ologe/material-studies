@@ -19,6 +19,8 @@ import androidx.compose.ui.unit.sp
 import androidx.ui.tooling.preview.datasource.LoremIpsum
 import dev.olog.basil.composable.stepper.Stepper
 import dev.olog.basil.R
+import dev.olog.basil.theme.MaterialColors
+import dev.olog.basil.theme.MaterialTypography
 
 @Composable
 fun RecipeDirections() {
@@ -55,14 +57,14 @@ fun RecipeDirections() {
             items = (1..8).toList(),
             currentPage = currentPage,
             modifier = Modifier.padding(16.dp).padding(top = 4.dp),
-            indicatorModifier = Modifier.border(3.dp, MaterialTheme.colors.onPrimary, CircleShape),
+            indicatorModifier = Modifier.border(3.dp, MaterialColors.onPrimary, CircleShape),
         ) { item, _, underIndicator ->
             Text(
                 text = item.toString().padStart(2, '0'),
                 fontSize = 16.sp,
-                style = MaterialTheme.typography.body1,
+                style = MaterialTypography.body1,
                 fontWeight = if (underIndicator) FontWeight.Bold else FontWeight.SemiBold,
-                color = MaterialTheme.colors.onBackground,
+                color = MaterialColors.onBackground,
                 modifier = Modifier.padding(12.dp)
             )
         }
