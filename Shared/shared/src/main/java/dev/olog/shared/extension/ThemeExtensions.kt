@@ -1,4 +1,4 @@
-package dev.olog.basil.theme
+package dev.olog.shared.extension
 
 import androidx.compose.material.Colors
 import androidx.compose.material.MaterialTheme

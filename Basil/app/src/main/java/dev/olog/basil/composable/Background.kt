@@ -3,7 +3,7 @@ package dev.olog.basil.composable
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import dev.olog.basil.theme.MaterialColors
+import dev.olog.shared.extension.MaterialColors
 
 @Composable
 fun Background(

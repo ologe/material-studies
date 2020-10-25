@@ -16,8 +16,8 @@ import androidx.compose.ui.unit.sp
 import androidx.ui.tooling.preview.datasource.LoremIpsum
 import dev.olog.basil.composable.stepper.VerticalStepper
 import dev.olog.basil.R
-import dev.olog.basil.theme.MaterialColors
-import dev.olog.basil.theme.MaterialTypography
+import dev.olog.shared.extension.MaterialColors
+import dev.olog.shared.extension.MaterialTypography
 
 @Composable
 fun RecipeDirections() {

@@ -17,8 +17,8 @@ import dev.olog.basil.R
 import dev.olog.basil.composable.Background
 import dev.olog.basil.model.Category
 import dev.olog.basil.theme.BasilTheme
-import dev.olog.basil.theme.MaterialColors
-import dev.olog.basil.theme.MaterialTypography
+import dev.olog.shared.extension.MaterialColors
+import dev.olog.shared.extension.MaterialTypography
 import dev.olog.basil.utils.ParallaxUtils.DrawerParallaxDp
 import dev.olog.basil.utils.toDp
 import dev.olog.basil.utils.toFloatPx

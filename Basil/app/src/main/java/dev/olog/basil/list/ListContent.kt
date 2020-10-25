@@ -19,7 +19,7 @@ import dev.olog.basil.composable.viewpager.ViewPagerState
 import dev.olog.basil.detail.DetailTabDrawerState
 import dev.olog.basil.detail.offset
 import dev.olog.basil.model.Recipe
-import dev.olog.basil.theme.MaterialColors
+import dev.olog.shared.extension.MaterialColors
 import dev.olog.basil.utils.ParallaxUtils
 import dev.olog.basil.utils.ParallaxUtils.ListParallaxDp
 import dev.olog.basil.utils.scaleDown

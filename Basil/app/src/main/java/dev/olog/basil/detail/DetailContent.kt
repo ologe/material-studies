@@ -32,8 +32,8 @@ import dev.olog.basil.utils.fakeClickable
 import dev.olog.basil.utils.screenHeightDp
 import dev.olog.basil.utils.toFloatPx
 import dev.olog.basil.R
-import dev.olog.basil.theme.MaterialColors
-import dev.olog.basil.theme.MaterialTypography
+import dev.olog.shared.extension.MaterialColors
+import dev.olog.shared.extension.MaterialTypography
 import dev.olog.basil.utils.scaleDown
 
 private const val EAGER_END_THRESHOLD = 0.1f

@@ -16,8 +16,8 @@ import androidx.ui.tooling.preview.PreviewParameter
 import dev.olog.basil.R
 import dev.olog.basil.model.Allergen
 import dev.olog.basil.theme.BasilTheme
-import dev.olog.basil.theme.MaterialColors
-import dev.olog.basil.theme.MaterialTypography
+import dev.olog.shared.extension.MaterialColors
+import dev.olog.shared.extension.MaterialTypography
 import dev.olog.basil.utils.AllergenPreviewProvider
 import dev.olog.basil.utils.exhaustive
 
