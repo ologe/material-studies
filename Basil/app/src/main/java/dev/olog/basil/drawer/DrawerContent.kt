@@ -94,7 +94,7 @@ private fun DrawerCategories(
     selected: MutableState<Category>,
     drawerFraction: Float,
 ) {
-    val categories = Category.values().toList()
+    val categories = Category.values()
 
     Column(
         Modifier.fillMaxWidth(),
