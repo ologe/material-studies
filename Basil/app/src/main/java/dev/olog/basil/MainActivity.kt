@@ -25,8 +25,8 @@ import dev.olog.basil.model.Category
 import dev.olog.basil.model.Recipe
 import dev.olog.basil.theme.BasilTheme
 import dev.olog.basil.utils.DrawerPagePreviewProvider
-import dev.olog.basil.utils.screenHeightDp
 import dev.olog.shared.extension.toIntPx
+import dev.olog.shared.utils.screenHeightDp
 import kotlin.math.abs
 
 class MainActivity : AppCompatActivity() {
