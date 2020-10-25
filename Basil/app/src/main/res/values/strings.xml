@@ -8,4 +8,7 @@
     <string name="category_desserts">Desserts</string>
     <string name="category_cocktails">Cocktails</string>
 
+    <string name="allergen_gluten_free">Gluten-free</string>
+    <string name="allergen_egg_free">Egg free</string>
+
 </resources>

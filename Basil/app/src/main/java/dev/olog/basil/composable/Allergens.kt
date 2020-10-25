@@ -8,6 +8,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.vector.VectorAsset
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import androidx.ui.tooling.preview.Preview
@@ -41,14 +42,14 @@ fun AllergenRow(
     iconModifier: Modifier = Modifier.size(32.dp)
 ) {
     when (allergen) {
-        Allergen.GlutenFree -> AllergenUi(
-            text = "Gluten-free",
+        Allergen.GlutenFree -> AllergenContent(
+            text = stringResource(R.string.allergen_gluten_free),
             asset = vectorResource(R.drawable.vd_leaf),
             modifier = modifier,
             iconModifier = iconModifier
         )
-        Allergen.EggFree -> AllergenUi(
-            text = "Egg free",
+        Allergen.EggFree -> AllergenContent(
+            text = stringResource(R.string.allergen_egg_free),
             asset = vectorResource(R.drawable.vd_egg),
             modifier = modifier,
             iconModifier = iconModifier
@@ -57,7 +58,7 @@ fun AllergenRow(
 }
 
 @Composable
-private fun AllergenUi(
+private fun AllergenContent(
     text: String,
     asset: VectorAsset,
     modifier: Modifier = Modifier,
