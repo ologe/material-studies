@@ -54,7 +54,6 @@ fun<T> Stepper(
             )
         }
 
-        // TODO magnify content behind?? is this even possible
         Box(
             Modifier
                 .height(state.height().toDp())
