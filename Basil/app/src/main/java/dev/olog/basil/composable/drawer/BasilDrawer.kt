@@ -19,9 +19,9 @@ fun BasilDrawer(
     bottomPeek: Dp,
     initialValue: DrawerPage = LIST,
     state: SwipeableState<DrawerPage> = rememberSwipeableState(initialValue),
-    drawerContent: @Composable BoxScope.() -> Unit,
-    listContent: @Composable BoxScope.() -> Unit,
-    detailContent: @Composable BoxScope.() -> Unit
+    drawerContent: @Composable () -> Unit,
+    listContent: @Composable () -> Unit,
+    detailContent: @Composable () -> Unit
 ) {
     val bottomPeekPx = bottomPeek.toIntPx()
     // TODO remember?
@@ -67,42 +67,45 @@ fun BasilDrawer(
 private fun DrawerSlot(
     peek: Dp,
     modifier: Modifier = Modifier,
-    content: @Composable BoxScope.() -> Unit
+    content: @Composable () -> Unit
 ) {
     Box(
         modifier = modifier then Modifier
             .offset(y = -(screenHeightDp - peek * 0.5f))
             .fillMaxWidth()
-            .height(screenHeightDp + peek),
-        children = content
-    )
+            .height(screenHeightDp + peek)
+    ) {
+        content()
+    }
 }
 
 @Composable
 private fun ListSlot(
     peek: Dp,
     modifier: Modifier = Modifier,
-    content: @Composable BoxScope.() -> Unit
+    content: @Composable () -> Unit
 ) {
     Box(
         modifier = modifier then Modifier
             .fillMaxWidth()
-            .height(screenHeightDp - peek),
-        children = content
-    )
+            .height(screenHeightDp - peek)
+    ) {
+        content()
+    }
 }
 
 @Composable
 private fun DetailSlot(
     peek: Dp,
     modifier: Modifier = Modifier,
-    content: @Composable BoxScope.() -> Unit
+    content: @Composable () -> Unit
 ) {
     Box(
         modifier = modifier then Modifier
             .offset(y = screenHeightDp - peek)
             .fillMaxWidth()
-            .height(screenHeightDp),
-        children = content
-    )
+            .height(screenHeightDp)
+    ) {
+        content()
+    }
 }
