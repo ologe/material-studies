@@ -57,8 +57,8 @@ private fun MainActivityContentPreview(
 private fun MainActivityContent(
     items: List<Recipe>,
     initialPage: DrawerPage = DrawerPage.LIST,
-    topPeek: Dp = 40.dp,
-    bottomPeek: Dp = 300.dp
+    peekTop: Dp = 40.dp,
+    peekBottom: Dp = 300.dp
 ) {
 
     val currentCategory = savedInstanceState { Category.Entrees }
@@ -71,8 +71,8 @@ private fun MainActivityContent(
     )
 
     // TODO extract from BasilDrawer??
-    val detailPageHeight = (screenHeightDp - bottomPeek).toIntPx()
-    val drawerPageHeight = (screenHeightDp + topPeek).toIntPx()
+    val detailPageHeight = (screenHeightDp - peekBottom).toIntPx()
+    val drawerPageHeight = (screenHeightDp + peekTop).toIntPx()
     val detailFraction = (abs(swipeableState.detailOffset.toFloat()) / detailPageHeight).coerceIn(0f, 1f)
     val drawerFraction = (abs(swipeableState.drawerOffset.toFloat()) / drawerPageHeight).coerceIn(0f, 1f)
     val tabDrawerState = rememberSwipeableState(
@@ -82,8 +82,8 @@ private fun MainActivityContent(
 
     Background {
         BasilDrawer(
-            topPeek = topPeek,
-            bottomPeek = bottomPeek,
+            peekTop = peekTop,
+            peekBottom = peekBottom,
             state = swipeableState,
             drawerContent = {
                 DrawerContent(
@@ -102,8 +102,8 @@ private fun MainActivityContent(
             },
             detailContent = {
                 DetailContent(
-                    topPeek = topPeek,
-                    bottomPeek = bottomPeek,
+                    peekTop = peekTop,
+                    peekBottom = peekBottom,
                     items = items,
                     viewPagerState = viewPagerState,
                     tabDrawerState = tabDrawerState,

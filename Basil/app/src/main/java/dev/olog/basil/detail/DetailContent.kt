@@ -4,7 +4,6 @@ import androidx.compose.foundation.Icon
 import androidx.compose.foundation.Text
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.SwipeableState
 import androidx.compose.runtime.Composable
@@ -46,8 +45,8 @@ fun DetailContent(
     viewPagerState: ViewPagerState,
     tabDrawerState: SwipeableState<DetailTabDrawerState>,
     item: Recipe,
-    topPeek: Dp,
-    bottomPeek: Dp,
+    peekTop: Dp,
+    peekBottom: Dp,
     @FloatRange(0.0, 1.0) detailFraction: Float
 ) {
     val eagerEndFraction = translateToStart(detailFraction, EAGER_END_THRESHOLD)
@@ -70,8 +69,8 @@ fun DetailContent(
             val lateStartAlphaModifier = Modifier.drawLayer(alpha = lateStartFraction)
 
             // title + description, same height as content list
-            UntilListContentImage(topPeek) {
-                Box(Modifier.fillMaxWidth().preferredHeight(bottomPeek)) {
+            UntilListContentImage(peekTop) {
+                Box(Modifier.fillMaxWidth().preferredHeight(peekBottom)) {
                     DownArrow(eagerEndFraction)
                 }
                 Column(

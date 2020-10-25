@@ -8,27 +8,23 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.gesture.scrollorientationlocking.Orientation
 import androidx.compose.ui.unit.Dp
 import dev.olog.basil.composable.drawer.DrawerPage.*
-import dev.olog.basil.utils.offsetGetter
-import dev.olog.basil.utils.screenHeightDp
-import dev.olog.basil.utils.screenHeightPx
-import dev.olog.basil.utils.toIntPx
+import dev.olog.basil.utils.*
 
 @Composable
 fun BasilDrawer(
-    topPeek: Dp,
-    bottomPeek: Dp,
+    peekTop: Dp,
+    peekBottom: Dp,
     initialValue: DrawerPage = LIST,
     state: SwipeableState<DrawerPage> = rememberSwipeableState(initialValue),
     drawerContent: @Composable () -> Unit,
     listContent: @Composable () -> Unit,
     detailContent: @Composable () -> Unit
 ) {
-    val bottomPeekPx = bottomPeek.toIntPx()
     // TODO remember?
     val anchors = mapOf(
         screenHeightPx.toFloat() to DRAWER,
         0f to LIST,
-        -(screenHeightPx - bottomPeekPx).toFloat() to DETAIL,
+        -(screenHeightPx.toFloat() - peekBottom.toFloatPx()) to DETAIL,
     )
 
     Box(
@@ -44,18 +40,18 @@ fun BasilDrawer(
     ) {
         val offsetGetter = Modifier.offsetGetter(y = { state.detailOffset })
         DrawerSlot(
-            peek = topPeek,
+            peek = peekTop,
             // move content when detail is opening
             modifier = offsetGetter,
             content = drawerContent
         )
         ListSlot(
-            peek = topPeek,
+            peek = peekTop,
             modifier = Modifier.align(Alignment.BottomCenter),
             content = listContent
         )
         DetailSlot(
-            peek = bottomPeek,
+            peek = peekBottom,
             // scroll detail
             modifier = offsetGetter,
             content = detailContent
