@@ -1,10 +1,9 @@
 package dev.olog.basil.list
 
-import androidx.compose.foundation.Box
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.foundation.layout.Box
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.SwipeableState
 import androidx.compose.runtime.Composable
@@ -48,7 +47,7 @@ fun ListContent(
             items = items,
             state = viewPagerState,
         ) { item, itemFraction, isLeft ->
-            Stack(Modifier.fillMaxSize()) {
+            Box(Modifier.fillMaxSize()) {
                 Recipe(
                     item = item,
                     maxWidth = maxWidth,
@@ -63,7 +62,7 @@ fun ListContent(
 }
 
 @Composable
-private fun StackScope.Recipe(
+private fun BoxScope.Recipe(
     item: Recipe,
     @FloatRange(0.0, 1.0) drawerFraction: Float,
     @FloatRange(0.0, 1.0) detailFraction: Float,
@@ -71,7 +70,7 @@ private fun StackScope.Recipe(
     maxWidth: Dp,
     isLeft: Boolean
 ) {
-    Stack(
+    Box(
         Modifier
             .align(Alignment.Center)
             .width(maxWidth)
@@ -99,7 +98,7 @@ private fun StackScope.Recipe(
 }
 
 @Composable
-private fun StackScope.Scrim(fraction: Float) {
+private fun BoxScope.Scrim(fraction: Float) {
     Box(
         Modifier
             .fillMaxWidth()

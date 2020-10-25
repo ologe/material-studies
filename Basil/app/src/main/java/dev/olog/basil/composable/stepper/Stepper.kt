@@ -1,7 +1,7 @@
 package dev.olog.basil.composable.stepper
 
 import androidx.compose.foundation.*
-import androidx.compose.foundation.layout.Stack
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
@@ -29,7 +29,7 @@ fun<T> Stepper(
     var slotWidth by remember { mutableStateOf(0.dp) }
     val scrollState = rememberScrollState()
 
-    Stack(modifier) {
+    Box(modifier) {
 
         val density = DensityAmbient.current.density
         ScrollableColumn(
@@ -94,7 +94,7 @@ private fun<T> StepperSlots(
                 scaleY = scale,
             )
 
-        Stack(modifier = modifier) {
+        Box(modifier = modifier) {
             children(item, index, isUnderIndicator)
         }
     }

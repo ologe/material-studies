@@ -44,7 +44,7 @@ fun DrawerContent(
     drawerFraction: Float,
 ) {
 
-    Stack(Modifier.fillMaxSize()) {
+    Box(Modifier.fillMaxSize()) {
         Column(
             modifier = Modifier.fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally

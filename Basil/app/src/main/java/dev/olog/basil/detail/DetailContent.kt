@@ -57,7 +57,7 @@ fun DetailContent(
         translationY = -(50.dp * (1f - lateStartFraction)).toFloatPx()
     )
 
-    Stack {
+    Box {
         Column(
             // made clickable so below content cannot be clicked
             modifier = Modifier
@@ -71,7 +71,7 @@ fun DetailContent(
 
             // title + description, same height as content list
             UntilListContentImage(topPeek) {
-                Stack(Modifier.fillMaxWidth().preferredHeight(bottomPeek)) {
+                Box(Modifier.fillMaxWidth().preferredHeight(bottomPeek)) {
                     DownArrow(eagerEndFraction)
                 }
                 Column(
@@ -121,9 +121,9 @@ fun DetailContent(
 @Composable
 private fun UntilListContentImage(
     peek: Dp,
-    content: @Composable StackScope.() -> Unit
+    content: @Composable BoxScope.() -> Unit
 ) {
-    Stack(
+    Box(
         modifier = Modifier
             .fillMaxWidth()
             .height(screenHeightDp * ListHeightFraction - peek),
@@ -137,7 +137,7 @@ private fun RecipeTitle(
     state: ViewPagerState,
     @FloatRange(0.0, 1.0) detailFraction: Float,
 ) {
-    Stack(Modifier.fillMaxWidth()) {
+    Box(Modifier.fillMaxWidth()) {
         ViewPager(
             items = items,
             state = state,
@@ -166,7 +166,7 @@ private fun RecipeTitle(
 }
 
 @Composable
-private fun StackScope.DownArrow(fraction: Float) {
+private fun BoxScope.DownArrow(fraction: Float) {
     Icon(
         asset = vectorResource(R.drawable.vd_fat_arrow),
         modifier = Modifier

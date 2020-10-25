@@ -3,6 +3,7 @@ package dev.olog.basil.detail
 import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -47,7 +48,7 @@ fun DetailTabDrawer(
 
     var page by remember { mutableStateOf(DetailTabDrawerPage.Directions) }
 
-    Stack(
+    Box(
         modifier
             .offsetPx(y = state.offset)
             .swipeable(
@@ -69,7 +70,7 @@ fun DetailTabDrawer(
         }
 
         if (state.progress.isCollapsed) {
-            return@Stack
+            return@Box
         }
 
         Column(Modifier.drawLayer(

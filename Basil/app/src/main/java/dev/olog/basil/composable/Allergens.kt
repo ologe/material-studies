@@ -66,7 +66,7 @@ private fun AllergenUi(
         modifier = modifier,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Stack(iconModifier) {
+        Box(iconModifier) {
             Image(
                 asset = asset,
                 modifier = Modifier.matchParentSize(),
