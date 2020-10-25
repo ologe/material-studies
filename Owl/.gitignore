@@ -18,3 +18,4 @@ local.properties
 /.idea/markdown*
 /.idea/gradle.xml
 /.idea/codeStyles
+/.idea/inspectionProfiles
