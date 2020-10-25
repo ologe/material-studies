@@ -24,7 +24,9 @@ android {
         freeCompilerArgs += [
             "-Xallow-jvm-ir-dependencies",
             "-Xskip-prerelease-check",
-            "-Xopt-in=androidx.compose.material.ExperimentalMaterialApi"
+            "-Xopt-in=androidx.compose.material.ExperimentalMaterialApi",
+            "-Xopt-in=androidx.compose.animation.ExperimentalAnimationApi",
+            "-Xopt-in=kotlin.ExperimentalStdlibApi",
         ]
         allWarningsAsErrors = true
     }

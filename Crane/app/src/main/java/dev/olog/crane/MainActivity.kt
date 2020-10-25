@@ -126,7 +126,6 @@ sealed class MainActivityState {
 
 }
 
-@OptIn(ExperimentalStdlibApi::class)
 @Composable
 private fun CraneViewPager(state: ViewPagerState) {
     ViewPager(

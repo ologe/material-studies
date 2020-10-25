@@ -34,7 +34,6 @@ object TabActionsConstants {
     val itemSpacing = 8.dp
 }
 
-@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun CraneTabsActions(tab: Tab) {
     Column(
@@ -76,7 +75,6 @@ private fun CraneTabsActionThree(tab: Tab) {
     }.exhaustive
 }
 
-@OptIn(ExperimentalAnimationApi::class)
 @Composable
 private fun CraneTabsActionFour(tab: Tab) {
     AnimatedVisibility(
