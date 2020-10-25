@@ -27,6 +27,7 @@ android {
             "-Xopt-in=androidx.compose.material.ExperimentalMaterialApi",
             "-Xopt-in=androidx.compose.animation.ExperimentalAnimationApi",
             "-Xopt-in=kotlin.ExperimentalStdlibApi",
+            "-Xopt-in=kotlinx.coroutines.ExperimentalCoroutinesApi",
         ]
         allWarningsAsErrors = true
     }
