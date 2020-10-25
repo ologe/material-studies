@@ -18,7 +18,7 @@ import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.drawLayer
-import androidx.compose.ui.onPositioned
+import androidx.compose.ui.onGloballyPositioned
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.ui.tooling.preview.Preview
@@ -158,7 +158,7 @@ private fun ToolbarFullText(
             text = "The ",
             modifier = Modifier
                 .drawLayer(alpha = leftTextAlpha)
-                .onPositioned {
+                .onGloballyPositioned {
                     leftTextWidth = it.size.width.toFloat()
                 }
         )
