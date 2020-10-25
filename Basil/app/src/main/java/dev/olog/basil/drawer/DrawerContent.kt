@@ -98,7 +98,6 @@ private fun DrawerCategories(
     val categories = Category.values()
 
     Column(
-        Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
