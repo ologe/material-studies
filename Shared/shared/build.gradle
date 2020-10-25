@@ -1,1 +1,2 @@
+apply plugin: 'com.android.library'
 apply from: rootProject.file("../buildscripts/android-defaults.gradle")
