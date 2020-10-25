@@ -6,7 +6,6 @@ android {
     buildToolsVersion "30.0.2"
 
     defaultConfig {
-        applicationId "dev.olog.basil"
         minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
