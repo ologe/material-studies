@@ -16,7 +16,6 @@ import androidx.ui.tooling.preview.Preview
 import dev.olog.basil.R
 import dev.olog.basil.composable.Background
 import dev.olog.basil.model.Category
-import dev.olog.basil.model.Category.Entrees
 import dev.olog.basil.theme.BasilTheme
 import dev.olog.basil.theme.MaterialColors
 import dev.olog.basil.theme.MaterialTypography
@@ -31,7 +30,7 @@ import java.util.*
 private fun DrawerContentPreview() {
     BasilTheme {
         Background {
-            val state = mutableStateOf(Entrees)
+            val state = mutableStateOf(Category.Entrees)
             DrawerContent(state, 1f)
         }
     }
@@ -104,7 +103,7 @@ private fun DrawerCategories(
         for ((index, category) in categories.withIndex()) {
             val inverseIndex = categories.size - index
             DrawerCategory(
-                text = category.toString(),
+                text = category.textify(),
                 isSelected = category == selected.value,
                 modifier = Modifier.parallax(inverseIndex, drawerFraction),
                 onClick = { selected.value = category }
@@ -131,7 +130,7 @@ private fun DrawerCategory(
         var width by remember { mutableStateOf(0) }
 
         Text(
-            text = text.toUpperCase(Locale.ROOT),
+            text = text.toUpperCase(Locale.getDefault()),
             style = MaterialTypography.h5,
             fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Normal,
             modifier = Modifier
@@ -168,4 +167,12 @@ private fun Modifier.parallax(position: Int, fraction: Float): Modifier {
     return this then Modifier.drawLayer(
         translationY = -DrawerParallaxDp.toFloatPx() * position * (1f - fraction)
     )
+}
+
+@Composable
+private fun Category.textify(): String = when (this) {
+    Category.Appetizers -> stringResource(R.string.category_appetizers)
+    Category.Entrees -> stringResource(R.string.category_entrees)
+    Category.Desserts -> stringResource(R.string.category_desserts)
+    Category.Cocktails -> stringResource(R.string.category_cocktails)
 }

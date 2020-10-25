@@ -3,4 +3,9 @@
 
     <string name="shopping_list">Shopping List</string>
 
+    <string name="category_appetizers">Appetizers</string>
+    <string name="category_entrees">Entrées</string>
+    <string name="category_desserts">Desserts</string>
+    <string name="category_cocktails">Cocktails</string>
+
 </resources>
