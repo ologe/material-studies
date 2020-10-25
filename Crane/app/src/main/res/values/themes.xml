@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <style name="Theme.Crane" parent="Theme.MaterialComponents.Light.NoActionBar">
+    <style name="Theme.Crane" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:background">#5d1049</item>
         <item name="android:statusBarColor">#4e0d3a</item>
 
