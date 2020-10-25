@@ -70,7 +70,7 @@ private fun DrawerSlot(
     content: @Composable () -> Unit
 ) {
     Box(
-        modifier = modifier then Modifier
+        modifier = modifier
             .offset(y = -(screenHeightDp - peek * 0.5f))
             .fillMaxWidth()
             .height(screenHeightDp + peek)
@@ -86,7 +86,7 @@ private fun ListSlot(
     content: @Composable () -> Unit
 ) {
     Box(
-        modifier = modifier then Modifier
+        modifier = modifier
             .fillMaxWidth()
             .height(screenHeightDp - peek)
     ) {
@@ -101,7 +101,7 @@ private fun DetailSlot(
     content: @Composable () -> Unit
 ) {
     Box(
-        modifier = modifier then Modifier
+        modifier = modifier
             .offset(y = screenHeightDp - peek)
             .fillMaxWidth()
             .height(screenHeightDp)
