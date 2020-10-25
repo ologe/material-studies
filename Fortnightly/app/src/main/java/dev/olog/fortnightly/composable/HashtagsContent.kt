@@ -16,6 +16,7 @@ import androidx.ui.tooling.preview.Preview
 import dev.olog.fortnightly.feed.FeedState
 import dev.olog.fortnightly.ui.FortnightlyTheme
 import dev.olog.fortnightly.ui.librefranklyn
+import dev.olog.shared.extension.MaterialTypography
 import dev.olog.shared.extension.toFloatPx
 
 @Preview
@@ -47,7 +48,7 @@ fun HashtagsContent(
         }
         Text(
             text = "#$item",
-            style = MaterialTheme.typography.body1,
+            style = MaterialTypography.body1,
             fontFamily = librefranklyn,
             letterSpacing = 0.em,
         )

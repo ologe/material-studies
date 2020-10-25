@@ -17,6 +17,7 @@ import androidx.compose.ui.unit.dp
 import androidx.ui.tooling.preview.Preview
 import dev.olog.fortnightly.ui.FortnightlyTheme
 import dev.olog.shared.MediumEmphasis
+import dev.olog.shared.extension.MaterialTypography
 import dev.olog.shared.extension.toFloatPx
 import java.util.*
 
@@ -61,7 +62,7 @@ fun TagsContent(
 private fun TagText(title: String) {
     Text(
         text = title,
-        style = MaterialTheme.typography.overline,
+        style = MaterialTypography.overline,
         fontWeight = FontWeight.Black,
         textAlign = TextAlign.Center
     )

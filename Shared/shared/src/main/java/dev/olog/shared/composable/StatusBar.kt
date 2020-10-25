@@ -18,6 +18,7 @@ import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.PathFillType
 import androidx.compose.ui.unit.dp
 import androidx.ui.tooling.preview.Preview
+import dev.olog.shared.extension.MaterialColors
 
 @Preview
 @Composable
@@ -35,7 +36,7 @@ fun StatusBar() {
         modifier = Modifier
             .fillMaxWidth()
             .height(24.dp)
-            .background(MaterialTheme.colors.primaryVariant)
+            .background(MaterialColors.primaryVariant)
     ) {
         val size = 10.dp
         val color = Color.DarkGray.copy(alpha = 0.7f)

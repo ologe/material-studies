@@ -15,6 +15,7 @@ import androidx.ui.tooling.preview.Preview
 import androidx.ui.tooling.preview.datasource.LoremIpsum
 import dev.olog.fortnightly.feed.FeedState
 import dev.olog.fortnightly.ui.FortnightlyTheme
+import dev.olog.shared.extension.MaterialTypography
 import dev.olog.shared.extension.toFloatPx
 
 @Preview
@@ -95,7 +96,7 @@ fun BigFeedItemContent(
         Text(
             text = title,
             maxLines = 2,
-            style = MaterialTheme.typography.subtitle1,
+            style = MaterialTypography.subtitle1,
             fontWeight = FontWeight.SemiBold,
             fontSize = 22.sp
         )
@@ -124,7 +125,7 @@ fun FeedItemContent(
                 text = title,
                 maxLines = 2,
                 overflow = TextOverflow.Ellipsis,
-                style = MaterialTheme.typography.subtitle1,
+                style = MaterialTypography.subtitle1,
                 fontWeight = FontWeight.Medium,
                 fontSize = 18.sp
             )

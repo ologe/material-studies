@@ -25,6 +25,8 @@ import androidx.ui.tooling.preview.Preview
 import dev.olog.fortnightly.composable.FortnightlyText
 import dev.olog.fortnightly.ui.FortnightlyTheme
 import dev.olog.fortnightly.ui.librefranklyn
+import dev.olog.shared.extension.MaterialColors
+import dev.olog.shared.extension.MaterialTypography
 
 @Preview
 @Composable
@@ -113,7 +115,7 @@ private fun CategoryContent(
         // icon
         Box(modifier = Modifier.size(iconSize)) {
             if (!isFrontPage) { // draw icon only when is not front page
-                val tint = MaterialTheme.colors.onSurface
+                val tint = MaterialColors.onSurface
                 Icon(
                     asset = Icons.Default.ArrowDropDown,
                     tint = if (isSelected) tint else tint.copy(alpha = 0.4f),
@@ -127,7 +129,7 @@ private fun CategoryContent(
         // text
         Text(
             text = category.toString(),
-            style = MaterialTheme.typography.h6,
+            style = MaterialTypography.h6,
             fontStyle = FontStyle.Normal,
             fontFamily = librefranklyn,
             fontWeight = if (isSelected) FontWeight.Black else FontWeight.Medium
@@ -156,7 +158,7 @@ private fun SubCategoryContent(
             for (value in DrawerSubCategory.values()) {
                 Text(
                     text = value.toString(),
-                    style = MaterialTheme.typography.subtitle1,
+                    style = MaterialTypography.subtitle1,
                     fontStyle = FontStyle.Normal,
                     fontFamily = librefranklyn,
                     fontWeight = FontWeight.Normal

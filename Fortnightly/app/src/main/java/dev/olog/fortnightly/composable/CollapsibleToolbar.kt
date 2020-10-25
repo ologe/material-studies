@@ -23,6 +23,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.ui.tooling.preview.Preview
 import dev.olog.fortnightly.ui.FortnightlyTheme
+import dev.olog.shared.extension.MaterialColors
 import dev.olog.shared.extension.toIntPx
 import dev.olog.shared.utils.AnimationUtils.translateToStart
 
@@ -133,7 +134,7 @@ fun CollapsibleToolbar(
                     .drawLayer(alpha = state[alphaPercent]),
                 onClick = onSearchClick
             ) {
-                Icon(Icons.Default.Search, tint = MaterialTheme.colors.secondary)
+                Icon(Icons.Default.Search, tint = MaterialColors.secondary)
             }
         }
     }

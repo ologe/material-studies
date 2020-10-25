@@ -30,6 +30,7 @@ import dev.olog.fortnightly.composable.TagsContent
 import dev.olog.fortnightly.ui.FortnightlyTheme
 import dev.olog.fortnightly.ui.merryweather
 import dev.olog.shared.MediumEmphasis
+import dev.olog.shared.extension.MaterialTypography
 
 @Preview
 @Composable
@@ -64,13 +65,13 @@ fun DetailContent() {
                 TagsContent(tags = listOf("US", "Environment"))
                 Text(
                     text = "Llamas Patrol The Central Coast of California",
-                    style = MaterialTheme.typography.h3,
+                    style = MaterialTypography.h3,
                     fontSize = 34.sp
                 )
                 MediumEmphasis {
                     Text(
                         text = "How these fuzzy creatures are protecting America's farmland and your salad now",
-                        style = MaterialTheme.typography.body1
+                        style = MaterialTypography.body1
                     )
                 }
                 Row(
