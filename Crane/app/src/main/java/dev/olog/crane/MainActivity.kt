@@ -39,12 +39,8 @@ import dev.olog.crane.model.craneDestinations
 import dev.olog.crane.model.craneHotels
 import dev.olog.crane.model.craneRestaurants
 import dev.olog.crane.theme.CraneTheme
-import dev.olog.crane.utils.exhaustive
-import dev.olog.crane.utils.toFloatPx
 import dev.olog.shared.MediumEmphasis
-import dev.olog.shared.extension.MaterialColors
-import dev.olog.shared.extension.MaterialShape
-import dev.olog.shared.extension.MaterialTypography
+import dev.olog.shared.extension.*
 import java.util.*
 
 // TODO draw over navigation bar + made it transaprent

@@ -11,7 +11,7 @@ import androidx.compose.ui.*
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import dev.olog.crane.utils.toDp
+import dev.olog.shared.extension.toDp
 
 @Composable
 fun<T> Stepper(
