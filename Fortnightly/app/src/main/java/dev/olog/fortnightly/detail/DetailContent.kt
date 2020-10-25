@@ -25,7 +25,7 @@ import androidx.ui.tooling.preview.Preview
 import dev.olog.fortnightly.R
 import dev.olog.fortnightly.composable.CollapsibleToolbar
 import dev.olog.fortnightly.composable.FilterImage
-import dev.olog.fortnightly.composable.StatusBar
+import dev.olog.shared.composable.StatusBar
 import dev.olog.fortnightly.composable.TagsContent
 import dev.olog.fortnightly.ui.FortnightlyTheme
 import dev.olog.fortnightly.ui.merryweather

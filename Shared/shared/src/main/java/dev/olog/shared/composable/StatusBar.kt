@@ -1,10 +1,11 @@
-package dev.olog.fortnightly.composable
+package dev.olog.shared.composable
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -17,12 +18,12 @@ import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.PathFillType
 import androidx.compose.ui.unit.dp
 import androidx.ui.tooling.preview.Preview
-import dev.olog.fortnightly.ui.FortnightlyTheme
 
 @Preview
 @Composable
 private fun StatusBarPreview() {
-    FortnightlyTheme {
+    val colors = lightColors(primaryVariant = Color(0xff_e8e8e8))
+    MaterialTheme(colors = colors) {
         StatusBar()
     }
 }

@@ -11,6 +11,7 @@ import androidx.compose.ui.unit.dp
 import androidx.ui.tooling.preview.Preview
 import dev.olog.fortnightly.composable.*
 import dev.olog.fortnightly.ui.FortnightlyTheme
+import dev.olog.shared.composable.StatusBar
 import dev.olog.shared.extension.exhaustive
 
 @Preview
