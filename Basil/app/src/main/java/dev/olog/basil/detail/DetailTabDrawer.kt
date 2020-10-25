@@ -20,7 +20,7 @@ import androidx.compose.ui.util.annotation.FloatRange
 import dev.olog.basil.detail.DetailTabDrawerState.Collapsed
 import dev.olog.basil.detail.DetailTabDrawerState.Expanded
 import dev.olog.basil.theme.MaterialColors
-import dev.olog.basil.utils.AnimationUtils
+import dev.olog.shared.utils.AnimationUtils
 import dev.olog.basil.utils.exhaustive
 import dev.olog.basil.utils.screenHeightPx
 import dev.olog.basil.utils.toIntPx

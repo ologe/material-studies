@@ -1,4 +1,4 @@
-package dev.olog.basil.utils
+package dev.olog.shared.utils
 
 import androidx.annotation.FloatRange
 

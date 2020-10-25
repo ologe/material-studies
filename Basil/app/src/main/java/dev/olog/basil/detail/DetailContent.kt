@@ -24,8 +24,8 @@ import dev.olog.basil.list.ListHorizontalPadding
 import dev.olog.basil.model.Allergen
 import dev.olog.basil.model.Recipe
 import dev.olog.basil.theme.green500
-import dev.olog.basil.utils.AnimationUtils.translateToEnd
-import dev.olog.basil.utils.AnimationUtils.translateToStart
+import dev.olog.shared.utils.AnimationUtils.translateToEnd
+import dev.olog.shared.utils.AnimationUtils.translateToStart
 import dev.olog.basil.utils.ParallaxUtils.DetailParallaxDp
 import dev.olog.basil.utils.ParallaxUtils.computeParallax
 import dev.olog.basil.utils.fakeClickable

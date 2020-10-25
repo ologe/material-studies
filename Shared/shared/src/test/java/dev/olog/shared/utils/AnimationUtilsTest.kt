@@ -1,8 +1,7 @@
-package dev.olog.basil.utils
+package dev.olog.shared.utils
 
-import dev.olog.basil.utils.AnimationUtils.translateToEnd
-import dev.olog.basil.utils.AnimationUtils.translateToStart
-import org.junit.Assert.assertEquals
+import dev.olog.shared.utils.AnimationUtils.translateToEnd
+import dev.olog.shared.utils.AnimationUtils.translateToStart
 import org.junit.Assert.fail
 import org.junit.Test
 import kotlin.math.abs
