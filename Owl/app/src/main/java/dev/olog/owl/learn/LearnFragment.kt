@@ -8,8 +8,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.ui.tooling.preview.Preview
-import dev.olog.owl.composable.Background
 import dev.olog.owl.ui.PinkTheme
+import dev.olog.shared.composable.Background
 
 class LearnFragment : Fragment() {
 
