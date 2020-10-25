@@ -101,7 +101,6 @@ private fun MainActivityContent(
                 )
             },
             detailContent = {
-                // TODO use some sync viewpager for detail title?
                 DetailContent(
                     topPeek = topPeek,
                     bottomPeek = bottomPeek,
