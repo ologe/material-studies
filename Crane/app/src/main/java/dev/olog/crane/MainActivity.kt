@@ -42,6 +42,7 @@ import dev.olog.crane.model.craneRestaurants
 import dev.olog.crane.theme.CraneTheme
 import dev.olog.crane.utils.exhaustive
 import dev.olog.crane.utils.toFloatPx
+import dev.olog.shared.MediumEmphasis
 import java.util.*
 
 // TODO draw over navigation bar + made it transaprent
@@ -173,7 +174,7 @@ private fun ListHeader(text: String) {
             .height(56.dp),
         shape = MaterialTheme.shapes.large
     ) {
-        ProvideEmphasis(EmphasisAmbient.current.medium) {
+        MediumEmphasis {
             Text(
                 text = text,
                 modifier = Modifier.padding(horizontal = 24.dp, vertical = 16.dp),
@@ -216,7 +217,7 @@ private fun ListItem(item: ExploreModel) {
                     fontWeight = FontWeight.Medium,
                     fontSize = 20.sp
                 )
-                ProvideEmphasis(EmphasisAmbient.current.medium) {
+                MediumEmphasis {
                     Text(
                         text = item.description,
                         style = MaterialTheme.typography.subtitle1,
