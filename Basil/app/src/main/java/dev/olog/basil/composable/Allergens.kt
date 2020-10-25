@@ -19,7 +19,7 @@ import dev.olog.basil.theme.BasilTheme
 import dev.olog.shared.extension.MaterialColors
 import dev.olog.shared.extension.MaterialTypography
 import dev.olog.basil.utils.AllergenPreviewProvider
-import dev.olog.basil.utils.exhaustive
+import dev.olog.shared.extension.exhaustive
 
 @Preview
 @Composable

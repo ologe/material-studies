@@ -6,9 +6,6 @@ import androidx.compose.ui.platform.DensityAmbient
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
-inline val <T> T.exhaustive: T
-    get() = this
-
 @Composable
 inline val screenHeightDp: Dp
     get() = ConfigurationAmbient.current.screenHeightDp.dp
