@@ -16,8 +16,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import dev.olog.basil.theme.green800
 import dev.olog.basil.theme.lekton
-import dev.olog.basil.utils.toFloatPx
-import dev.olog.basil.utils.toIntPx
+import dev.olog.shared.extension.toFloatPx
+import dev.olog.shared.extension.toIntPx
 import kotlin.random.Random
 
 @Composable

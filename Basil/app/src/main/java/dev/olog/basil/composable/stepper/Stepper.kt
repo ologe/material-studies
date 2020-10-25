@@ -19,7 +19,7 @@ import androidx.ui.tooling.preview.Preview
 import dev.olog.basil.theme.BasilTheme
 import dev.olog.shared.extension.MaterialColors
 import dev.olog.shared.extension.MaterialTypography
-import dev.olog.basil.utils.toDp
+import dev.olog.shared.extension.toDp
 
 @Preview
 @Composable

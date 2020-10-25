@@ -7,7 +7,7 @@ import androidx.compose.ui.gesture.MinFlingVelocity
 import androidx.compose.ui.gesture.scrollorientationlocking.Orientation
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import dev.olog.basil.utils.toIntPx
+import dev.olog.shared.extension.toIntPx
 import kotlin.math.abs
 
 fun Modifier.viewPager(

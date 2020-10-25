@@ -23,7 +23,7 @@ import dev.olog.shared.extension.MaterialColors
 import dev.olog.basil.utils.ParallaxUtils
 import dev.olog.basil.utils.ParallaxUtils.ListParallaxDp
 import dev.olog.basil.utils.scaleDown
-import dev.olog.basil.utils.toIntPx
+import dev.olog.shared.extension.toIntPx
 
 val ListHorizontalPadding = 32.dp
 const val ListHeightFraction = 0.6f

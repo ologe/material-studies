@@ -23,7 +23,7 @@ import dev.olog.shared.extension.MaterialColors
 import dev.olog.shared.utils.AnimationUtils
 import dev.olog.basil.utils.exhaustive
 import dev.olog.basil.utils.screenHeightPx
-import dev.olog.basil.utils.toIntPx
+import dev.olog.shared.extension.toIntPx
 import java.util.*
 
 enum class DetailTabDrawerState {

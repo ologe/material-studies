@@ -30,11 +30,11 @@ import dev.olog.basil.utils.ParallaxUtils.DetailParallaxDp
 import dev.olog.basil.utils.ParallaxUtils.computeParallax
 import dev.olog.basil.utils.fakeClickable
 import dev.olog.basil.utils.screenHeightDp
-import dev.olog.basil.utils.toFloatPx
 import dev.olog.basil.R
 import dev.olog.shared.extension.MaterialColors
 import dev.olog.shared.extension.MaterialTypography
 import dev.olog.basil.utils.scaleDown
+import dev.olog.shared.extension.toFloatPx
 
 private const val EAGER_END_THRESHOLD = 0.1f
 private const val LATE_START_THRESHOLD = 0.6f

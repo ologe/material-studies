@@ -4,6 +4,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.annotation.FloatRange
+import dev.olog.shared.extension.toFloatPx
+import dev.olog.shared.extension.toIntPx
 
 object ParallaxUtils {
 

@@ -20,9 +20,9 @@ import dev.olog.basil.theme.BasilTheme
 import dev.olog.shared.extension.MaterialColors
 import dev.olog.shared.extension.MaterialTypography
 import dev.olog.basil.utils.ParallaxUtils.DrawerParallaxDp
-import dev.olog.basil.utils.toDp
-import dev.olog.basil.utils.toFloatPx
-import dev.olog.basil.utils.toIntPx
+import dev.olog.shared.extension.toDp
+import dev.olog.shared.extension.toFloatPx
+import dev.olog.shared.extension.toIntPx
 import java.util.*
 
 @Preview
