@@ -1,7 +1,7 @@
 package dev.olog.basil.utils
 
 import androidx.ui.tooling.preview.PreviewParameterProvider
-import dev.olog.basil.composable.DrawerPage
+import dev.olog.basil.composable.drawer.DrawerPage
 import dev.olog.basil.model.Allergen
 
 class AllergenPreviewProvider : PreviewParameterProvider<Allergen> {

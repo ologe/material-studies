@@ -3,7 +3,6 @@ package dev.olog.basil
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.animation.core.SpringSpec
-import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.rememberSwipeableState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.savedinstancestate.savedInstanceState
@@ -13,6 +12,10 @@ import androidx.compose.ui.unit.dp
 import androidx.ui.tooling.preview.Preview
 import androidx.ui.tooling.preview.PreviewParameter
 import dev.olog.basil.composable.*
+import dev.olog.basil.composable.drawer.BasilDrawer
+import dev.olog.basil.composable.drawer.DrawerPage
+import dev.olog.basil.composable.drawer.detailOffset
+import dev.olog.basil.composable.drawer.drawerOffset
 import dev.olog.basil.composable.viewpager.rememberViewPagerState
 import dev.olog.basil.detail.DetailContent
 import dev.olog.basil.detail.DetailTabDrawerState

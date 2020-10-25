@@ -1,4 +1,4 @@
-package dev.olog.basil.composable
+package dev.olog.basil.composable.drawer
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
@@ -7,23 +7,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.gesture.scrollorientationlocking.Orientation
 import androidx.compose.ui.unit.Dp
-import dev.olog.basil.composable.DrawerPage.*
+import dev.olog.basil.composable.drawer.DrawerPage.*
 import dev.olog.basil.utils.offsetGetter
 import dev.olog.basil.utils.screenHeightDp
 import dev.olog.basil.utils.screenHeightPx
 import dev.olog.basil.utils.toIntPx
-
-enum class DrawerPage {
-    DRAWER,
-    LIST,
-    DETAIL
-}
-
-val SwipeableState<DrawerPage>.drawerOffset: Int
-    get() = offset.value.toInt().coerceAtLeast(0)
-
-val SwipeableState<DrawerPage>.detailOffset: Int
-    get() = offset.value.toInt().coerceAtMost(0)
 
 @Composable
 fun BasilDrawer(
