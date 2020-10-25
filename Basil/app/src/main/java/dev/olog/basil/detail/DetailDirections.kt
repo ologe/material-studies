@@ -1,11 +1,8 @@
 package dev.olog.basil.detail
 
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -17,7 +14,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.ui.tooling.preview.datasource.LoremIpsum
-import dev.olog.basil.composable.stepper.Stepper
+import dev.olog.basil.composable.stepper.VerticalStepper
 import dev.olog.basil.R
 import dev.olog.basil.theme.MaterialColors
 import dev.olog.basil.theme.MaterialTypography
@@ -53,7 +50,7 @@ fun RecipeDirections() {
             )
         }
 
-        Stepper(
+        VerticalStepper(
             items = (1..8).toList(),
             currentPage = currentPage,
             modifier = Modifier.padding(16.dp).padding(top = 4.dp),
