@@ -6,9 +6,7 @@ import androidx.compose.foundation.Text
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.EmphasisAmbient
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.ProvideEmphasis
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -31,6 +29,7 @@ import dev.olog.fortnightly.composable.StatusBar
 import dev.olog.fortnightly.composable.TagsContent
 import dev.olog.fortnightly.ui.FortnightlyTheme
 import dev.olog.fortnightly.ui.merryweather
+import dev.olog.shared.MediumEmphasis
 
 @Preview
 @Composable
@@ -68,7 +67,7 @@ fun DetailContent() {
                     style = MaterialTheme.typography.h3,
                     fontSize = 34.sp
                 )
-                ProvideEmphasis(emphasis = EmphasisAmbient.current.medium) {
+                MediumEmphasis {
                     Text(
                         text = "How these fuzzy creatures are protecting America's farmland and your salad now",
                         style = MaterialTheme.typography.body1

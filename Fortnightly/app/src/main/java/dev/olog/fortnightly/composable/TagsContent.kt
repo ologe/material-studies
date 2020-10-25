@@ -5,9 +5,7 @@ import androidx.compose.foundation.Text
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.EmphasisAmbient
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.ProvideEmphasis
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -19,6 +17,7 @@ import androidx.compose.ui.unit.dp
 import androidx.ui.tooling.preview.Preview
 import dev.olog.fortnightly.ui.FortnightlyTheme
 import dev.olog.fortnightly.utils.toFloatPx
+import dev.olog.shared.MediumEmphasis
 import java.util.*
 
 @Preview
@@ -50,7 +49,7 @@ fun TagsContent(
 
             // divider
             if (index != tags.lastIndex) {
-                ProvideEmphasis(emphasis = EmphasisAmbient.current.medium) {
+                MediumEmphasis {
                     TagText("¬")
                 }
             }
