@@ -25,9 +25,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import dev.chrisbanes.accompanist.coil.CoilImage
 import dev.chrisbanes.accompanist.coil.CoilImageWithCrossfade
-import dev.olog.crane.composable.Background
+import dev.olog.shared.composable.Background
 import dev.olog.crane.composable.CraneTabsActions
 import dev.olog.crane.composable.TabActionsConstants.itemHeight
 import dev.olog.crane.composable.TabActionsConstants.itemSpacing
