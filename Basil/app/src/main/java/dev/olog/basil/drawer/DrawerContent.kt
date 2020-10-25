@@ -7,11 +7,8 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.drawLayer
+import androidx.compose.ui.*
 import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.onPositioned
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -138,7 +135,7 @@ private fun DrawerCategory(
             fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Normal,
             modifier = Modifier
                 .padding(24.dp)
-                .onPositioned {
+                .onGloballyPositioned {
                     width = it.size.width
                 }
         )
