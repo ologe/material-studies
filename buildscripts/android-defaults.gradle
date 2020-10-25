@@ -28,6 +28,7 @@ android {
             "-Xskip-prerelease-check",
             "-Xopt-in=androidx.compose.material.ExperimentalMaterialApi"
         ]
+        allWarningsAsErrors = true
     }
     buildFeatures {
         compose true
