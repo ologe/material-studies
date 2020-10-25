@@ -7,10 +7,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.drawLayer
-import androidx.compose.ui.onPositioned
+import androidx.compose.ui.*
 import androidx.compose.ui.platform.DensityAmbient
 import androidx.compose.ui.unit.dp
 import dev.olog.basil.utils.toDp
@@ -33,7 +30,7 @@ fun<T> Stepper(
 
         val density = DensityAmbient.current.density
         ScrollableColumn(
-            modifier = Modifier.onPositioned {
+            modifier = Modifier.onGloballyPositioned {
                 // TODO find another way
                 if (state.slotHeight == 0f) {
                     state.slotHeight = (it.size.height / itemCount).toFloat()
