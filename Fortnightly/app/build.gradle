@@ -1,3 +1,4 @@
+apply plugin: 'com.android.application'
 apply from: rootProject.file("../buildscripts/android-defaults.gradle")
 
 android {
@@ -6,4 +7,8 @@ android {
         applicationId "dev.olog.fortnightly"
     }
 
+}
+
+dependencies {
+    implementation project(':shared')
 }
