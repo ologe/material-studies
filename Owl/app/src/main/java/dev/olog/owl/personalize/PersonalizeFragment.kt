@@ -6,8 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.fragment.app.Fragment
-import androidx.ui.tooling.preview.Preview
 import dev.olog.owl.ui.YellowTheme
 import dev.olog.shared.composable.Background
 
