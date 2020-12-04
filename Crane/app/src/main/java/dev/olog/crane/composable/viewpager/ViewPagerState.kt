@@ -12,7 +12,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.savedinstancestate.Saver
 import androidx.compose.runtime.savedinstancestate.rememberSavedInstanceState
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.platform.AnimationClockAmbient
+import androidx.compose.ui.platform.AmbientAnimationClock
 import dev.olog.crane.utils.animateSpec
 import dev.olog.crane.utils.scrollSpec
 
@@ -22,7 +22,7 @@ fun rememberViewPagerState(
     scrollSpec: AnimationSpec<Float> = SwipeableConstants.scrollSpec,
     animateSpec: AnimationSpec<Float> = SwipeableConstants.animateSpec,
 ): ViewPagerState {
-    val clock = AnimationClockAmbient.current.asDisposableClock()
+    val clock = AmbientAnimationClock.current.asDisposableClock()
     return rememberSavedInstanceState(
         clock,
         saver = ViewPagerState.Saver(

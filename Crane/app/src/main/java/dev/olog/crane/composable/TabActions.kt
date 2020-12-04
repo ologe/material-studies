@@ -1,16 +1,14 @@
 package dev.olog.crane.composable
 
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.Text
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.SwipeableConstants
+import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.Composable
@@ -19,7 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.graphics.vector.VectorAsset
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import dev.olog.crane.Tab
@@ -104,7 +102,7 @@ private fun PeopleAction(text: String) {
 
 @Composable
 private fun LocationAction(
-    icon: VectorAsset,
+    icon: ImageVector,
     text: String,
 ) {
     CraneTabsAction(
@@ -134,7 +132,7 @@ private fun TimeAction(text: String) {
 
 @Composable
 private fun CraneTabsAction(
-    icon: VectorAsset,
+    icon: ImageVector,
     text: String,
     placeholder: String
 ) {
@@ -152,7 +150,7 @@ private fun CraneTabsAction(
             horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             Image(
-                icon,
+                imageVector = icon,
                 colorFilter = ColorFilter.tint(color = if (text.isNotBlank()) Color.White else Color.White.copy(alpha = 0.4f))
             )
             Text(

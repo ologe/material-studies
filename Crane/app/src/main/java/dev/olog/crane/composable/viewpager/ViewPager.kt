@@ -2,13 +2,13 @@ package dev.olog.crane.composable.viewpager
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
+import androidx.compose.foundation.layout.offset
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.onCommit
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.WithConstraints
 import androidx.compose.ui.gesture.scrollorientationlocking.Orientation
-import dev.olog.shared.offsetGetter
+import androidx.compose.ui.layout.WithConstraints
 import kotlin.math.floor
 
 /**
@@ -17,8 +17,8 @@ import kotlin.math.floor
 @Composable
 fun <T> ViewPager(
     items: List<T>,
-    state: ViewPagerState = rememberViewPagerState(initialPage = 0),
     modifier: Modifier = Modifier,
+    state: ViewPagerState = rememberViewPagerState(initialPage = 0),
     orientation: Orientation = Orientation.Horizontal,
     isUserInputEnabled: Boolean = true,
     alignment: Alignment = Alignment.Center,
@@ -45,12 +45,12 @@ fun <T> ViewPager(
                 orientation = orientation,
                 isUserInputEnabled = isUserInputEnabled
             ),
-            alignment = alignment
+            contentAlignment = alignment
         ) {
             val offset = floor(state.offset).toInt()
 
             for ((index, item) in items.withIndex()) {
-                val leftPageStartOffset = index * pageSize - offset
+                val leftPageStartOffset = (index * pageSize - offset).toFloat()
                 Page(offset = leftPageStartOffset, orientation = orientation) {
                     children(item)
                 }
@@ -61,16 +61,16 @@ fun <T> ViewPager(
 
 @Composable
 private fun Page(
-    offset: Int,
+    offset: Float,
     orientation: Orientation,
-    children: @Composable BoxScope.() -> Unit
+    content: @Composable BoxScope.() -> Unit
 ) {
     val modifier = when (orientation) {
-        Orientation.Horizontal -> Modifier.offsetGetter(x = { offset })
-        Orientation.Vertical -> Modifier.offsetGetter(y = { offset })
+        Orientation.Horizontal -> Modifier.offset(x = { offset })
+        Orientation.Vertical -> Modifier.offset(y = { offset })
     }
     Box(
         modifier = modifier,
-        children = children
+        content = content
     )
 }

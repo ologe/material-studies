@@ -2,22 +2,28 @@ package dev.olog.crane.composable.stepper
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.ui.*
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.unit.dp
 import dev.olog.shared.extension.toDp
 
 @Composable
 fun<T> Stepper(
     items: List<T>,
-    currentPage: MutableState<Int> = mutableStateOf(0),
     modifier: Modifier = Modifier,
+    currentPage: MutableState<Int> = mutableStateOf(0),
     onClick: (T, Int) -> Unit = { _, _ -> },
     children: @Composable (T, Int, Boolean) -> Unit,
 ) {
@@ -27,7 +33,7 @@ fun<T> Stepper(
 
     Box(
         modifier,
-        alignment = Alignment.CenterStart
+        contentAlignment = Alignment.CenterStart
     ) {
 
         Row(
@@ -57,7 +63,7 @@ fun<T> Stepper(
             Modifier
                 .fillMaxHeight(0.9f)
                 .width(state.width().toDp())
-                .drawLayer(translationX = state.leftOffset)
+                .graphicsLayer(translationX = state.leftOffset)
                 .border(3.dp, Color.White, CircleShape),
         )
     }
@@ -92,7 +98,7 @@ private fun<T> StepperSlots(
                     onClick = { onClick(item, index) },
 //                    indication = Indica
                 ),
-            alignment = Alignment.Center,
+            contentAlignment = Alignment.Center,
         ) {
             children(item, index, isUnderIndicator)
         }

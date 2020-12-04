@@ -3,7 +3,6 @@ package dev.olog.crane
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.Text
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -16,7 +15,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.drawLayer
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.setContent
 import androidx.compose.ui.res.vectorResource
@@ -25,8 +24,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import dev.chrisbanes.accompanist.coil.CoilImageWithCrossfade
-import dev.olog.shared.composable.Background
+import dev.chrisbanes.accompanist.coil.CoilImage
 import dev.olog.crane.composable.CraneTabsActions
 import dev.olog.crane.composable.TabActionsConstants.itemHeight
 import dev.olog.crane.composable.TabActionsConstants.itemSpacing
@@ -40,6 +38,7 @@ import dev.olog.crane.model.craneHotels
 import dev.olog.crane.model.craneRestaurants
 import dev.olog.crane.theme.CraneTheme
 import dev.olog.shared.MediumEmphasis
+import dev.olog.shared.composable.Background
 import dev.olog.shared.extension.*
 import java.util.*
 
@@ -93,8 +92,8 @@ private fun CraneMainToolbar(
         Image(vectorResource(R.drawable.vd_menu), Modifier.fillMaxHeight())
         Spacer(modifier = Modifier.width(8.dp))
         Image(
-            asset = vectorResource(R.drawable.vd_crane_logo),
-            modifier = Modifier.fillMaxHeight().drawLayer(translationY = 4.dp.toFloatPx())
+            imageVector = vectorResource(R.drawable.vd_crane_logo),
+            modifier = Modifier.fillMaxHeight().graphicsLayer(translationY = 4.dp.toFloatPx())
         )
         Spacer(modifier = Modifier.width(24.dp))
         Box(Modifier.weight(1f).fillMaxHeight()) {
@@ -108,7 +107,7 @@ private fun CraneMainToolbar(
                 Text(
                     text = item.toString().toUpperCase(Locale.ROOT),
                     color = if (selected) textColor else textColor.copy(alpha = 0.6f),
-                    modifier = Modifier.drawLayer(translationY = -2.dp.toFloatPx()),
+                    modifier = Modifier.graphicsLayer(translationY = -2.dp.toFloatPx()),
                     textAlign = TextAlign.Center
                 )
             }
@@ -193,7 +192,8 @@ private fun ListItem(item: ExploreModel) {
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(24.dp)
         ) {
-            CoilImageWithCrossfade(
+            CoilImage(
+                fadeIn = true,
                 data = item.imageUrl,
                 modifier = Modifier
                     .fillMaxHeight()
