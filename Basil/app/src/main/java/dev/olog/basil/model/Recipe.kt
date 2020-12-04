@@ -1,12 +1,12 @@
 package dev.olog.basil.model
 
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.ImageAsset
+import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.res.imageResource
 import dev.olog.basil.R
 
 data class Recipe(
-    val image: ImageAsset,
+    val image: ImageBitmap,
     val title: String,
     val allergens: Set<Allergen> = emptySet()
 ) {

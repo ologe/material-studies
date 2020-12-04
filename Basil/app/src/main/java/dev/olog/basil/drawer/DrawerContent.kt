@@ -1,25 +1,27 @@
 package dev.olog.basil.drawer
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.Text
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.*
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.ui.tooling.preview.Preview
 import dev.olog.basil.R
 import dev.olog.basil.composable.Background
 import dev.olog.basil.model.Category
 import dev.olog.basil.theme.BasilTheme
+import dev.olog.basil.utils.ParallaxUtils.DrawerParallaxDp
 import dev.olog.shared.extension.MaterialColors
 import dev.olog.shared.extension.MaterialTypography
-import dev.olog.basil.utils.ParallaxUtils.DrawerParallaxDp
 import dev.olog.shared.extension.toDp
 import dev.olog.shared.extension.toFloatPx
 import dev.olog.shared.extension.toIntPx
@@ -69,7 +71,7 @@ private fun DrawerHeader(
     ) {
         Spacer(Modifier.height(96.dp))
         Image(
-            asset = vectorResource(R.drawable.vd_shopping_list),
+            imageVector = vectorResource(R.drawable.vd_shopping_list),
             modifier = Modifier.size(48.dp),
             colorFilter = ColorFilter.tint(MaterialColors.onPrimary)
         )
@@ -146,7 +148,7 @@ private fun DrawerCategory(
                 modifier = Modifier
                     .height(2.dp)
                     .width(width.toDp())
-                    .drawLayer(translationY = -20.dp.toIntPx().toFloat())
+                    .graphicsLayer(translationY = -20.dp.toIntPx().toFloat())
                     .background(MaterialColors.onPrimary)
             )
         }
@@ -162,10 +164,11 @@ private fun DrawerCategory(
  * 1
  * 0
  */
-@Composable
-private fun Modifier.parallax(position: Int, fraction: Float): Modifier {
-    return this then Modifier.drawLayer(
-        translationY = -DrawerParallaxDp.toFloatPx() * position * (1f - fraction)
+private fun Modifier.parallax(position: Int, fraction: Float): Modifier = composed {
+    this.then(
+        Modifier.graphicsLayer(
+            translationY = -DrawerParallaxDp.toFloatPx() * position * (1f - fraction)
+        )
     )
 }
 

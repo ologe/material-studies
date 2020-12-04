@@ -1,21 +1,23 @@
 package dev.olog.basil.detail
 
-import androidx.compose.foundation.Icon
-import androidx.compose.foundation.Text
+import androidx.annotation.FloatRange
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.Icon
 import androidx.compose.material.SwipeableState
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.drawLayer
+import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.util.annotation.FloatRange
-import androidx.ui.tooling.preview.datasource.LoremIpsum
+import dev.olog.basil.R
 import dev.olog.basil.composable.AllergenRow
 import dev.olog.basil.composable.viewpager.ViewPager
 import dev.olog.basil.composable.viewpager.ViewPagerState
@@ -24,16 +26,15 @@ import dev.olog.basil.list.ListHorizontalPadding
 import dev.olog.basil.model.Allergen
 import dev.olog.basil.model.Recipe
 import dev.olog.basil.theme.green500
-import dev.olog.shared.utils.AnimationUtils.translateToEnd
-import dev.olog.shared.utils.AnimationUtils.translateToStart
 import dev.olog.basil.utils.ParallaxUtils.DetailParallaxDp
 import dev.olog.basil.utils.ParallaxUtils.computeParallax
-import dev.olog.basil.R
+import dev.olog.basil.utils.scaleDown
 import dev.olog.shared.extension.MaterialColors
 import dev.olog.shared.extension.MaterialTypography
-import dev.olog.basil.utils.scaleDown
 import dev.olog.shared.extension.toFloatPx
 import dev.olog.shared.fakeClickable
+import dev.olog.shared.utils.AnimationUtils.translateToEnd
+import dev.olog.shared.utils.AnimationUtils.translateToStart
 import dev.olog.shared.utils.screenHeightDp
 
 private const val EAGER_END_THRESHOLD = 0.1f
@@ -48,12 +49,12 @@ fun DetailContent(
     item: Recipe,
     peekTop: Dp,
     peekBottom: Dp,
-    @FloatRange(0.0, 1.0) detailFraction: Float
+    @FloatRange(from = 0.0, to = 1.0) detailFraction: Float
 ) {
     val eagerEndFraction = translateToStart(detailFraction, EAGER_END_THRESHOLD)
     val lateStartFraction = translateToEnd(detailFraction, LATE_START_THRESHOLD)
 
-    val lateStartModifier = Modifier.drawLayer(
+    val lateStartModifier = Modifier.graphicsLayer(
         translationY = -(50.dp * (1f - lateStartFraction)).toFloatPx()
     )
 
@@ -67,7 +68,7 @@ fun DetailContent(
             verticalArrangement = Arrangement.spacedBy(16.dp),
         ) {
 
-            val lateStartAlphaModifier = Modifier.drawLayer(alpha = lateStartFraction)
+            val lateStartAlphaModifier = Modifier.alpha(lateStartFraction)
 
             // title + description, same height as content list
             UntilListContentImage(peekTop) {
@@ -127,7 +128,7 @@ private fun UntilListContentImage(
         modifier = Modifier
             .fillMaxWidth()
             .height(screenHeightDp * ListHeightFraction - peek),
-        children = content
+        content = content
     )
 }
 
@@ -135,7 +136,7 @@ private fun UntilListContentImage(
 private fun RecipeTitle(
     items: List<Recipe>,
     state: ViewPagerState,
-    @FloatRange(0.0, 1.0) detailFraction: Float,
+    @FloatRange(from = 0.0, to = 1.0) detailFraction: Float,
 ) {
     Box(Modifier.fillMaxWidth()) {
         ViewPager(
@@ -155,7 +156,7 @@ private fun RecipeTitle(
                 text = item.title,
                 modifier = Modifier.fillMaxWidth()
                     .padding(top = 32.dp)
-                    .drawLayer(translationX = parallax),
+                    .graphicsLayer(translationX = parallax),
                 style = MaterialTypography.h2,
                 textAlign = TextAlign.Center,
                 color = MaterialColors.secondary,
@@ -168,13 +169,11 @@ private fun RecipeTitle(
 @Composable
 private fun BoxScope.DownArrow(fraction: Float) {
     Icon(
-        asset = vectorResource(R.drawable.vd_fat_arrow),
+        imageVector = vectorResource(R.drawable.vd_fat_arrow),
         modifier = Modifier
             .align(Alignment.BottomCenter)
-            .drawLayer(
-                alpha = (1 - fraction * 3).coerceIn(0f, 1f),
-                scaleX = 1.2f
-            )
+            .alpha((1 - fraction * 3).coerceIn(0f, 1f))
+            .graphicsLayer(scaleX = 1.2f)
             .padding(bottom = 8.dp)
     )
 }

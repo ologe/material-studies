@@ -1,29 +1,30 @@
 package dev.olog.shared
 
-import androidx.compose.material.AmbientEmphasisLevels
-import androidx.compose.material.ProvideEmphasis
+import androidx.compose.material.AmbientContentAlpha
+import androidx.compose.material.ContentAlpha
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Providers
 
 @Composable
 fun HighEmphasis(content: @Composable () -> Unit) {
-    ProvideEmphasis(
-        emphasis = AmbientEmphasisLevels.current.high,
+    Providers(
+        AmbientContentAlpha provides ContentAlpha.high,
         content = content
     )
 }
 
 @Composable
 fun MediumEmphasis(content: @Composable () -> Unit) {
-    ProvideEmphasis(
-        emphasis = AmbientEmphasisLevels.current.medium,
+    Providers(
+        AmbientContentAlpha provides ContentAlpha.high,
         content = content
     )
 }
 
 @Composable
 fun DisabledEmphasis(content: @Composable () -> Unit) {
-    ProvideEmphasis(
-        emphasis = AmbientEmphasisLevels.current.disabled,
+    Providers(
+        AmbientContentAlpha provides ContentAlpha.high,
         content = content
     )
 }

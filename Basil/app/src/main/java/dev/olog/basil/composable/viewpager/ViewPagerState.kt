@@ -12,14 +12,14 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.savedinstancestate.Saver
 import androidx.compose.runtime.savedinstancestate.rememberSavedInstanceState
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.platform.AnimationClockAmbient
+import androidx.compose.ui.platform.AmbientAnimationClock
 
 @Composable
 fun rememberViewPagerState(
     initialPage: Int,
     animationSpec: AnimationSpec<Float> = SwipeableConstants.DefaultAnimationSpec
 ): ViewPagerState {
-    val clock = AnimationClockAmbient.current.asDisposableClock()
+    val clock = AmbientAnimationClock.current.asDisposableClock()
     return rememberSavedInstanceState(
         clock,
         saver = ViewPagerState.Saver(

@@ -2,8 +2,20 @@ package dev.olog.basil.composable.drawer
 
 import androidx.compose.material.SwipeableState
 
-val SwipeableState<DrawerPage>.drawerOffset: Int
-    get() = offset.value.toInt().coerceAtLeast(0)
+val SwipeableState<DrawerPage>.drawerOffset: Float
+    get() {
+        if (offset.value.isNaN()) {
+            // first emitted value is NaN
+            return 0f
+        }
+        return offset.value.coerceAtLeast(0f)
+    }
 
-val SwipeableState<DrawerPage>.detailOffset: Int
-    get() = offset.value.toInt().coerceAtMost(0)
+val SwipeableState<DrawerPage>.detailOffset: Float
+    get() {
+        if (offset.value.isNaN()) {
+            // first emitted value is NaN
+            return 0f
+        }
+        return offset.value.coerceAtMost(0f)
+    }

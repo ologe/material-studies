@@ -1,9 +1,9 @@
 package dev.olog.basil.utils
 
+import androidx.annotation.FloatRange
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.util.annotation.FloatRange
 import dev.olog.shared.extension.toFloatPx
 import dev.olog.shared.extension.toIntPx
 
@@ -15,7 +15,7 @@ object ParallaxUtils {
 
     @Composable
     fun computeParallax(
-        @FloatRange(0.0, 1.0) fraction: Float,
+        @FloatRange(from = 0.0, to = 1.0) fraction: Float,
         isLeft: Boolean,
         parallax: Dp
     ): Float {

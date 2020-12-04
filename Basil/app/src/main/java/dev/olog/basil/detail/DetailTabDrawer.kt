@@ -1,28 +1,26 @@
 package dev.olog.basil.detail
 
+import androidx.annotation.FloatRange
 import androidx.compose.animation.Crossfade
-import androidx.compose.foundation.*
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.layout.Box
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.drawLayer
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.gesture.scrollorientationlocking.Orientation
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.util.annotation.FloatRange
 import dev.olog.basil.detail.DetailTabDrawerState.Collapsed
 import dev.olog.basil.detail.DetailTabDrawerState.Expanded
 import dev.olog.shared.extension.MaterialColors
-import dev.olog.shared.utils.AnimationUtils
 import dev.olog.shared.extension.exhaustive
 import dev.olog.shared.extension.toIntPx
+import dev.olog.shared.fakeClickable
+import dev.olog.shared.utils.AnimationUtils
 import dev.olog.shared.utils.screenHeightPx
 import java.util.*
 
@@ -38,8 +36,8 @@ enum class DetailTabDrawerPage {
 
 @Composable
 fun DetailTabDrawer(
-    state: SwipeableState<DetailTabDrawerState> = rememberSwipeableState(Collapsed),
     modifier: Modifier = Modifier,
+    state: SwipeableState<DetailTabDrawerState> = rememberSwipeableState(Collapsed),
     buttonsHeight: Dp = 64.dp,
 ) {
     val anchors = mapOf(
@@ -51,7 +49,7 @@ fun DetailTabDrawer(
 
     Box(
         modifier
-            .offsetPx(y = state.offset)
+            .offset(y = { state.offset.value })
             .swipeable(
                 state = state,
                 anchors = anchors,
@@ -61,43 +59,40 @@ fun DetailTabDrawer(
             )
             .fillMaxSize()
             .background(MaterialColors.background.copy(alpha = .95f))
-            .clickable(indication = null) {
-
-            }
+            .fakeClickable()
     ) {
         Buttons(state.progress.offset) {
             page = it
             state.animateTo(Expanded)
         }
 
-        if (state.progress.isCollapsed) {
-            return@Box
-        }
+        if (!state.progress.isCollapsed) {
+            Column(modifier = Modifier.alpha(
+                AnimationUtils.translateToEnd(state.progress.offset, 0.4f))
+            ) {
+                Spacer(modifier = Modifier.height(buttonsHeight))
+                Crossfade(page) { // TODO animate slide
+                    when (page) {
+                        DetailTabDrawerPage.Ingredients -> RecipeIngredients()
+                        DetailTabDrawerPage.Directions -> RecipeDirections()
+                    }.exhaustive
+                }
 
-        Column(Modifier.drawLayer(
-            alpha = AnimationUtils.translateToEnd(state.progress.offset, 0.4f))) {
-            Spacer(modifier = Modifier.height(buttonsHeight))
-            Crossfade(page) { // TODO animate slide
-                when (page) {
-                    DetailTabDrawerPage.Ingredients -> RecipeIngredients()
-                    DetailTabDrawerPage.Directions -> RecipeDirections()
-                }.exhaustive
             }
-
         }
     }
 }
 
 @Composable
 private fun Buttons(
-    @FloatRange(0.0, 1.0) offset: Float,
+    @FloatRange(from = 0.0, to = 1.0) offset: Float,
     onClick: (DetailTabDrawerPage) -> Unit
 ) {
 
     Column {
         Spacer(
             modifier = Modifier
-                .drawLayer(alpha = 1 - AnimationUtils.translateToStart(offset, .2f))
+                .alpha(alpha = 1 - AnimationUtils.translateToStart(offset, .2f))
                 .background(Color.Black.copy(.2f))
                 .fillMaxWidth()
                 .height(1.dp)
@@ -114,7 +109,7 @@ private fun Buttons(
         }
         Spacer(
             modifier = Modifier
-                .drawLayer(alpha = AnimationUtils.translateToEnd(offset, 0.6f))
+                .alpha(alpha = AnimationUtils.translateToEnd(offset, 0.6f))
                 .background(MaterialColors.onBackground.copy(alpha = .2f))
                 .fillMaxWidth()
                 .height(1.dp)

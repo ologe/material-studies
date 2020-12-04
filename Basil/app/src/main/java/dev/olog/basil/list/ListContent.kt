@@ -1,5 +1,6 @@
 package dev.olog.basil.list
 
+import androidx.annotation.FloatRange
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -8,12 +9,11 @@ import androidx.compose.material.SwipeableState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.WithConstraints
 import androidx.compose.ui.draw.clipToBounds
-import androidx.compose.ui.drawLayer
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.layout.WithConstraints
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.util.annotation.FloatRange
 import dev.olog.basil.composable.viewpager.ViewPager
 import dev.olog.basil.composable.viewpager.ViewPagerState
 import dev.olog.basil.detail.DetailTabDrawerState
@@ -64,9 +64,9 @@ fun ListContent(
 @Composable
 private fun BoxScope.Recipe(
     item: Recipe,
-    @FloatRange(0.0, 1.0) drawerFraction: Float,
-    @FloatRange(0.0, 1.0) detailFraction: Float,
-    @FloatRange(0.0, 1.0) itemFraction: Float,
+    @FloatRange(from = 0.0, to = 1.0) drawerFraction: Float,
+    @FloatRange(from = 0.0, to = 1.0) detailFraction: Float,
+    @FloatRange(from = 0.0, to = 1.0) itemFraction: Float,
     maxWidth: Dp,
     isLeft: Boolean
 ) {
@@ -85,8 +85,8 @@ private fun BoxScope.Recipe(
         )
         val yParallax = -ListParallaxDp.toIntPx() * drawerFraction
         Image(
-            asset = item.image,
-            modifier = Modifier.fillMaxSize().drawLayer(
+            bitmap = item.image,
+            modifier = Modifier.fillMaxSize().graphicsLayer(
                 scaleY = 1.2f,
                 scaleX = 1.2f,
                 translationX = -xParallax,

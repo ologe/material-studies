@@ -7,10 +7,10 @@ import androidx.compose.material.rememberSwipeableState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.savedinstancestate.savedInstanceState
 import androidx.compose.ui.platform.setContent
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import androidx.ui.tooling.preview.Preview
-import androidx.ui.tooling.preview.PreviewParameter
 import dev.olog.basil.composable.*
 import dev.olog.basil.composable.drawer.BasilDrawer
 import dev.olog.basil.composable.drawer.DrawerPage
@@ -73,8 +73,8 @@ private fun MainActivityContent(
     // TODO extract from BasilDrawer??
     val detailPageHeight = (screenHeightDp - peekBottom).toIntPx()
     val drawerPageHeight = (screenHeightDp + peekTop).toIntPx()
-    val detailFraction = (abs(swipeableState.detailOffset.toFloat()) / detailPageHeight).coerceIn(0f, 1f)
-    val drawerFraction = (abs(swipeableState.drawerOffset.toFloat()) / drawerPageHeight).coerceIn(0f, 1f)
+    val detailFraction = (abs(swipeableState.detailOffset) / detailPageHeight).coerceIn(0f, 1f)
+    val drawerFraction = (abs(swipeableState.drawerOffset) / drawerPageHeight).coerceIn(0f, 1f)
     val tabDrawerState = rememberSwipeableState(
         initialValue = DetailTabDrawerState.Collapsed,
         animationSpec = SpringSpec(stiffness = 150f)

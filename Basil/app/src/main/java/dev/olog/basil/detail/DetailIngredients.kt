@@ -1,16 +1,16 @@
 package dev.olog.basil.detail
 
 import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.Icon
-import androidx.compose.foundation.Text
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.Icon
+import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AddCircleOutline
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.drawLayer
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -28,7 +28,7 @@ fun RecipeIngredients() {
                 Modifier.padding(20.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Icon(asset = Icons.Default.AddCircleOutline)
+                Icon(imageVector = Icons.Default.AddCircleOutline)
                 Spacer(modifier = Modifier.width(12.dp))
                 Text(
                     text = "Test $i",
@@ -58,7 +58,7 @@ private fun DottedDivider(
     Canvas(
         modifier = modifier
             .padding(horizontal = 8.dp)
-            .drawLayer(translationY = 4.dp.toFloatPx())
+            .graphicsLayer(translationY = 4.dp.toFloatPx())
     ) {
         for (index in 0 until (size.width.toInt() / (strokeSize + strokeOffset))) {
             val start = index * strokeSize + index * strokeOffset

@@ -11,14 +11,14 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.savedinstancestate.Saver
 import androidx.compose.runtime.savedinstancestate.rememberSavedInstanceState
-import androidx.compose.ui.platform.AnimationClockAmbient
+import androidx.compose.ui.platform.AmbientAnimationClock
 import kotlin.math.abs
 
 @Composable
 fun rememberStepperState(
     currentPageState: MutableState<Int>
 ): StepperState {
-    val clock = AnimationClockAmbient.current.asDisposableClock()
+    val clock = AmbientAnimationClock.current.asDisposableClock()
     val top = animatedFloat(0f)
     val bottom = animatedFloat(0f)
 

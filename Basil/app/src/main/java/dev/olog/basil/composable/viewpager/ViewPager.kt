@@ -2,27 +2,27 @@ package dev.olog.basil.composable.viewpager
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
+import androidx.compose.foundation.layout.offset
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.onCommit
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.WithConstraints
 import androidx.compose.ui.gesture.scrollorientationlocking.Orientation
-import dev.olog.shared.offsetGetter
+import androidx.compose.ui.layout.WithConstraints
 import kotlin.math.floor
 
 /**
- * @param children T item, float (0..1) fraction offset, bool true when is left item
+ * @param content T item, float (0..1) fraction offset, bool true when is left item
  */
 @Composable
 fun <T> ViewPager(
     items: List<T>,
-    state: ViewPagerState = rememberViewPagerState(initialPage = 0),
     modifier: Modifier = Modifier,
+    state: ViewPagerState = rememberViewPagerState(initialPage = 0),
     orientation: Orientation = Orientation.Horizontal,
     isUserInputEnabled: Boolean = true,
     alignment: Alignment = Alignment.Center,
-    children: @Composable BoxScope.(T, Float, Boolean) -> Unit
+    content: @Composable BoxScope.(T, Float, Boolean) -> Unit
 ) {
     val itemCount = items.size
 
@@ -45,22 +45,22 @@ fun <T> ViewPager(
                 orientation = orientation,
                 isUserInputEnabled = isUserInputEnabled
             ),
-            alignment = alignment
+            contentAlignment = alignment
         ) {
-            val offset = floor(state.offset).toInt()
-            val leftPage = offset / pageSize // left or center
+            val offset = floor(state.offset)
+            val leftPage = (offset / pageSize).toInt() // left or center
             val leftPageStartOffset = leftPage * pageSize - offset
 
             val itemFraction = (state.offset % pageSize) / pageSize
 
             // left page
             Page(offset = leftPageStartOffset, orientation = orientation) {
-                children(items[leftPage], itemFraction, true)
+                content(items[leftPage], itemFraction, true)
             }
             // right page
             if (leftPage + 1 < itemCount) {
                 Page(offset = leftPageStartOffset + pageSize, orientation = orientation) {
-                    children(items[leftPage + 1], itemFraction, false)
+                    content(items[leftPage + 1], itemFraction, false)
                 }
             }
         }
@@ -69,16 +69,16 @@ fun <T> ViewPager(
 
 @Composable
 private fun Page(
-    offset: Int,
+    offset: Float,
     orientation: Orientation,
-    children: @Composable BoxScope.() -> Unit
+    content: @Composable BoxScope.() -> Unit
 ) {
     val modifier = when (orientation) {
-        Orientation.Horizontal -> Modifier.offsetGetter(x = { offset })
-        Orientation.Vertical -> Modifier.offsetGetter(y = { offset })
+        Orientation.Horizontal -> Modifier.offset(x = { offset })
+        Orientation.Vertical -> Modifier.offset(y = { offset })
     }
     Box(
         modifier = modifier,
-        children = children
+        content = content
     )
 }

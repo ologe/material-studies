@@ -3,6 +3,7 @@ package dev.olog.basil.detail
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -11,9 +12,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.ui.tooling.preview.datasource.LoremIpsum
 import dev.olog.basil.composable.stepper.VerticalStepper
 import dev.olog.basil.R
 import dev.olog.shared.extension.MaterialColors
@@ -42,7 +43,7 @@ fun RecipeDirections() {
             )
             Spacer(modifier = Modifier.height(32.dp))
             Image(
-                asset = imageResource(id = R.drawable.cat1),
+                bitmap = imageResource(id = R.drawable.cat1),
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .aspectRatio(1.4f)

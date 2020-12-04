@@ -1,18 +1,18 @@
 package dev.olog.basil.composable
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.Text
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.graphics.vector.VectorAsset
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
-import androidx.ui.tooling.preview.Preview
-import androidx.ui.tooling.preview.PreviewParameter
 import dev.olog.basil.R
 import dev.olog.basil.model.Allergen
 import dev.olog.basil.theme.BasilTheme
@@ -60,7 +60,7 @@ fun AllergenRow(
 @Composable
 private fun AllergenContent(
     text: String,
-    asset: VectorAsset,
+    asset: ImageVector,
     modifier: Modifier = Modifier,
     iconModifier: Modifier
 ) {
@@ -70,12 +70,12 @@ private fun AllergenContent(
     ) {
         Box(iconModifier) {
             Image(
-                asset = asset,
+                imageVector = asset,
                 modifier = Modifier.matchParentSize(),
                 colorFilter = ColorFilter.tint(MaterialColors.onPrimary)
             )
             Image(
-                asset = vectorResource(R.drawable.vd_crossed_circle),
+                imageVector = vectorResource(R.drawable.vd_crossed_circle),
                 modifier = Modifier.matchParentSize(),
                 colorFilter = ColorFilter.tint(MaterialColors.secondary)
             )

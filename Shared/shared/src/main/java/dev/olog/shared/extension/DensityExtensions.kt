@@ -1,13 +1,13 @@
 package dev.olog.shared.extension
 
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.platform.DensityAmbient
+import androidx.compose.ui.platform.AmbientDensity
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 @Composable
 fun Dp.toFloatPx(): Float {
-    val density = DensityAmbient.current.density
+    val density = AmbientDensity.current.density
     return this.value * density
 }
 
@@ -18,7 +18,7 @@ fun Dp.toIntPx(): Int {
 
 @Composable
 fun Float.toDp(): Dp {
-    val density = DensityAmbient.current.density
+    val density = AmbientDensity.current.density
     return (this / density).dp
 }
 
