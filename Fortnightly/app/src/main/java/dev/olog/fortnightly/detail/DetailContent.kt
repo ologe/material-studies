@@ -2,12 +2,11 @@ package dev.olog.fortnightly.detail
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.ScrollableColumn
-import androidx.compose.foundation.Text
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -19,17 +18,17 @@ import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.SpanStyleRange
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.ui.tooling.preview.Preview
 import dev.olog.fortnightly.R
 import dev.olog.fortnightly.composable.CollapsibleToolbar
 import dev.olog.fortnightly.composable.FilterImage
-import dev.olog.shared.composable.StatusBar
 import dev.olog.fortnightly.composable.TagsContent
 import dev.olog.fortnightly.ui.FortnightlyTheme
 import dev.olog.fortnightly.ui.merryweather
 import dev.olog.shared.MediumEmphasis
+import dev.olog.shared.composable.StatusBar
 import dev.olog.shared.extension.MaterialTypography
 
 @Preview
@@ -78,7 +77,7 @@ fun DetailContent() {
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Image(
-                        asset = imageResource(R.drawable.img3),
+                        bitmap = imageResource(R.drawable.img3),
                         modifier = Modifier.clip(CircleShape).size(48.dp),
                         contentScale = ContentScale.Crop
                     )

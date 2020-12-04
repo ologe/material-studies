@@ -4,24 +4,24 @@ import androidx.compose.animation.DpPropKey
 import androidx.compose.animation.core.FloatPropKey
 import androidx.compose.animation.core.transitionDefinition
 import androidx.compose.animation.transition
-import androidx.compose.foundation.Icon
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CutCornerShape
+import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.drawLayer
-import androidx.compose.ui.onGloballyPositioned
+import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import androidx.ui.tooling.preview.Preview
 import dev.olog.fortnightly.ui.FortnightlyTheme
 import dev.olog.shared.extension.MaterialColors
 import dev.olog.shared.extension.toIntPx
@@ -131,7 +131,7 @@ fun CollapsibleToolbar(
                         bottom.linkTo(parent.bottom)
                         end.linkTo(parent.end)
                     }
-                    .drawLayer(alpha = state[alphaPercent]),
+                    .alpha(state[alphaPercent]),
                 onClick = onSearchClick
             ) {
                 Icon(Icons.Default.Search, tint = MaterialColors.secondary)
@@ -152,13 +152,13 @@ private fun ToolbarFullText(
         modifier = modifier
             .padding(start = 6.dp)
             .padding(bottom = 4.dp) // center text
-            .drawLayer(translationX = offset * -leftTextWidth),
+            .graphicsLayer(translationX = offset * -leftTextWidth),
     ) {
         val leftTextAlpha = 1f - translateToStart(1f - alpha, .8f)
         FortnightlyText(
             text = "The ",
             modifier = Modifier
-                .drawLayer(alpha = leftTextAlpha)
+                .alpha(leftTextAlpha)
                 .onGloballyPositioned {
                     leftTextWidth = it.size.width.toFloat()
                 }
@@ -170,7 +170,7 @@ private fun ToolbarFullText(
         if (rightTextAlpha >= 0.1f) {
             FortnightlyText(
                 text = "ortnightly",
-                modifier = Modifier.drawLayer(alpha = rightTextAlpha)
+                modifier = Modifier.alpha(rightTextAlpha)
             )
         }
     }

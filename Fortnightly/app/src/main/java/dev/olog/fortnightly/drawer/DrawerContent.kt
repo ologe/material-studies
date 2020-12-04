@@ -1,27 +1,29 @@
 package dev.olog.fortnightly.drawer
 
-import androidx.compose.animation.*
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.animate
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.Icon
+import androidx.compose.animation.expandVertically
+import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.ScrollableColumn
-import androidx.compose.foundation.Text
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Icon
 import androidx.compose.material.Surface
+import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.drawLayer
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.ui.tooling.preview.Preview
 import dev.olog.fortnightly.composable.FortnightlyText
 import dev.olog.fortnightly.ui.FortnightlyTheme
 import dev.olog.fortnightly.ui.librefranklyn
@@ -117,11 +119,11 @@ private fun CategoryContent(
             if (!isFrontPage) { // draw icon only when is not front page
                 val tint = MaterialColors.onSurface
                 Icon(
-                    asset = Icons.Default.ArrowDropDown,
+                    imageVector = Icons.Default.ArrowDropDown,
                     tint = if (isSelected) tint else tint.copy(alpha = 0.4f),
                     modifier = Modifier
                         .align(Alignment.Center)
-                        .drawLayer(rotationZ = animate(iconRotation))
+                        .graphicsLayer(rotationZ = animate(iconRotation))
                 )
             }
         }

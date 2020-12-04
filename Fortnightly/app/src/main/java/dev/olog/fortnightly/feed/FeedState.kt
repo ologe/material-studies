@@ -1,7 +1,7 @@
 package dev.olog.fortnightly.feed
 
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.ImageAsset
+import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.res.imageResource
 import dev.olog.fortnightly.R
 
@@ -50,13 +50,13 @@ sealed class FeedState {
     ) : FeedState()
 
     data class BigItem(
-        val image: ImageAsset,
+        val image: ImageBitmap,
         val title: String,
         val tags: List<String>
     ) : FeedState()
 
     data class Item(
-        val image: ImageAsset,
+        val image: ImageBitmap,
         val title: String,
         val tags: List<String>
     ) : FeedState()

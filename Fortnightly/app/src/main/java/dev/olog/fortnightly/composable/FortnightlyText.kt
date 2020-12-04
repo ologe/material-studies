@@ -1,12 +1,12 @@
 package dev.olog.fortnightly.composable
 
-import androidx.compose.foundation.Text
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.sp
-import androidx.ui.tooling.preview.Preview
 import dev.olog.fortnightly.ui.FortnightlyTheme
 import dev.olog.fortnightly.ui.oldlondon
 
@@ -20,8 +20,8 @@ private fun FortnightlyTextPreview() {
 
 @Composable
 fun FortnightlyText(
-    text: String = "The Fortnightly",
     modifier: Modifier = Modifier,
+    text: String = "The Fortnightly",
     fontSize: TextUnit = 22.sp
 ) {
     Text(

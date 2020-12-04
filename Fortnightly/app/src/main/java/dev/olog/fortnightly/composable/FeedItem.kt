@@ -1,18 +1,17 @@
 package dev.olog.fortnightly.composable
 
-import androidx.compose.foundation.Text
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.drawLayer
-import androidx.compose.ui.graphics.ImageAsset
+import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.ui.tooling.preview.Preview
-import androidx.ui.tooling.preview.datasource.LoremIpsum
 import dev.olog.fortnightly.feed.FeedState
 import dev.olog.fortnightly.ui.FortnightlyTheme
 import dev.olog.shared.extension.MaterialTypography
@@ -76,7 +75,7 @@ private fun FeedItemTextTooLongPreview() {
 
 @Composable
 fun BigFeedItemContent(
-    image: ImageAsset,
+    image: ImageBitmap,
     title: String,
     tags: List<String>,
     modifier: Modifier = Modifier
@@ -91,7 +90,7 @@ fun BigFeedItemContent(
         )
         TagsContent(
             tags = tags,
-            modifier = Modifier.drawLayer(translationY = 5.dp.toFloatPx()),
+            modifier = Modifier.graphicsLayer(translationY = 5.dp.toFloatPx()),
         )
         Text(
             text = title,
@@ -105,7 +104,7 @@ fun BigFeedItemContent(
 
 @Composable
 fun FeedItemContent(
-    image: ImageAsset,
+    image: ImageBitmap,
     title: String,
     tags: List<String>,
     modifier: Modifier = Modifier

@@ -1,18 +1,17 @@
 package dev.olog.fortnightly.composable
 
-import androidx.compose.foundation.Text
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRowForIndexed
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.drawLayer
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
-import androidx.ui.tooling.preview.Preview
 import dev.olog.fortnightly.feed.FeedState
 import dev.olog.fortnightly.ui.FortnightlyTheme
 import dev.olog.fortnightly.ui.librefranklyn
@@ -33,8 +32,8 @@ private fun HashtagsContentPreview() {
 @Composable
 fun HashtagsContent(
     items: List<String>,
+    modifier: Modifier = Modifier,
     horizontalPadding: Dp = 12.dp,
-    modifier: Modifier = Modifier
 ) {
     // TODO content fade start and end
     LazyRowForIndexed(
@@ -57,7 +56,7 @@ fun HashtagsContent(
                 modifier = Modifier
                     .fillMaxHeight(.4f)
                     .padding(horizontal = 16.dp)
-                    .drawLayer(translationY = 2.dp.toFloatPx())
+                    .graphicsLayer(translationY = 2.dp.toFloatPx())
             )
         } else {
             // padding end
