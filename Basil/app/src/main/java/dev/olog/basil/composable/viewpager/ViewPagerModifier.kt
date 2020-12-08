@@ -13,7 +13,7 @@ import kotlin.math.abs
 fun Modifier.viewPager(
     state: ViewPagerState,
     maxWidthPx: Int,
-    orientation: Orientation = Orientation.Horizontal,
+    orientation: Orientation,
     isUserInputEnabled: Boolean = true,
     threshold: Dp = 56.dp,
 ): Modifier = composed {
@@ -27,15 +27,16 @@ fun Modifier.viewPager(
             if (!isUserInputEnabled) {
                 return@draggable
             }
-            val mod = state.offset % maxWidthPx
-            val left = state.offset - mod
+            val offsetFromLeft = state.offset % maxWidthPx
+            val left = state.offset - offsetFromLeft
             val right = left + maxWidthPx
             val animateTo = when {
-                mod < thresholdPx -> left
-                (maxWidthPx - mod) < thresholdPx -> right
-                abs(velocity) < minFlingVelocity -> if (mod < maxWidthPx / 2) left else right
-                velocity < 0 -> right
-                velocity > 0 -> left
+                offsetFromLeft < thresholdPx -> left // return to left
+                (maxWidthPx - offsetFromLeft) < thresholdPx -> right // return to right
+                // return to previous position when fling velocity is not high enough
+                abs(velocity) < minFlingVelocity -> if (offsetFromLeft < maxWidthPx / 2) left else right
+                velocity < 0 -> right // go to next page (right/down page)
+                velocity > 0 -> left  // go to previous page (left/up page)
                 else -> throw IllegalStateException()
             }
             state.animateTo(animateTo)
