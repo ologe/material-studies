@@ -16,10 +16,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dev.olog.basil.R
-import dev.olog.basil.composable.Background
 import dev.olog.basil.model.Category
 import dev.olog.basil.theme.BasilTheme
 import dev.olog.basil.utils.ParallaxUtils.DrawerParallaxDp
+import dev.olog.shared.composable.Background
 import dev.olog.shared.extension.MaterialColors
 import dev.olog.shared.extension.MaterialTypography
 import dev.olog.shared.extension.toDp

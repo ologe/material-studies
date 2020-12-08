@@ -11,7 +11,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import dev.olog.basil.composable.*
 import dev.olog.basil.composable.drawer.BasilDrawer
 import dev.olog.basil.composable.drawer.DrawerPage
 import dev.olog.basil.composable.drawer.detailOffset
@@ -25,6 +24,7 @@ import dev.olog.basil.model.Category
 import dev.olog.basil.model.Recipe
 import dev.olog.basil.theme.BasilTheme
 import dev.olog.basil.utils.DrawerPagePreviewProvider
+import dev.olog.shared.composable.Background
 import dev.olog.shared.extension.toIntPx
 import dev.olog.shared.utils.screenHeightDp
 import kotlin.math.abs
