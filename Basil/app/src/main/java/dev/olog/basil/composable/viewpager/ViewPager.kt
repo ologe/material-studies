@@ -21,10 +21,8 @@ fun <T> ViewPager(
     state: ViewPagerState = rememberViewPagerState(initialPage = 0),
     orientation: Orientation = Orientation.Horizontal,
     isUserInputEnabled: Boolean = true,
-    alignment: Alignment = Alignment.Center,
     content: @Composable BoxScope.(T, Float, Boolean) -> Unit
 ) {
-    val itemCount = items.size
 
     WithConstraints(modifier) {
         val pageSize = when (orientation) {
@@ -33,7 +31,7 @@ fun <T> ViewPager(
         }
 
         onCommit {
-            val maxScroll = (pageSize * (itemCount - 1)).toFloat()
+            val maxScroll = (pageSize * (items.lastIndex)).toFloat()
             state.pageSize = pageSize
             state.bounds = 0f.rangeTo(maxScroll)
         }
@@ -45,7 +43,7 @@ fun <T> ViewPager(
                 orientation = orientation,
                 isUserInputEnabled = isUserInputEnabled
             ),
-            contentAlignment = alignment
+            contentAlignment = Alignment.Center,
         ) {
             val offset = floor(state.offset)
             val leftPage = (offset / pageSize).toInt() // left or center
@@ -58,7 +56,7 @@ fun <T> ViewPager(
                 content(items[leftPage], itemFraction, true)
             }
             // right page
-            if (leftPage + 1 < itemCount) {
+            if (leftPage + 1 < items.size) {
                 Page(offset = leftPageStartOffset + pageSize, orientation = orientation) {
                     content(items[leftPage + 1], itemFraction, false)
                 }
