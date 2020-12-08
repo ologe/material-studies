@@ -23,6 +23,14 @@ import dev.olog.shared.extension.exhaustive
 
 @Preview
 @Composable
+private fun AllergenRowDefaultPreview() {
+    BasilTheme {
+        AllergenRow(allergen = Allergen.EggFree)
+    }
+}
+
+@Preview
+@Composable
 private fun AllergenRowPreview(
     @PreviewParameter(AllergenPreviewProvider::class) allergen: Allergen
 ) {
@@ -39,8 +47,8 @@ private fun AllergenRowPreview(
 fun AllergenRow(
     allergen: Allergen,
     modifier: Modifier = Modifier,
-    iconModifier: Modifier = Modifier.size(32.dp)
 ) {
+    val iconModifier = Modifier.size(32.dp)
     when (allergen) {
         Allergen.GlutenFree -> AllergenContent(
             text = stringResource(R.string.allergen_gluten_free),
