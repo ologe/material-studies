@@ -48,8 +48,20 @@ class ViewPagerState(
 
     // scroll offset by initial page size
     val offset: Float
-        get() = initialOffset + internalOffset
+        get() {
+            if (pageSize == 0) {
+                return 0f
+            }
+            return initialOffset + internalOffset
+        }
 
+    val currentPage: Int
+        get() {
+            if (pageSize == 0) {
+                return 0
+            }
+            return offset.toInt() / pageSize
+        }
 
     private val holder: AnimatedFloat = NotificationBasedAnimatedFloat(0f, DefaultAnimationClock()) {
         if(it in bounds) {
@@ -97,13 +109,12 @@ class ViewPagerState(
 
     companion object {
 
-        // TODO save last page instead of initial one?
         @Suppress("FunctionName")
         fun Saver(
             animationSpec: AnimationSpec<Float>
         ) = Saver<ViewPagerState, Int>(
-            save = { it.initialPage },
-            restore = { ViewPagerState(it, animationSpec) }
+            save = { it.currentPage },
+            restore = { ViewPagerState(initialPage = it, animationSpec = animationSpec) }
         )
     }
 
