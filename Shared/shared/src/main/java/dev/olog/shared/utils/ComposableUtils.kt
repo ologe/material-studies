@@ -6,18 +6,18 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import dev.olog.shared.extension.toIntPx
 
-@Composable
+@get:Composable
 inline val screenHeightDp: Dp
     get() = AmbientConfiguration.current.screenHeightDp.dp
 
-@Composable
+@get:Composable
 inline val screenWidthDp: Dp
     get() = AmbientConfiguration.current.screenWidthDp.dp
 
-@Composable
+@get:Composable
 inline val screenHeightPx: Int
     get() = screenHeightDp.toIntPx()
 
-@Composable
+@get:Composable
 inline val screenWidthPx: Int
     get() = screenWidthDp.toIntPx()

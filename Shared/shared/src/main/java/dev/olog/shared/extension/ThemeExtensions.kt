@@ -6,14 +6,14 @@ import androidx.compose.material.Shapes
 import androidx.compose.material.Typography
 import androidx.compose.runtime.Composable
 
-@Composable
+@get:Composable
 val MaterialColors: Colors
     get() = MaterialTheme.colors
 
-@Composable
+@get:Composable
 val MaterialTypography: Typography
     get() = MaterialTheme.typography
 
-@Composable
+@get:Composable
 val MaterialShape: Shapes
     get() = MaterialTheme.shapes

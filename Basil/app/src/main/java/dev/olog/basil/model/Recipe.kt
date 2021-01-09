@@ -13,7 +13,7 @@ data class Recipe(
 
     companion object {
 
-        @Composable
+        @get:Composable
         val sample : List<Recipe>
             get() {
                 return listOf(
