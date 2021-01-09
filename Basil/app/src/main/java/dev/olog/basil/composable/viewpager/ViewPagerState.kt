@@ -5,7 +5,7 @@ import androidx.compose.animation.core.AnimatedFloat
 import androidx.compose.animation.core.AnimationClockObservable
 import androidx.compose.animation.core.AnimationSpec
 import androidx.compose.animation.core.DefaultAnimationClock
-import androidx.compose.material.SwipeableConstants
+import androidx.compose.material.SwipeableDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -17,7 +17,7 @@ import androidx.compose.ui.platform.AmbientAnimationClock
 @Composable
 fun rememberViewPagerState(
     initialPage: Int,
-    animationSpec: AnimationSpec<Float> = SwipeableConstants.DefaultAnimationSpec
+    animationSpec: AnimationSpec<Float> = SwipeableDefaults.AnimationSpec
 ): ViewPagerState {
     val clock = AmbientAnimationClock.current.asDisposableClock()
     return rememberSavedInstanceState(
@@ -35,7 +35,7 @@ fun rememberViewPagerState(
 
 class ViewPagerState(
     private val initialPage: Int,
-    private val animationSpec: AnimationSpec<Float> = SwipeableConstants.DefaultAnimationSpec,
+    private val animationSpec: AnimationSpec<Float> = SwipeableDefaults.AnimationSpec,
 ) {
 
     var pageSize: Int = 0

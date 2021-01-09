@@ -9,6 +9,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.gesture.scrollorientationlocking.Orientation
 import androidx.compose.ui.layout.WithConstraints
+import androidx.compose.ui.unit.IntOffset
 import kotlin.math.floor
 
 /**
@@ -72,8 +73,8 @@ private fun Page(
     content: @Composable BoxScope.() -> Unit
 ) {
     val modifier = when (orientation) {
-        Orientation.Horizontal -> Modifier.offset(x = { offset })
-        Orientation.Vertical -> Modifier.offset(y = { offset })
+        Orientation.Horizontal -> Modifier.offset { IntOffset(0, offset.toInt()) }
+        Orientation.Vertical -> Modifier.offset { IntOffset(0, offset.toInt()) }
     }
     Box(
         modifier = modifier,

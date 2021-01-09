@@ -3,7 +3,6 @@ package dev.olog.basil.detail
 import androidx.annotation.FloatRange
 import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.layout.Box
 import androidx.compose.material.*
@@ -13,6 +12,7 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.gesture.scrollorientationlocking.Orientation
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import dev.olog.basil.detail.DetailTabDrawerState.Collapsed
 import dev.olog.basil.detail.DetailTabDrawerState.Expanded
@@ -49,7 +49,7 @@ fun DetailTabDrawer(
 
     Box(
         modifier
-            .offset(y = { state.offset.value })
+            .offset { IntOffset(0, state.offset.value.toInt()) }
             .swipeable(
                 state = state,
                 anchors = anchors,

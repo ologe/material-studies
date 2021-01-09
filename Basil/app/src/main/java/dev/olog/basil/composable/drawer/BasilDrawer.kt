@@ -9,6 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.gesture.scrollorientationlocking.Orientation
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.IntOffset
 import dev.olog.basil.composable.drawer.DrawerPage.*
 import dev.olog.shared.extension.toFloatPx
 import dev.olog.shared.utils.screenHeightDp
@@ -42,9 +43,9 @@ fun BasilDrawer(
                 // TODO didn't understand too much this api, with this value, viewpager works half the time
                 FractionalThreshold(0.8f)
             },
-        ).offset(y = { state.drawerOffset })
+        ).offset { IntOffset(0, state.drawerOffset.toInt()) }
     ) {
-        val offsetGetter = Modifier.offset(y = { state.detailOffset })
+        val offsetGetter = Modifier.offset { IntOffset(0, state.detailOffset.toInt()) }
         DrawerSlot(
             peek = peekTop,
             // move content when detail is opening
