@@ -73,7 +73,7 @@ private fun Page(
     content: @Composable BoxScope.() -> Unit
 ) {
     val modifier = when (orientation) {
-        Orientation.Horizontal -> Modifier.offset { IntOffset(0, offset.toInt()) }
+        Orientation.Horizontal -> Modifier.offset { IntOffset(offset.toInt(), 0) }
         Orientation.Vertical -> Modifier.offset { IntOffset(0, offset.toInt()) }
     }
     Box(
