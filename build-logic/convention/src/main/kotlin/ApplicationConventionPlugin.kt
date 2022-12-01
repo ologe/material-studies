@@ -39,7 +39,7 @@ class ApplicationConventionPlugin : Plugin<Project> {
             }
 
             libraries {
-                project(":shared")
+                project("implementation", ":shared")
 
                 implementation("kotlin")
                 implementation("coroutines")

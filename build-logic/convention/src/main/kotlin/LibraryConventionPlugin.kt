@@ -5,6 +5,8 @@ import dev.olog.material.studies.configureLibrary
 import dev.olog.material.studies.libraries
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.api.artifacts.VersionCatalogsExtension
+import org.gradle.kotlin.dsl.getByType
 
 
 class LibraryConventionPlugin : Plugin<Project> {
@@ -20,6 +22,11 @@ class LibraryConventionPlugin : Plugin<Project> {
 
             buildFeatures {
                 compose = true
+            }
+
+            val catalog = extensions.getByType<VersionCatalogsExtension>().named("libs")
+            composeOptions {
+                kotlinCompilerExtensionVersion = catalog.findVersion("compose-compiler").get().toString()
             }
 
             libraries {
