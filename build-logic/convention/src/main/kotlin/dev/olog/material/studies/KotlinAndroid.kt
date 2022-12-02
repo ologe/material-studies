@@ -27,7 +27,7 @@ fun Project.configureKotlinAndroid(
     kotlinOptions {
         jvmTarget = config.javaVersion.toString()
         freeCompilerArgs = freeCompilerArgs + listOf(
-
+            "-opt-in=androidx.compose.material.ExperimentalMaterialApi",
         )
     }
 
