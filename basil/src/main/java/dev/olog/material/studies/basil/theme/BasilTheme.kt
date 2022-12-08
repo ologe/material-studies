@@ -1,20 +1,20 @@
-package dev.olog.material.studies.basil
+package dev.olog.material.studies.basil.theme
 
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.Color
 import dev.olog.material.studies.shared.Background
 
 @Composable
 fun BasilTheme(content: @Composable () -> Unit) {
     MaterialTheme(
         colors = lightColors(
-            background = Color(0xFF_FFFBE6),
-            primary = Color(0xFF_356859),
-            primaryVariant = Color(0xFF_e9e6d0),
-            secondary = Color(0xFF_FD5523),
+            background = BasilColors.secondary50,
+            onBackground = BasilColors.primary800,
+            primary = BasilColors.primary800,
+            secondary = BasilColors.secondary800,
         ),
+        typography = basilTypography(),
         content = {
             Background {
                 content()
@@ -22,4 +22,6 @@ fun BasilTheme(content: @Composable () -> Unit) {
         },
     )
 }
+
+
 
