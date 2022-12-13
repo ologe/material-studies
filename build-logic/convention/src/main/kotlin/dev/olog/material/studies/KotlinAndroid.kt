@@ -28,6 +28,7 @@ fun Project.configureKotlinAndroid(
         jvmTarget = config.javaVersion.toString()
         freeCompilerArgs = freeCompilerArgs + listOf(
             "-opt-in=androidx.compose.material.ExperimentalMaterialApi",
+            "-opt-in=com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi",
         )
     }
 

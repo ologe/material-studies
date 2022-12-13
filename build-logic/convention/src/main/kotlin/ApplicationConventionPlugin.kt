@@ -56,6 +56,10 @@ class ApplicationConventionPlugin : Plugin<Project> {
                 implementation("compose-activity")
                 implementation("compose-icons")
                 implementation("compose-constraintLayout")
+
+                implementation("glide-core")
+                implementation("glide-compose")
+                kapt("glide-compiler")
             }
 
         }
