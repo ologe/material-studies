@@ -8,7 +8,6 @@ import androidx.compose.material.swipeable
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.*
@@ -80,15 +79,13 @@ fun BasilLayout(
         ) {
             // drawer
             Box(
-                Modifier
-                    .offset { IntOffset(0, offsetPx) }
-                    .background(Color.Black.copy(alpha = .5f))
+                Modifier.offset { IntOffset(0, offsetPx) }
             )
 
             // list
             BasilListLayout(
                 measurer = measurer,
-                modifier = Modifier.background(Color.Red.copy(alpha = .5f))
+                modifier = Modifier.offset { IntOffset(0, offsetPx.coerceAtLeast(0)) }
             ) {
                 listContent()
             }
@@ -96,9 +93,7 @@ fun BasilLayout(
             // detail
             BasilDetailLayout(
                 measurer = measurer,
-                modifier = Modifier
-                    .offset { IntOffset(0, offsetPx) }
-                    .background(Color.Green.copy(alpha = .5f))
+                modifier = Modifier.offset { IntOffset(0, offsetPx) }
             ) {
                 detailContent()
             }
@@ -120,11 +115,14 @@ private fun BasilLayout(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
+    val statusBarHeight = statusBarHeight()
     Layout(
         content = content,
         modifier = modifier
     ) { measurables, constraints ->
-        val drawer = measurables[0].measure(constraints)
+        val drawer = measurables[0].measure(
+            constraints.copy(minHeight = constraints.maxHeight - statusBarHeight)
+        )
         val list = measurables[1].measure(constraints)
         val listRect = measurer.measureListRect()
         val detail = measurables[2].measure(
@@ -167,6 +165,7 @@ private fun BasilDetailLayout(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
+    val statusBarHeight = statusBarHeight()
     Layout(
         content = content,
         modifier = modifier,
@@ -181,9 +180,9 @@ private fun BasilDetailLayout(
 
         layout(
             width = constraints.maxWidth,
-            height = constraints.maxHeight // TODO + list rect
+            height = constraints.maxHeight
         ) {
-            mainHeaderPlaceable.place(mainHeaderRect.left, mainHeaderRect.top)
+            mainHeaderPlaceable.place(mainHeaderRect.left, mainHeaderRect.top - statusBarHeight / 2)
             namePlaceable.place(recipeNameRect.left, recipeNameRect.top)
             otherRecipeInfoPlaceable.place(otherRecipeInfoRect.left, otherRecipeInfoRect.top)
         }
