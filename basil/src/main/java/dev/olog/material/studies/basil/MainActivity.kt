@@ -16,9 +16,9 @@ import androidx.compose.ui.unit.sp
 import androidx.core.view.WindowCompat
 import dev.olog.material.studies.basil.theme.BasilColors
 import dev.olog.material.studies.basil.theme.BasilTheme
-import dev.olog.material.studies.basil.v2.BasilLayout
-import dev.olog.material.studies.basil.v2.BasilLayoutStateValue
-import dev.olog.material.studies.basil.v2.rememberBasilLayoutState
+import dev.olog.material.studies.basil.drawer.BasilLayout
+import dev.olog.material.studies.basil.drawer.BasilLayoutStateValue
+import dev.olog.material.studies.basil.drawer.rememberBasilLayoutState
 import dev.olog.material.studies.shared.boundingBox
 
 class MainActivity : ComponentActivity() {

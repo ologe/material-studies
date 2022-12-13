@@ -1,49 +1,22 @@
-package dev.olog.material.studies.basil.v2
+package dev.olog.material.studies.basil.drawer
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.SwipeableState
 import androidx.compose.material.swipeable
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.unit.*
+import androidx.compose.ui.unit.Constraints
+import androidx.compose.ui.unit.Density
+import androidx.compose.ui.unit.IntOffset
+import androidx.compose.ui.unit.IntRect
 import dev.olog.material.studies.basil.theme.BasilColors
 import dev.olog.material.studies.shared.measure
 import dev.olog.material.studies.shared.statusBarHeight
 import kotlin.math.roundToInt
-
-enum class BasilLayoutStateValue {
-    Drawer,
-    List,
-    Detail,
-}
-
-@Composable
-fun rememberBasilLayoutState(
-    initialValue: BasilLayoutStateValue,
-    listPositionPercentage: Float,
-    listPadding: Dp,
-): BasilLayoutState {
-    return remember(initialValue, listPositionPercentage, listPadding) {
-        BasilLayoutState(
-            initialValue = initialValue,
-            listPositionPercentage = listPositionPercentage,
-            listPadding = listPadding
-        )
-    }
-}
-
-class BasilLayoutState(
-    val initialValue: BasilLayoutStateValue,
-    val listPositionPercentage: Float,
-    val listPadding: Dp,
-) : SwipeableState<BasilLayoutStateValue>(
-    initialValue = initialValue
-)
 
 @Composable
 fun BasilLayout(
@@ -189,7 +162,7 @@ private fun BasilDetailLayout(
     }
 }
 
-class BasilLayoutMeasurer(
+private class BasilLayoutMeasurer(
     private val constraints: Constraints,
     private val state: BasilLayoutState,
     private val density: Density,
