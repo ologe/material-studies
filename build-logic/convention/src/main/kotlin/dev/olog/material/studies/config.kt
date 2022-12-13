@@ -6,7 +6,7 @@ import org.gradle.api.JavaVersion
 
 object config {
 
-    const val minSdk = 21
+    const val minSdk = 23
     const val targetSdk = 33
     const val compileSdk = 33
 

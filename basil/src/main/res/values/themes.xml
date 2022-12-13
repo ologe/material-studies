@@ -1,6 +1,6 @@
 <resources>
 
-    <style name="Theme.Materialstudies" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-
+    <style name="Theme.Basil" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
 </resources>
