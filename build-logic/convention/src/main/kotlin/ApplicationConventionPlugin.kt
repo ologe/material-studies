@@ -50,12 +50,15 @@ class ApplicationConventionPlugin : Plugin<Project> {
 
                 implementation("androidx-material")
                 implementation("compose-ui")
+                implementation("compose-foundation")
                 debugImplementation("compose-tooling")
                 implementation("compose-tooling-preview")
                 implementation("compose-material")
                 implementation("compose-activity")
                 implementation("compose-icons")
                 implementation("compose-constraintLayout")
+
+                implementation("accompanist-pager")
 
                 implementation("glide-core")
                 implementation("glide-compose")

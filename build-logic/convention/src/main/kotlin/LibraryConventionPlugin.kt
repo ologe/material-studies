@@ -35,6 +35,7 @@ class LibraryConventionPlugin : Plugin<Project> {
                 implementation("coroutines-android")
 
                 implementation("compose-ui")
+                implementation("compose-foundation")
                 debugImplementation("compose-tooling")
                 implementation("compose-tooling-preview")
                 implementation("compose-material")
