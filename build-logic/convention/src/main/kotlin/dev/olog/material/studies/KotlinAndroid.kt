@@ -31,6 +31,7 @@ fun Project.configureKotlinAndroid(
             "-opt-in=androidx.compose.foundation.ExperimentalFoundationApi",
             "-opt-in=com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi",
             "-opt-in=com.google.accompanist.pager.ExperimentalPagerApi",
+            "-opt-in=androidx.compose.foundation.text.InternalFoundationTextApi",
         )
     }
 
