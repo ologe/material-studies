@@ -22,6 +22,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.text.PlatformTextStyle
 import androidx.compose.ui.text.style.TextAlign
@@ -133,6 +134,7 @@ fun BasilLayout(
                 ),
                 sheetBackgroundColor = BasilColors.secondary50.copy(alpha = .97f),
                 sheetElevation = 0.dp,
+                backgroundColor = Color.Transparent,
                 modifier = Modifier
                     .size(detailSize)
                     .offset(y = (headerSize.height + listSize.height).toDp())
