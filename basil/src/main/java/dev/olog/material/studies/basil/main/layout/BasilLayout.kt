@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -11,13 +12,17 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.BottomSheetScaffold
+import androidx.compose.material.BottomSheetState
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
+import androidx.compose.material.rememberBottomSheetScaffoldState
 import androidx.compose.material.swipeable
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.text.PlatformTextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.IntSize
@@ -29,6 +34,8 @@ import dev.olog.material.studies.basil.main.layout.BasilLayoutStateValue.Detail
 import dev.olog.material.studies.basil.main.layout.BasilLayoutStateValue.Drawer
 import dev.olog.material.studies.basil.main.layout.BasilLayoutStateValue.List
 import dev.olog.material.studies.basil.theme.BasilColors
+import dev.olog.material.studies.shared.fraction
+import dev.olog.material.studies.shared.remap
 import dev.olog.material.studies.shared.rememberStatusBarHeight
 import dev.olog.material.studies.shared.size
 import dev.olog.material.studies.shared.toDp
@@ -37,12 +44,14 @@ import kotlin.math.roundToInt
 @Composable
 fun BasilLayout(
     layoutState: BasilLayoutState,
+    sheetState: BottomSheetState,
     modifier: Modifier = Modifier,
     drawerContent: @Composable (Float) -> Unit,
     listContent: @Composable () -> Unit,
     detailHeaderContent: @Composable (Float) -> Unit,
     detailDescriptionContent: @Composable (Float) -> Unit,
     detailExtraContent: @Composable (Float) -> Unit,
+    sheetContent: @Composable ColumnScope.() -> Unit,
 ) {
     val statusBarHeight = rememberStatusBarHeight()
 
@@ -79,6 +88,7 @@ fun BasilLayout(
                         )
                     },
                     orientation = Orientation.Vertical,
+                    enabled = sheetState.isCollapsed,
                 ),
         ) {
 
@@ -117,37 +127,58 @@ fun BasilLayout(
                 )
             }
 
-            Box(
+            BottomSheetScaffold(
+                scaffoldState = rememberBottomSheetScaffoldState(
+                    bottomSheetState = sheetState,
+                ),
+                sheetBackgroundColor = BasilColors.secondary50.copy(alpha = .97f),
+                sheetElevation = 0.dp,
                 modifier = Modifier
                     .size(detailSize)
                     .offset(y = (headerSize.height + listSize.height).toDp())
-                    .offset { layoutState.detailOffset }
+                    .offset { layoutState.detailOffset },
+                sheetContent = sheetContent,
+                sheetGesturesEnabled = sheetState.isExpanded,
             ) {
-                Box(Modifier.size(detailUpperSize)) {
-                    detailHeaderContent(layoutState.detailProgress)
-                }
-
-                val descriptionPadding = detailUpperSize.height.toDp() - BasilLayoutConstants.DownArrowSize
-                val descriptionHeight = (headerSize.height + listSize.height).toDp() -
-                        (detailUpperSize.height).toDp() -
-                        BasilLayoutConstants.ListHorizontalPadding
-
                 Box(
                     Modifier
-                        .padding(top = descriptionPadding)
-                        .padding(horizontal = BasilLayoutConstants.ListHorizontalPadding)
-                        .fillMaxWidth()
-                        .height(descriptionHeight)
-                ) {
-                    detailDescriptionContent(layoutState.detailProgress)
-                }
+                        .graphicsLayer {
+                            val scale = remap(
+                                inMin = 0f, inMax = 1f,
+                                outMin = .85f, outMax = 1f,
+                                value = 1 - sheetState.fraction,
+                            )
 
-                Box(
-                    modifier = Modifier
-                        // slightly incorrect, padding is not pixel perfect
-                        .padding(top = descriptionPadding + descriptionHeight + 4.dp)
+                            scaleX = scale
+                            scaleY = scale
+                        },
                 ) {
-                    detailExtraContent(layoutState.detailProgress)
+                    Box(Modifier.size(detailUpperSize)) {
+                        detailHeaderContent(layoutState.detailProgress)
+                    }
+
+                    val descriptionPadding = detailUpperSize.height.toDp() - BasilLayoutConstants.DownArrowSize
+                    val descriptionHeight = (headerSize.height + listSize.height).toDp() -
+                            (detailUpperSize.height).toDp() -
+                            BasilLayoutConstants.ListHorizontalPadding
+
+                    Box(
+                        Modifier
+                            .padding(top = descriptionPadding)
+                            .padding(horizontal = BasilLayoutConstants.ListHorizontalPadding)
+                            .fillMaxWidth()
+                            .height(descriptionHeight)
+                    ) {
+                        detailDescriptionContent(layoutState.detailProgress)
+                    }
+
+                    Box(
+                        modifier = Modifier
+                            // slightly incorrect, padding is not pixel perfect
+                            .padding(top = descriptionPadding + descriptionHeight + 4.dp)
+                    ) {
+                        detailExtraContent(layoutState.detailProgress)
+                    }
                 }
             }
 

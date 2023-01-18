@@ -6,6 +6,9 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material.BottomSheetValue
+import androidx.compose.material.rememberBottomSheetState
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.core.view.WindowCompat
@@ -14,6 +17,7 @@ import dev.olog.material.studies.basil.DummyData
 import dev.olog.material.studies.basil.main.layout.BasilLayout
 import dev.olog.material.studies.basil.main.layout.rememberBasilLayoutState
 import dev.olog.material.studies.basil.theme.BasilTheme
+import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
 
@@ -27,9 +31,14 @@ class MainActivity : ComponentActivity() {
                 val recipes = DummyData.recipes
                 val layoutState = rememberBasilLayoutState()
                 val pagerState = rememberPagerState(pageCount = recipes.size)
+                val sheetState = rememberBottomSheetState(
+                    initialValue = BottomSheetValue.Collapsed,
+                )
+                val scope = rememberCoroutineScope()
 
                 BasilLayout(
                     layoutState = layoutState,
+                    sheetState = sheetState,
                     drawerContent = {
                         Box(
                             modifier = Modifier
@@ -58,7 +67,14 @@ class MainActivity : ComponentActivity() {
                     },
                     detailExtraContent = {
                         DetailExtraContent(
-                            recipe = recipes[pagerState.currentPage]
+                            recipe = recipes[pagerState.currentPage],
+                        )
+                    },
+                    sheetContent = {
+                        SheetContent(
+                            expand = {
+                                scope.launch { sheetState.expand() }
+                            }
                         )
                     }
                 )

@@ -7,14 +7,12 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.Divider
 import androidx.compose.material.LocalContentColor
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
-import androidx.compose.material.TextButton
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.AirplaneTicket
 import androidx.compose.material.icons.rounded.Egg
@@ -108,7 +106,9 @@ fun DetailDescriptionContent(recipe: Recipe) {
 }
 
 @Composable
-fun DetailExtraContent(recipe: Recipe) {
+fun DetailExtraContent(
+    recipe: Recipe,
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -127,9 +127,6 @@ fun DetailExtraContent(recipe: Recipe) {
             modifier = Modifier.padding(horizontal = BasilLayoutConstants.ListHorizontalPadding)
         )
         Spacer(modifier = Modifier.weight(1f))
-        IngredientsAndDirections(
-            recipe = recipe
-        )
     }
 }
 
@@ -225,34 +222,6 @@ private fun Allergen(
             Text(
                 text = text
             )
-        }
-    }
-}
-
-@Composable
-private fun IngredientsAndDirections(
-    recipe: Recipe,
-    modifier: Modifier = Modifier,
-) {
-    Column(modifier) {
-        Divider()
-        Row(Modifier.height(48.dp)) {
-            TextButton(
-                modifier = Modifier.weight(1f),
-                onClick = {
-
-                }
-            ) {
-                Text(text = "Ingredients")
-            }
-            TextButton(
-                modifier = Modifier.weight(1f),
-                onClick = {
-
-                }
-            ) {
-                Text(text = "Directions")
-            }
         }
     }
 }
