@@ -144,7 +144,7 @@ fun BasilLayout(
 
                 Box(
                     modifier = Modifier
-                        // slightly correct, padding is not pixel perfect
+                        // slightly incorrect, padding is not pixel perfect
                         .padding(top = descriptionPadding + descriptionHeight + 4.dp)
                 ) {
                     detailExtraContent(layoutState.detailProgress)
