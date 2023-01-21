@@ -100,6 +100,7 @@ fun BasilLayout(
                     },
                     orientation = Orientation.Vertical,
                     enabled = sheetState.isCollapsed,
+                    resistance = null,
                 ),
         ) {
 
