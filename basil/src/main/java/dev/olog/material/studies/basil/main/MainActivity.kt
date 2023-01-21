@@ -72,6 +72,7 @@ class MainActivity : ComponentActivity() {
                     },
                     sheetContent = {
                         SheetContent(
+                            recipe = recipes[pagerState.currentPage],
                             expand = {
                                 scope.launch { sheetState.expand() }
                             }

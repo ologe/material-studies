@@ -1,8 +1,32 @@
 package dev.olog.material.studies.basil
 
+
 object DummyData {
 
-    val description = "Guilt-free gluten-free spaghetti pasta is sautéed in a garlic, kale pesto. It's an easy and healthy dinner."
+    const val description = "Guilt-free gluten-free spaghetti pasta is sautéed in a garlic, kale pesto. It's an easy and healthy dinner."
+
+    val ingredients = listOf(
+        Ingredient(name = "Basil", quantity = "6 tbsp"),
+        Ingredient(name = "Gluten-free Spaghetti", quantity = "2 cups"),
+        Ingredient(name = "Garlic", quantity = "1 tbsp"),
+        Ingredient(name = "Ricotta", quantity = "4 cups"),
+        Ingredient(name = "Kale", quantity = "3 cups"),
+        Ingredient(name = "Red Pepper Flakes", quantity = "1 tbsp"),
+        Ingredient(name = "Extra Virgin Olive Oil", quantity = "1 tbsp"),
+        Ingredient(name = "Salt", quantity = "1 tbsp"),
+        Ingredient(name = "Pine nuts", quantity = "1 tbsp"),
+    )
+
+    val directions = listOf(
+        Direction(
+            header = "Chop the Pesto Ingredients",
+            text = "Place the basil leaves, garlic and pine nuts on a sturdy cutting board.\n\nRoughly chop the ingredients by hand before using the food processor. This will insure your pesto is smooth and creamy."
+        ),
+        Direction(
+            header = "Combine and Toss",
+            text = "Combine the kale, garlic and red pepper flakes in a large bowl.\n\nToss the ingredients by hand"
+        )
+    )
 
     // https://picsum.photos/1000
     val recipes = listOf(
@@ -31,10 +55,22 @@ data class Recipe(
     val imageUrl: String,
     val description: String = DummyData.description,
     val macro: Macro = Macro(),
+    val ingredients: List<Ingredient> = DummyData.ingredients,
+    val directions: List<Direction> = DummyData.directions + DummyData.directions + DummyData.directions
 )
 
 data class Macro(
     val calories: Int = 465,
     val protein: Int = 27,
     val fat: Int = 12,
+)
+
+data class Ingredient(
+    val name: String,
+    val quantity: String,
+)
+
+data class Direction(
+    val header: String,
+    val text: String,
 )

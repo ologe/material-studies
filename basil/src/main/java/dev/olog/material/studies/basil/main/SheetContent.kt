@@ -1,5 +1,6 @@
 package dev.olog.material.studies.basil.main
 
+import androidx.compose.animation.AnimatedContent
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -8,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.material.Divider
 import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
 import androidx.compose.material.icons.Icons
@@ -19,7 +21,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clipToBounds
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import dev.olog.material.studies.basil.Recipe
+import dev.olog.material.studies.basil.compose.Stepper
+import dev.olog.material.studies.shared.animation.SlideVerticallyTransitionSpec
 
 enum class SheetTab {
     Ingredients,
@@ -28,6 +36,7 @@ enum class SheetTab {
 
 @Composable
 fun SheetContent(
+    recipe: Recipe,
     modifier: Modifier = Modifier,
     expand: () -> Unit,
 ) {
@@ -42,8 +51,8 @@ fun SheetContent(
         }
         // TODO add divider below whne expanded
         when (currentTab) {
-            SheetTab.Ingredients -> Ingredients()
-            SheetTab.Directions -> Directions()
+            SheetTab.Ingredients -> Ingredients(recipe)
+            SheetTab.Directions -> Directions(recipe)
         }
     }
 }
@@ -53,7 +62,7 @@ private fun Tabs(
     modifier: Modifier = Modifier,
     expand: (SheetTab) -> Unit,
 ) {
-    Row(Modifier.height(48.dp)) {
+    Row(modifier.height(48.dp)) {
         TextButton(
             modifier = Modifier.weight(1f),
             onClick = { expand(SheetTab.Ingredients) },
@@ -71,26 +80,14 @@ private fun Tabs(
 
 @Composable
 private fun Ingredients(
+    recipe: Recipe,
     modifier: Modifier = Modifier,
 ) {
     Column(modifier) {
-        Ingredient(text = "Basil", quantity = "6 tbsp")
-        Ingredient(text = "Gluten-free Spaghetti", quantity = "2 cups")
-        Ingredient(text = "Garlic", quantity = "1 tbsp")
-        Ingredient(text = "Ricotta", quantity = "4 cups")
-        Ingredient(text = "Kale", quantity = "3 cups")
-        Ingredient(text = "Red Pepper Flakes", quantity = "1 tbsp")
-        Ingredient(text = "Extra Virgin Olive Oil", quantity = "1 tbsp")
-        Ingredient(text = "Salt", quantity = "1 tbsp")
-        Ingredient(text = "Pine nuts", quantity = "1 tbsp")
+        for (ingredient in recipe.ingredients) {
+            Ingredient(text = ingredient.name, quantity = ingredient.quantity)
+        }
     }
-}
-
-@Composable
-private fun Directions(
-    modifier: Modifier = Modifier,
-) {
-
 }
 
 @Composable
@@ -116,5 +113,48 @@ private fun Ingredient(
             }
         )
         Text(text = quantity)
+    }
+}
+
+@Composable
+private fun Directions(
+    recipe: Recipe,
+    modifier: Modifier = Modifier,
+) {
+    var selectedDirection by remember {
+        mutableStateOf(0)
+    }
+    Row(
+        modifier = modifier
+            .fillMaxSize()
+            .clipToBounds()
+    ) {
+        AnimatedContent(
+            modifier = Modifier.weight(1f),
+            targetState = selectedDirection,
+            transitionSpec = SlideVerticallyTransitionSpec()
+        ) {
+            Column {
+                val direction = recipe.directions[it]
+                Text(
+                    text = direction.header,
+                    style = MaterialTheme.typography.h4,
+                )
+                Text(text = direction.text)
+            }
+        }
+        Stepper(
+            selected = selectedDirection,
+            count = recipe.directions.size,
+            onSelectionChanged = {
+                selectedDirection = it
+            },
+            render = {
+                Text(
+                    text = (it + 1).toString().padStart(2, '0'),
+                    fontWeight = FontWeight.ExtraBold,
+                )
+            }
+        )
     }
 }
