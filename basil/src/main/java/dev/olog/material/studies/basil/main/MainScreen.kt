@@ -21,6 +21,7 @@ import dev.olog.material.studies.basil.main.layout.rememberBasilLayoutState
 import dev.olog.material.studies.basil.theme.BasilTheme
 import dev.olog.material.studies.shared.DevicePreviews
 import dev.olog.material.studies.shared.animation.AnimationUtils
+import dev.olog.material.studies.shared.fraction
 import kotlinx.coroutines.launch
 
 @Composable
@@ -29,10 +30,10 @@ fun MainScreen(
     selectedCategory: RecipeCategory,
     onSelectedCategoryUpdate: (RecipeCategory) -> Unit,
     layoutState: BasilLayoutState = rememberBasilLayoutState(
-        initialState = BasilLayoutStateValue.List
+        initialState = BasilLayoutStateValue.Detail,
     ),
     sheetState: BottomSheetState = rememberBottomSheetState(
-        initialValue = BottomSheetValue.Collapsed,
+        initialValue = BottomSheetValue.Expanded,
     ),
     pagerState: PagerState = rememberPagerState(
         pageCount = recipes.size
@@ -85,6 +86,7 @@ fun MainScreen(
         sheetContent = {
             SheetContent(
                 recipe = selectedRecipe,
+                fraction = sheetState.fraction,
                 expand = {
                     scope.launch { sheetState.expand() }
                 }

@@ -161,6 +161,7 @@ fun BasilLayout(
                 ),
                 sheetBackgroundColor = BasilColors.secondary50.copy(alpha = .97f),
                 sheetElevation = 0.dp,
+                sheetPeekHeight = BasilLayoutConstants.SheetHeight,
                 backgroundColor = Color.Transparent,
                 modifier = Modifier
                     .size(detailSize)
@@ -226,6 +227,7 @@ object BasilLayoutConstants {
     const val TotalWeight = TopWeight + BottomWeight
     val ListPaddingPadding = 32.dp
     val DownArrowSize = 48.dp
+    val SheetHeight = 56.dp
 
 }
 
