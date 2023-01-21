@@ -47,11 +47,11 @@ private val TailAnimationSpec = tween<Float>(Duration, Delay)
 fun Stepper(
     selected: Int,
     count: Int,
-    stepSize: Dp,
-    onSelectionChanged: (Int) -> Unit,
     modifier: Modifier = Modifier,
+    stepSize: Dp = 48.dp,
     scrollState: ScrollState = rememberScrollState(),
     render: @Composable BoxScope.(Int) -> Unit,
+    onSelectionChanged: (Int) -> Unit,
 ) {
     val latestSelected = remember { mutableStateOf<Int?>(null) }
     val density = LocalDensity.current
@@ -160,11 +160,12 @@ private fun Preview() {
             count = 10,
             stepSize = 48.dp,
             onSelectionChanged = { selected = it },
-        ) {
-            Text(
-                text = (it + 1).toString().padStart(2, '0'),
-                fontWeight = FontWeight.ExtraBold,
-            )
-        }
+            render = {
+                Text(
+                    text = (it + 1).toString().padStart(2, '0'),
+                    fontWeight = FontWeight.ExtraBold,
+                )
+            }
+        )
     }
 }
