@@ -51,7 +51,7 @@ class BasilLayoutState(
 
 @Composable
 fun rememberBasilLayoutState(
-    initialState: BasilLayoutStateValue = Detail,
+    initialState: BasilLayoutStateValue = List,
 ): BasilLayoutState {
     return remember(initialState) {
         BasilLayoutState(initialState)
