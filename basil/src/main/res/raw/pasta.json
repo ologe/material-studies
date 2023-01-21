@@ -4,13 +4,16 @@
     "name": "Chilli prawn linguine",
     "image_url": "https://www.themealdb.com/images/media/meals/usywpp1511189717.jpg",
     "category": "Pasta",
-    "description": "Guilt-free gluten-free spaghetti pasta is sautéed in a garlic, kale pesto. It's an easy and healthy dinner.",
+    "description": "Our delicious chilli, prawn and garlic linguine recipe is elegant enough for a dinner party but light enough to be enjoyed for dinner during the week.",
     "instructions" : [
-      "Mix the dressing ingredients in a small bowl and season with salt and pepper. Set aside.",
-      "Cook the pasta according to the packet instructions. Add the sugar snap peas for the last minute or so of cooking time.",
-      "Meanwhile, heat the oil in a wok or large frying pan, toss in the garlic and chilli and cook over a fairly gentle heat for about 30 seconds without letting the garlic brown. Tip in the prawns and cook over a high heat, stirring frequently, for about 3 minutes until they turn pink.",
-      "Add the tomatoes and cook, stirring occasionally, for 3 minutes until they just start to soften. Drain the pasta and sugar snaps well, then toss into the prawn mixture. Tear in the basil leaves, stir, and season with salt and pepper.",
-      "Serve with salad leaves drizzled with the lime dressing, and warm crusty bread."
+      "To make the dressing, mix 2 tbsp virtually fat-free fromage frais, the grated zest and juice of 2 limes and 2 tsp golden caster sugar in a small bowl and season with salt and pepper. Set aside.",
+      "Cook 280g linguine pasta according to the packet instructions. Add 200g trimmed sugar snap peas for the last minute or so of cooking time.",
+      "Meanwhile, heat 2 tbsp olive oil in a wok or big frying pan, toss in 2 finely chopped large garlic cloves and 1 deseeded and finely chopped large red chilli and cook over a fairly gentle heat for about 30 seconds without letting the garlic brown.",
+      "Tip in 24 peeled raw king prawns and cook over a high heat, stirring frequently, for about 3 minutes until they turn pink.",
+      "Add 12 halved cherry tomatoes and cook, stirring occasionally, for 3 minutes until they just start to soften.",
+      "Drain the linguine pasta and sugar snap peas well, then toss into the prawn mixture.",
+      "Tear in a handful of basil leaves, stir, and season with salt and pepper.",
+      "Serve with mixed salad leaves drizzled with the lime dressing, and warm crusty white bread."
     ],
     "ingredients": [
       {
@@ -44,26 +47,6 @@
       {
         "name": "Basil Leaves",
         "quantity": "Handful"
-      },
-      {
-        "name": "Lettuce",
-        "quantity": "Leaves"
-      },
-      {
-        "name": "Bread",
-        "quantity": "to serve"
-      },
-      {
-        "name": "Fromage Frais",
-        "quantity": "2 tbsp"
-      },
-      {
-        "name": "Lime",
-        "quantity": "Grated Zest of 2"
-      },
-      {
-        "name": "Caster Sugar",
-        "quantity": "2 tsp"
       }
     ]
   },
@@ -72,9 +55,12 @@
     "name": "Fettuccine Alfredo",
     "image_url": "https:\/\/www.themealdb.com\/images\/media\/meals\/0jv5gx1661040802.jpg",
     "category": "Pasta",
-    "description": "",
+    "description": "Hankering for a comforting bowl of pasta in creamy sauce? This sumptuous Italian dish is for you. It takes just 25 minutes so it's an easy midweek meal.",
     "instructions": [
-      "Cook pasta according to package instructions in a large pot of boiling water and salt. Add heavy cream and butter to a large skillet over medium heat until the cream bubbles and the butter melts. Whisk in parmesan and add seasoning (salt and black pepper). Let the sauce thicken slightly and then add the pasta and toss until coated in sauce. Garnish with parsley, and it's ready."
+      "In a medium saucepan, stir the clotted cream, butter and cornflour over a low-ish heat and bring to a low simmer. Turn off the heat and keep warm.",
+      "Meanwhile, put the cheese and nutmeg in a small bowl and add a good grinding of black pepper, then stir everything together (don’t add any salt at this stage).",
+      "Put the pasta in another pan with 2 tsp salt, pour over some boiling water and cook following pack instructions (usually 3-4 mins). When cooked, scoop some of the cooking water into a heatproof jug or mug and drain the pasta, but not too thoroughly.",
+      "Add the pasta to the pan with the clotted cream mixture, then sprinkle over the cheese and gently fold everything together over a low heat using a rubber spatula. When combined, splash in 3 tbsp of the cooking water. At first, the pasta will look wet and sloppy: keep stirring until the water is absorbed and the sauce is glossy. Check the seasoning before transferring to heated bowls. Sprinkle over some chives or parsley, then serve immediately."
     ],
     "ingredients": [
       {
@@ -108,7 +94,7 @@
     "name": "Spaghetti alla Carbonara",
     "image_url": "https:\/\/www.themealdb.com\/images\/media\/meals\/llcbn01574260722.jpg",
     "category": "Pasta",
-    "description": "",
+    "description": "Discover how to make superb spaghetti carbonara. This cheesy pasta dish is an Italian favourite and with the right technique, you can make it perfect every time.",
     "instructions": [
       "Put a large saucepan of water on to boil.",
       "Finely chop the 100g pancetta, having first removed any rind. Finely grate 50g pecorino cheese and 50g parmesan and mix them together.",
