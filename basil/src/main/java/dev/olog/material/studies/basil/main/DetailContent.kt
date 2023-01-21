@@ -79,10 +79,7 @@ fun DetailDescriptionContent(
     modifier: Modifier = Modifier,
 ) {
     Column(modifier) {
-        Divider(
-            color = LocalContentColor.current,
-            modifier = Modifier.padding(horizontal = BasilLayoutConstants.ListPaddingPadding)
-        )
+        Divider(color = LocalContentColor.current)
         Box(
             modifier = Modifier
                 .fillMaxSize()
