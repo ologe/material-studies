@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.composed
 import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
@@ -20,6 +21,7 @@ import dev.olog.material.studies.basil.data.model.Recipe
 import dev.olog.material.studies.basil.main.layout.BasilLayoutConstants
 import dev.olog.material.studies.basil.main.layout.BasilLayoutState
 import dev.olog.material.studies.basil.theme.BasilColors
+import dev.olog.material.studies.shared.animation.rememberDecelerateEasing
 
 @Composable
 fun ListContent(
@@ -52,14 +54,16 @@ fun ListContent(
 private fun Modifier.drawParallaxScrim(
     color: Color,
     progress: Float,
-): Modifier {
-    return this.then(Modifier.drawWithContent {
+): Modifier = composed {
+    val easing = rememberDecelerateEasing(.6f)
+
+    Modifier.drawWithContent {
         drawContent()
         rotate(180f) {
             drawRect(
                 color = color,
-                size = Size(size.width, size.height * progress)
+                size = Size(size.width, size.height * easing.transform(progress))
             )
         }
-    })
+    }
 }
