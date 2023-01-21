@@ -45,8 +45,8 @@ import dev.olog.material.studies.basil.main.layout.BasilLayoutStateValue.Detail
 import dev.olog.material.studies.basil.main.layout.BasilLayoutStateValue.Drawer
 import dev.olog.material.studies.basil.main.layout.BasilLayoutStateValue.List
 import dev.olog.material.studies.basil.theme.BasilColors
+import dev.olog.material.studies.shared.animation.AnimationUtils
 import dev.olog.material.studies.shared.fraction
-import dev.olog.material.studies.shared.remap
 import dev.olog.material.studies.shared.rememberStatusBarHeight
 import dev.olog.material.studies.shared.size
 import dev.olog.material.studies.shared.toDp
@@ -150,7 +150,7 @@ fun BasilLayout(
                     .offset { layoutState.drawerOffset }
                     .graphicsLayer {
                         scaleX = 1.4f // mimic wide icon
-//                        alpha = 1 - offset todo
+                        alpha = AnimationUtils.translateToEnd(1f - layoutState.detailProgress, .5f)
                     },
                 colorFilter = ColorFilter.tint(LocalContentColor.current)
             )
@@ -173,7 +173,7 @@ fun BasilLayout(
                     Modifier
                         // scale down when bottom sheet is expanded
                         .graphicsLayer {
-                            val scale = remap(
+                            val scale = AnimationUtils.remap(
                                 inMin = 0f, inMax = 1f,
                                 outMin = .85f, outMax = 1f,
                                 value = 1 - sheetState.fraction,

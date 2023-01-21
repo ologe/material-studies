@@ -8,6 +8,8 @@ import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.graphicsLayer
 import com.google.accompanist.pager.PagerState
 import com.google.accompanist.pager.rememberPagerState
 import dev.olog.material.studies.basil.data.model.Recipe
@@ -18,6 +20,7 @@ import dev.olog.material.studies.basil.main.layout.BasilLayoutStateValue
 import dev.olog.material.studies.basil.main.layout.rememberBasilLayoutState
 import dev.olog.material.studies.basil.theme.BasilTheme
 import dev.olog.material.studies.shared.DevicePreviews
+import dev.olog.material.studies.shared.animation.AnimationUtils
 import kotlinx.coroutines.launch
 
 @Composable
@@ -66,12 +69,18 @@ fun MainScreen(
         },
         detailDescriptionContent = {
             DetailDescriptionContent(
-                recipe = selectedRecipe
+                recipe = selectedRecipe,
+                modifier = Modifier.graphicsLayer {
+                    alpha = AnimationUtils.translateToEnd(it, .5f)
+                }
             )
         },
         detailExtraContent = {
             DetailExtraContent(
                 recipe = selectedRecipe,
+                modifier = Modifier.graphicsLayer {
+                    alpha = AnimationUtils.translateToEnd(it, .5f)
+                }
             )
         },
         sheetContent = {

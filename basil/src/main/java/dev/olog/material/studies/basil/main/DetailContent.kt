@@ -74,15 +74,14 @@ fun DetailHeaderContent(
 }
 
 @Composable
-fun DetailDescriptionContent(recipe: Recipe) {
-    Column {
+fun DetailDescriptionContent(
+    recipe: Recipe,
+    modifier: Modifier = Modifier,
+) {
+    Column(modifier) {
         Divider(
             color = LocalContentColor.current,
-            modifier = Modifier
-                .padding(horizontal = BasilLayoutConstants.ListPaddingPadding)
-                .graphicsLayer {
-//                    alpha = offset
-                }
+            modifier = Modifier.padding(horizontal = BasilLayoutConstants.ListPaddingPadding)
         )
         Box(
             modifier = Modifier
@@ -104,9 +103,10 @@ fun DetailDescriptionContent(recipe: Recipe) {
 @Composable
 fun DetailExtraContent(
     recipe: Recipe,
+    modifier: Modifier = Modifier,
 ) {
     Column(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
             .padding(top = 16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp),

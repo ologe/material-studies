@@ -51,6 +51,7 @@ fun ListContent(
     }
 }
 
+// TODO triggers lots of recompositions
 private fun Modifier.drawParallaxScrim(
     color: Color,
     progress: Float,
