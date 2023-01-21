@@ -20,7 +20,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
-import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.Hyphens
@@ -39,7 +39,6 @@ import dev.olog.material.studies.shared.ResponsiveText
 fun DetailHeaderContent(
     pagerState: PagerState,
     recipes: List<Recipe>,
-    offset: Float,
     modifier: Modifier = Modifier,
 ) {
     HorizontalPager(
@@ -79,7 +78,7 @@ fun DetailDescriptionContent(
     modifier: Modifier = Modifier,
 ) {
     Column(modifier) {
-        Divider(color = LocalContentColor.current)
+        Divider(color = BasilColors.primary500)
         Box(
             modifier = Modifier
                 .fillMaxSize()
@@ -92,6 +91,7 @@ fun DetailDescriptionContent(
                 style = MaterialTheme.typography.h6.copy(
                     fontSize = 40.sp
                 ),
+                color = BasilColors.primary800,
             )
         }
     }
@@ -113,7 +113,8 @@ fun DetailExtraContent(
             modifier = Modifier.padding(horizontal = BasilLayoutConstants.ListPaddingPadding)
         )
         Divider(
-            modifier = Modifier.padding(horizontal = BasilLayoutConstants.ListPaddingPadding)
+            modifier = Modifier.padding(horizontal = BasilLayoutConstants.ListPaddingPadding),
+            color = BasilColors.primary500,
         )
         Allergens(
             recipe = recipe,
@@ -163,10 +164,15 @@ private fun Macro(
     ) {
         Text(
             text = name,
+            style = MaterialTheme.typography.subtitle1,
+            color = BasilColors.primary500,
             fontWeight = FontWeight.Light,
         )
         Text(
             text = value,
+            style = MaterialTheme.typography.subtitle1,
+            color = BasilColors.primary800,
+            fontWeight = FontWeight.Bold,
         )
     }
 }
@@ -210,10 +216,12 @@ private fun Allergen(
         ) {
             Image(
                 imageVector = icon,
-                contentDescription = null
+                contentDescription = null,
+                colorFilter = ColorFilter.tint(BasilColors.primary800),
             )
             Text(
-                text = text
+                text = text,
+                color = BasilColors.primary800,
             )
         }
     }

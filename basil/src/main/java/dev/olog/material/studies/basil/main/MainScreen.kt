@@ -5,8 +5,8 @@ import androidx.compose.material.BottomSheetValue
 import androidx.compose.material.rememberBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
@@ -64,7 +64,6 @@ fun MainScreen(
             DetailHeaderContent(
                 pagerState = pagerState,
                 recipes = recipes,
-                offset = it,
             )
         },
         detailDescriptionContent = {
