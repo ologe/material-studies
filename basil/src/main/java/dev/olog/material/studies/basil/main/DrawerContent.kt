@@ -3,6 +3,7 @@ package dev.olog.material.studies.basil.main
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -80,9 +81,13 @@ fun DrawerContent(
                         fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Medium,
                         fontSize = 16.sp,
                         color = if (isSelected) BasilColors.primary800 else BasilColors.primary500,
-                        modifier = Modifier.clickable {
-                            onCategoryChange(category)
-                        }
+                        modifier = Modifier.clickable(
+                            indication = null,
+                            onClick = {
+                                onCategoryChange(category)
+                            },
+                            interactionSource = remember { MutableInteractionSource() }
+                        )
                     )
                 }
             }
