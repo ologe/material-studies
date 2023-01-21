@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.material.Divider
 import androidx.compose.material.LocalContentColor
 import androidx.compose.material.MaterialTheme
@@ -16,12 +15,10 @@ import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.AirplaneTicket
 import androidx.compose.material.icons.rounded.Egg
-import androidx.compose.material.icons.rounded.KeyboardArrowDown
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
-import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
@@ -33,7 +30,6 @@ import com.google.accompanist.pager.PagerState
 import dev.olog.material.studies.basil.data.model.Recipe
 import dev.olog.material.studies.basil.data.model.RecipeMacro
 import dev.olog.material.studies.basil.main.layout.BasilLayoutConstants
-import dev.olog.material.studies.basil.main.layout.BasilLayoutConstants.DownArrowSize
 import dev.olog.material.studies.basil.theme.BasilColors
 import dev.olog.material.studies.shared.ResponsiveText
 
@@ -76,18 +72,6 @@ fun DetailHeaderContent(
                     .graphicsLayer {
                         alpha = offset
                     }
-            )
-
-            Image(
-                imageVector = Icons.Rounded.KeyboardArrowDown,
-                contentDescription = null,
-                modifier = Modifier
-                    .size(DownArrowSize)
-                    .graphicsLayer {
-                        scaleX = 1.4f // mimic wide icon
-                        alpha = 1 - offset
-                    },
-                colorFilter = ColorFilter.tint(LocalContentColor.current)
             )
         }
     }

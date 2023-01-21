@@ -1,5 +1,6 @@
 package dev.olog.material.studies.basil.main.layout
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.layout.Box
@@ -12,9 +13,13 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.BottomSheetScaffold
 import androidx.compose.material.BottomSheetState
+import androidx.compose.material.LocalContentColor
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.KeyboardArrowDown
 import androidx.compose.material.rememberBottomSheetScaffoldState
 import androidx.compose.material.swipeable
 import androidx.compose.runtime.Composable
@@ -23,6 +28,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.FirstBaseline
 import androidx.compose.ui.layout.layout
@@ -133,6 +139,20 @@ fun BasilLayout(
                     modifier = Modifier.fixTextPadding(),
                 )
             }
+
+            Image(
+                imageVector = Icons.Rounded.KeyboardArrowDown,
+                contentDescription = null,
+                modifier = Modifier
+                    .align(Alignment.BottomCenter)
+                    .size(BasilLayoutConstants.DownArrowSize)
+                    .offset { layoutState.drawerOffset }
+                    .graphicsLayer {
+                        scaleX = 1.4f // mimic wide icon
+//                        alpha = 1 - offset todo
+                    },
+                colorFilter = ColorFilter.tint(LocalContentColor.current)
+            )
 
             BottomSheetScaffold(
                 scaffoldState = rememberBottomSheetScaffoldState(
