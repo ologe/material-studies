@@ -17,6 +17,7 @@ class ApplicationConventionPlugin : Plugin<Project> {
             apply("kotlin-android")
             apply("kotlin-kapt")
             apply("dagger.hilt.android.plugin")
+            apply("kotlinx-serialization")
         }
 
         configureApp {
@@ -63,6 +64,8 @@ class ApplicationConventionPlugin : Plugin<Project> {
                 implementation("glide-core")
                 implementation("glide-compose")
                 kapt("glide-compiler")
+
+                implementation("kotlin-serialization")
             }
 
         }

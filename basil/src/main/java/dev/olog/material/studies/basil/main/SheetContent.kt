@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.material.Divider
 import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
 import androidx.compose.material.icons.Icons
@@ -22,11 +21,10 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clipToBounds
-import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import dev.olog.material.studies.basil.Recipe
 import dev.olog.material.studies.basil.compose.Stepper
+import dev.olog.material.studies.basil.data.model.Recipe
 import dev.olog.material.studies.shared.animation.SlideVerticallyTransitionSpec
 
 enum class SheetTab {
@@ -135,17 +133,17 @@ private fun Directions(
             transitionSpec = SlideVerticallyTransitionSpec()
         ) {
             Column {
-                val direction = recipe.directions[it]
-                Text(
-                    text = direction.header,
-                    style = MaterialTheme.typography.h4,
-                )
-                Text(text = direction.text)
+//                val direction = recipe.instructions[it]
+//                Text(
+//                    text = direction.header,
+//                    style = MaterialTheme.typography.h4,
+//                )
+//                Text(text = direction.text)
             }
         }
         Stepper(
             selected = selectedDirection,
-            count = recipe.directions.size,
+            count = recipe.instructions.size,
             onSelectionChanged = {
                 selectedDirection = it
             },

@@ -30,8 +30,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.PagerState
-import dev.olog.material.studies.basil.Macro
-import dev.olog.material.studies.basil.Recipe
+import dev.olog.material.studies.basil.data.model.Recipe
+import dev.olog.material.studies.basil.data.model.RecipeMacro
 import dev.olog.material.studies.basil.main.layout.BasilLayoutConstants
 import dev.olog.material.studies.basil.main.layout.BasilLayoutConstants.DownArrowSize
 import dev.olog.material.studies.basil.theme.BasilColors
@@ -132,7 +132,7 @@ fun DetailExtraContent(
 
 @Composable
 private fun Macros(
-    macro: Macro,
+    macro: RecipeMacro,
     modifier: Modifier = Modifier,
 ) {
     Row(

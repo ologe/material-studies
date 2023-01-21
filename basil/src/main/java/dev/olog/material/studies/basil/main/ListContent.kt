@@ -13,7 +13,7 @@ import androidx.compose.ui.graphics.drawscope.rotate
 import com.bumptech.glide.integration.compose.GlideImage
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.PagerState
-import dev.olog.material.studies.basil.Recipe
+import dev.olog.material.studies.basil.data.model.Recipe
 import dev.olog.material.studies.basil.main.layout.BasilLayoutConstants
 import dev.olog.material.studies.basil.main.layout.BasilLayoutState
 import dev.olog.material.studies.basil.theme.BasilColors
