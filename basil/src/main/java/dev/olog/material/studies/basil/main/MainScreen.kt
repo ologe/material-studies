@@ -26,7 +26,7 @@ fun MainScreen(
     selectedCategory: RecipeCategory,
     onSelectedCategoryUpdate: (RecipeCategory) -> Unit,
     layoutState: BasilLayoutState = rememberBasilLayoutState(
-        initialState = BasilLayoutStateValue.List
+        initialState = BasilLayoutStateValue.Detail
     ),
     sheetState: BottomSheetState = rememberBottomSheetState(
         initialValue = BottomSheetValue.Collapsed,

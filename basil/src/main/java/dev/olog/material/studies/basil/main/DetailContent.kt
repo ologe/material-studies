@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Divider
 import androidx.compose.material.LocalContentColor
@@ -52,7 +53,7 @@ fun DetailHeaderContent(
         ) {
             Box(
                 modifier = Modifier.weight(1f),
-                contentAlignment = Alignment.TopCenter,
+                contentAlignment = Alignment.Center,
             ) {
                 ResponsiveText(
                     text = recipe.name,
@@ -67,33 +68,36 @@ fun DetailHeaderContent(
                 )
             }
 
-            Divider(
-                color = LocalContentColor.current,
-                modifier = Modifier
-                    .padding(horizontal = BasilLayoutConstants.ListHorizontalPadding)
-                    .graphicsLayer {
-                        alpha = offset
-                    }
-            )
+            Spacer(Modifier.height(BasilLayoutConstants.DownArrowSize))
         }
     }
 }
 
 @Composable
 fun DetailDescriptionContent(recipe: Recipe) {
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
-        contentAlignment = Alignment.Center,
-    ) {
-        ResponsiveText(
-            text = recipe.description,
-            textAlign = TextAlign.Center,
-            style = MaterialTheme.typography.h6.copy(
-                fontSize = 40.sp
-            ),
+    Column {
+        Divider(
+            color = LocalContentColor.current,
+            modifier = Modifier
+                .padding(horizontal = BasilLayoutConstants.ListPaddingPadding)
+                .graphicsLayer {
+//                    alpha = offset
+                }
         )
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp),
+            contentAlignment = Alignment.Center,
+        ) {
+            ResponsiveText(
+                text = recipe.description,
+                textAlign = TextAlign.Center,
+                style = MaterialTheme.typography.h6.copy(
+                    fontSize = 40.sp
+                ),
+            )
+        }
     }
 }
 
@@ -109,14 +113,14 @@ fun DetailExtraContent(
     ) {
         Macros(
             macro = recipe.macro,
-            modifier = Modifier.padding(horizontal = BasilLayoutConstants.ListHorizontalPadding)
+            modifier = Modifier.padding(horizontal = BasilLayoutConstants.ListPaddingPadding)
         )
         Divider(
-            modifier = Modifier.padding(horizontal = BasilLayoutConstants.ListHorizontalPadding)
+            modifier = Modifier.padding(horizontal = BasilLayoutConstants.ListPaddingPadding)
         )
         Allergens(
             recipe = recipe,
-            modifier = Modifier.padding(horizontal = BasilLayoutConstants.ListHorizontalPadding)
+            modifier = Modifier.padding(horizontal = BasilLayoutConstants.ListPaddingPadding)
         )
         Spacer(modifier = Modifier.weight(1f))
     }

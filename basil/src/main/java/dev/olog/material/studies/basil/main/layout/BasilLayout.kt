@@ -171,6 +171,7 @@ fun BasilLayout(
             ) {
                 Box(
                     Modifier
+                        // scale down when bottom sheet is expanded
                         .graphicsLayer {
                             val scale = remap(
                                 inMin = 0f, inMax = 1f,
@@ -182,29 +183,26 @@ fun BasilLayout(
                             scaleY = scale
                         },
                 ) {
-                    Box(Modifier.size(detailUpperSize)) {
+                    Box(
+                        modifier = Modifier
+                            .size(detailUpperSize)
+                    ) {
                         detailHeaderContent(layoutState.detailProgress)
                     }
 
-                    val descriptionPadding = detailUpperSize.height.toDp() - BasilLayoutConstants.DownArrowSize
-                    val descriptionHeight = (headerSize.height + listSize.height).toDp() -
-                            (detailUpperSize.height).toDp() -
-                            BasilLayoutConstants.ListHorizontalPadding
-
                     Box(
                         Modifier
-                            .padding(top = descriptionPadding)
-                            .padding(horizontal = BasilLayoutConstants.ListHorizontalPadding)
+                            .padding(horizontal = BasilLayoutConstants.ListPaddingPadding)
+                            .height((listSize.height + headerSize.height - statusBarHeight).toDp() - BasilLayoutConstants.ListPaddingPadding)
+                            .padding(top = detailUpperSize.height.toDp() - BasilLayoutConstants.DownArrowSize)
                             .fillMaxWidth()
-                            .height(descriptionHeight)
                     ) {
                         detailDescriptionContent(layoutState.detailProgress)
                     }
 
                     Box(
                         modifier = Modifier
-                            // slightly incorrect, padding is not pixel perfect
-                            .padding(top = descriptionPadding + descriptionHeight + 4.dp)
+                            .padding(top = (listSize.height + headerSize.height - statusBarHeight).toDp() - BasilLayoutConstants.ListPaddingPadding)
                     ) {
                         detailExtraContent(layoutState.detailProgress)
                     }
@@ -226,7 +224,7 @@ object BasilLayoutConstants {
     const val TopWeight = 1f
     const val BottomWeight = 2f
     const val TotalWeight = TopWeight + BottomWeight
-    val ListHorizontalPadding = 32.dp
+    val ListPaddingPadding = 32.dp
     val DownArrowSize = 48.dp
 
 }

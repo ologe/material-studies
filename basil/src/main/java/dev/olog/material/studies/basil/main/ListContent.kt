@@ -31,7 +31,7 @@ fun ListContent(
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(BasilLayoutConstants.ListHorizontalPadding)
+                .padding(BasilLayoutConstants.ListPaddingPadding)
                 .drawParallaxScrim(BasilColors.primary100, layoutState.detailProgress),
             contentAlignment = Alignment.Center,
         ) {
