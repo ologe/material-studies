@@ -33,6 +33,7 @@ fun Project.configureKotlinAndroid(
             "-opt-in=com.google.accompanist.pager.ExperimentalPagerApi",
             "-opt-in=androidx.compose.foundation.text.InternalFoundationTextApi",
             "-opt-in=androidx.compose.animation.ExperimentalAnimationApi",
+            "-opt-in=androidx.compose.ui.text.ExperimentalTextApi",
         )
     }
 

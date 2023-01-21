@@ -22,6 +22,7 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.Hyphens
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -57,6 +58,7 @@ fun DetailHeaderContent(
                     text = recipe.name,
                     style = MaterialTheme.typography.h1.copy(
                         fontSize = 100.sp,
+                        hyphens = Hyphens.Auto,
                     ),
                     textAlign = TextAlign.Center,
                     color = BasilColors.secondary800,
