@@ -32,7 +32,7 @@ fun ListContent(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(BasilLayoutConstants.ListPaddingPadding)
-                .drawParallaxScrim(BasilColors.primary100, layoutState.detailProgress),
+                .drawParallaxScrim(BasilColors.primary50, layoutState.detailProgress),
             contentAlignment = Alignment.Center,
         ) {
             val recipe = recipes[it]
