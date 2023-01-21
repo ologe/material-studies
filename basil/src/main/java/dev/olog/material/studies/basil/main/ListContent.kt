@@ -1,6 +1,8 @@
 package dev.olog.material.studies.basil.main
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
@@ -10,6 +12,7 @@ import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.rotate
+import androidx.compose.ui.platform.LocalInspectionMode
 import com.bumptech.glide.integration.compose.GlideImage
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.PagerState
@@ -33,10 +36,15 @@ fun ListContent(
             contentAlignment = Alignment.Center,
         ) {
             val recipe = recipes[it]
-            GlideImage(
-                model = recipe.imageUrl,
-                contentDescription = null,
-            )
+            if (LocalInspectionMode.current) {
+                Spacer(modifier = Modifier.matchParentSize().background(Color.Magenta))
+            } else {
+                GlideImage(
+                    model = recipe.imageUrl,
+                    contentDescription = null,
+                    modifier = Modifier.matchParentSize()
+                )
+            }
         }
     }
 }

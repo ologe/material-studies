@@ -14,7 +14,6 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.BottomSheetScaffold
 import androidx.compose.material.BottomSheetState
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.rememberBottomSheetScaffoldState
 import androidx.compose.material.swipeable
@@ -22,12 +21,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.composed
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.text.PlatformTextStyle
+import androidx.compose.ui.layout.FirstBaseline
+import androidx.compose.ui.layout.layout
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import dev.olog.material.studies.basil.main.layout.BasilLayoutConstants.BottomWeight
 import dev.olog.material.studies.basil.main.layout.BasilLayoutConstants.TopWeight
 import dev.olog.material.studies.basil.main.layout.BasilLayoutConstants.TotalWeight
@@ -121,10 +125,12 @@ fun BasilLayout(
             ) {
                 Text(
                     text = "BASiL",
-                    style = MaterialTheme.typography.h1.copy(
-                        platformStyle = PlatformTextStyle(includeFontPadding = false)
-                    ),
+                    fontSize = 68.sp,
+                    fontWeight = FontWeight.SemiBold,
                     textAlign = TextAlign.Center,
+                    letterSpacing = 5.sp,
+                    color = BasilColors.primary800,
+                    modifier = Modifier.fixTextPadding(),
                 )
             }
 
@@ -196,10 +202,22 @@ fun BasilLayout(
 
 object BasilLayoutConstants {
 
-    const val TopWeight = 1.2f
+    const val TopWeight = 1f
     const val BottomWeight = 2f
     const val TotalWeight = TopWeight + BottomWeight
     val ListHorizontalPadding = 32.dp
     val DownArrowSize = 48.dp
 
+}
+
+private fun Modifier.fixTextPadding(): Modifier = composed {
+    val additionalHeight = rememberStatusBarHeight() - with(LocalDensity.current) { 18.dp.toPx() }
+
+    Modifier.layout { measurable, constraints ->
+        val placeable = measurable.measure(constraints)
+        val firstBaseline = placeable[FirstBaseline]
+        layout(placeable.width, placeable.height) {
+            placeable.place(0, firstBaseline - placeable.height + additionalHeight.roundToInt())
+        }
+    }
 }

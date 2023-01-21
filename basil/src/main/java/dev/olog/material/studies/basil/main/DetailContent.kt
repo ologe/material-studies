@@ -42,8 +42,12 @@ fun DetailHeaderContent(
     pagerState: PagerState,
     recipes: List<Recipe>,
     offset: Float,
+    modifier: Modifier = Modifier,
 ) {
-    HorizontalPager(state = pagerState) {
+    HorizontalPager(
+        modifier = modifier,
+        state = pagerState
+    ) {
         val recipe = recipes[it]
         Column(
             modifier = Modifier.fillMaxSize(),
@@ -51,11 +55,13 @@ fun DetailHeaderContent(
         ) {
             Box(
                 modifier = Modifier.weight(1f),
-                contentAlignment = Alignment.Center,
+                contentAlignment = Alignment.TopCenter,
             ) {
                 ResponsiveText(
                     text = recipe.name,
-                    style = MaterialTheme.typography.h1,
+                    style = MaterialTheme.typography.h1.copy(
+                        fontSize = 100.sp,
+                    ),
                     textAlign = TextAlign.Center,
                     color = BasilColors.secondary800,
                     maxLines = 2,
