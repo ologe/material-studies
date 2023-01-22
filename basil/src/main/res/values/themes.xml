@@ -3,5 +3,6 @@
     <style name="Theme.Basil" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowBackground">#FFFBE6</item>
     </style>
 </resources>

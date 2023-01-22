@@ -214,7 +214,7 @@ fun BasilLayout(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(statusBarHeight.toDp())
-                    .background(BasilColors.secondary50)
+                    .background(Color(0xFF_e6e3cc))
             )
         }
     }
