@@ -1,5 +1,5 @@
 [versions]
-gradle = "7.4.0-rc01"
+gradle = "7.4.0"
 kotlin = "1.7.20"
 kotlin-serialization = "1.4.1"
 dagger = "2.44.2"
