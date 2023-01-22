@@ -21,7 +21,6 @@ import dev.olog.material.studies.basil.main.layout.rememberBasilLayoutState
 import dev.olog.material.studies.basil.theme.BasilTheme
 import dev.olog.material.studies.shared.DevicePreviews
 import dev.olog.material.studies.shared.animation.AnimationUtils
-import dev.olog.material.studies.shared.fraction
 import kotlinx.coroutines.launch
 
 @Composable
@@ -71,7 +70,8 @@ fun MainScreen(
             DetailDescriptionContent(
                 recipe = selectedRecipe,
                 modifier = Modifier.graphicsLayer {
-                    alpha = AnimationUtils.translateToEnd(it, .5f)
+                    val fraction = layoutState.detailFraction
+                    alpha = AnimationUtils.translateToEnd(fraction, .5f)
                 }
             )
         },
@@ -79,14 +79,15 @@ fun MainScreen(
             DetailExtraContent(
                 recipe = selectedRecipe,
                 modifier = Modifier.graphicsLayer {
-                    alpha = AnimationUtils.translateToEnd(it, .5f)
+                    val fraction = layoutState.detailFraction
+                    alpha = AnimationUtils.translateToEnd(fraction, .5f)
                 }
             )
         },
         sheetContent = {
             SheetContent(
                 recipe = selectedRecipe,
-                fraction = sheetState.fraction,
+                sheetState = sheetState,
                 expand = {
                     scope.launch { sheetState.expand() }
                 }

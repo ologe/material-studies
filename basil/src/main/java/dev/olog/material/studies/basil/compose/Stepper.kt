@@ -106,14 +106,6 @@ fun Stepper(
             modifier = Modifier.verticalScroll(scrollState)
         ) {
             repeat(count) {
-                val top = with(density) { stepSize.toPx() * it }
-                val bottom = with(density) { stepSize.toPx() * (it + 1) }
-                // use some delta value to check a little inside the bounds
-                val delta = with(density) { stepSize.toPx() / 3 }
-                val isUnderIndicator =
-                    (top + delta) >= topOffset.value && (bottom - delta) <= bottomOffset.value
-                val scale = if (isUnderIndicator) 1.3f else 1f
-
                 Box(
                     modifier = Modifier
                         .size(stepSize)
@@ -123,6 +115,13 @@ fun Stepper(
                             onClick = { onSelectionChanged(it) }
                         )
                         .graphicsLayer {
+                            val top = stepSize.toPx() * it
+                            val bottom = stepSize.toPx() * (it + 1)
+                            // use some delta value to check a little inside the bounds
+                            val delta = stepSize.toPx() / 3
+                            val isUnderIndicator =
+                                (top + delta) >= topOffset.value && (bottom - delta) <= bottomOffset.value
+                            val scale = if (isUnderIndicator) 1.3f else 1f
                             scaleX = scale
                             scaleY = scale
                         },
@@ -135,13 +134,12 @@ fun Stepper(
 
 
         val color = LocalContentColor.current.copy(alpha = .7f)
-        val cornerSize = with(density) { stepSize.toPx() }
         Canvas(Modifier.matchParentSize()) {
             drawRoundRect(
                 color = color,
                 topLeft = Offset(0f, topOffset.value - scrollState.value),
                 size = Size(size.width, bottomOffset.value - topOffset.value),
-                cornerRadius = CornerRadius(cornerSize, cornerSize),
+                cornerRadius = CornerRadius(stepSize.toPx(), stepSize.toPx()),
                 style = Stroke(2.dp.toPx())
             )
         }

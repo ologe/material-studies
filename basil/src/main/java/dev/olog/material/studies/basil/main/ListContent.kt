@@ -44,7 +44,7 @@ fun ListContent(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(BasilLayoutConstants.ListPaddingPadding)
-                .drawParallaxScrim(BasilColors.primary50, layoutState.detailProgress)
+                .drawParallaxScrim(BasilColors.primary50) { layoutState.detailFraction }
                 .clipToBounds()
                 .graphicsLayer {
                     scaleX = 1.1f
@@ -76,7 +76,7 @@ fun ListContent(
 // TODO triggers lots of recompositions
 private fun Modifier.drawParallaxScrim(
     color: Color,
-    progress: Float,
+    progress: () -> Float,
 ): Modifier = composed {
     val easing = rememberDecelerateEasing(.6f)
 
@@ -85,7 +85,7 @@ private fun Modifier.drawParallaxScrim(
         rotate(180f) {
             drawRect(
                 color = color,
-                size = Size(size.width, size.height * easing.transform(progress))
+                size = Size(size.width, size.height * easing.transform(progress()))
             )
         }
     }

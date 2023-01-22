@@ -57,11 +57,11 @@ fun BasilLayout(
     layoutState: BasilLayoutState,
     sheetState: BottomSheetState,
     modifier: Modifier = Modifier,
-    drawerContent: @Composable (Float) -> Unit,
+    drawerContent: @Composable () -> Unit,
     listContent: @Composable () -> Unit,
-    detailHeaderContent: @Composable (Float) -> Unit,
-    detailDescriptionContent: @Composable (Float) -> Unit,
-    detailExtraContent: @Composable (Float) -> Unit,
+    detailHeaderContent: @Composable () -> Unit,
+    detailDescriptionContent: @Composable () -> Unit,
+    detailExtraContent: @Composable () -> Unit,
     sheetContent: @Composable ColumnScope.() -> Unit,
 ) {
     val statusBarHeight = rememberStatusBarHeight()
@@ -110,7 +110,7 @@ fun BasilLayout(
                     .offset(y = -drawerSize.height.toDp())
                     .offset { layoutState.drawerOffset }
             ) {
-                drawerContent(layoutState.drawerProgress)
+                drawerContent()
             }
 
             // list
@@ -150,7 +150,7 @@ fun BasilLayout(
                     .offset { layoutState.drawerOffset }
                     .graphicsLayer {
                         scaleX = 1.4f // mimic wide icon
-                        alpha = AnimationUtils.translateToEnd(1f - layoutState.detailProgress, .5f)
+                        alpha = AnimationUtils.translateToEnd(1f - layoutState.detailFraction, .5f)
                     },
                 colorFilter = ColorFilter.tint(LocalContentColor.current)
             )
@@ -188,7 +188,7 @@ fun BasilLayout(
                         modifier = Modifier
                             .size(detailUpperSize)
                     ) {
-                        detailHeaderContent(layoutState.detailProgress)
+                        detailHeaderContent()
                     }
 
                     Box(
@@ -198,14 +198,14 @@ fun BasilLayout(
                             .padding(top = detailUpperSize.height.toDp() - BasilLayoutConstants.DownArrowSize)
                             .fillMaxWidth()
                     ) {
-                        detailDescriptionContent(layoutState.detailProgress)
+                        detailDescriptionContent()
                     }
 
                     Box(
                         modifier = Modifier
                             .padding(top = (listSize.height + headerSize.height - statusBarHeight).toDp() - BasilLayoutConstants.ListPaddingPadding)
                     ) {
-                        detailExtraContent(layoutState.detailProgress)
+                        detailExtraContent()
                     }
                 }
             }

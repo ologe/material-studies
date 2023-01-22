@@ -19,7 +19,7 @@ class BasilLayoutState(
     initialState: BasilLayoutStateValue,
 ) : SwipeableState<BasilLayoutStateValue>(initialState) {
 
-    val drawerProgress: Float
+    val drawerFraction: Float
         get() = when {
             progress.from == List && progress.to == Drawer -> progress.fraction
             progress.from == Drawer && progress.to == List -> 1 - progress.fraction
@@ -27,7 +27,7 @@ class BasilLayoutState(
             else -> 0f
         }
 
-    val detailProgress: Float
+    val detailFraction: Float
         get() = when {
             progress.from == List && progress.to == Detail -> progress.fraction
             progress.from == Detail && progress.to == List -> 1 - progress.fraction

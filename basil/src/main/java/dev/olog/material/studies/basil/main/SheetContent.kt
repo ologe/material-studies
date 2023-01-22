@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.BottomSheetState
 import androidx.compose.material.Divider
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
@@ -35,6 +36,7 @@ import dev.olog.material.studies.basil.main.layout.BasilLayoutConstants
 import dev.olog.material.studies.basil.theme.BasilColors
 import dev.olog.material.studies.shared.animation.AnimationUtils
 import dev.olog.material.studies.shared.animation.SlideVerticallyTransitionSpec
+import dev.olog.material.studies.shared.fraction
 
 enum class SheetTab {
     Ingredients,
@@ -44,7 +46,7 @@ enum class SheetTab {
 @Composable
 fun SheetContent(
     recipe: Recipe,
-    fraction: Float,
+    sheetState: BottomSheetState,
     modifier: Modifier = Modifier,
     expand: () -> Unit,
 ) {
@@ -55,6 +57,7 @@ fun SheetContent(
         Divider(
             color = BasilColors.primary50,
             modifier = Modifier.graphicsLayer {
+                val fraction = sheetState.fraction
                 alpha = 1 - AnimationUtils.translateToStart(fraction, .3f)
             }
         )
@@ -64,6 +67,7 @@ fun SheetContent(
         }
         Column(
             Modifier.graphicsLayer {
+                val fraction = sheetState.fraction
                 alpha = AnimationUtils.translateToEnd(fraction, .4f)
             }
         ) {
