@@ -27,6 +27,7 @@ import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import dev.olog.material.studies.basil.compose.DottedLine
 import dev.olog.material.studies.basil.compose.Stepper
 import dev.olog.material.studies.basil.data.model.Recipe
@@ -118,7 +119,9 @@ private fun Ingredients(
     modifier: Modifier = Modifier,
 ) {
     Column(
-        modifier = modifier.padding(16.dp),
+        modifier = modifier
+            .fillMaxSize()
+            .padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(32.dp),
     ) {
         for (ingredient in recipe.ingredients) {
@@ -172,19 +175,22 @@ private fun Directions(
         modifier = modifier
             .fillMaxSize()
             .clipToBounds()
+            .padding(16.dp)
     ) {
         AnimatedContent(
-            modifier = Modifier.weight(1f),
+            modifier = Modifier.weight(1f).padding(end = 16.dp),
             targetState = selectedDirection,
             transitionSpec = SlideVerticallyTransitionSpec()
         ) {
             Column {
-//                val direction = recipe.instructions[it]
-//                Text(
-//                    text = direction.header,
-//                    style = MaterialTheme.typography.h4,
-//                )
-//                Text(text = direction.text)
+                val direction = recipe.instructions[it]
+                Text(
+                    text = direction,
+                    style = MaterialTheme.typography.subtitle1,
+                    fontSize = 25.sp,
+                    fontWeight = FontWeight.Normal,
+                    lineHeight = 35.sp,
+                )
             }
         }
         Stepper(
@@ -196,7 +202,8 @@ private fun Directions(
             render = {
                 Text(
                     text = (it + 1).toString().padStart(2, '0'),
-                    fontWeight = FontWeight.ExtraBold,
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 14.sp,
                 )
             }
         )
