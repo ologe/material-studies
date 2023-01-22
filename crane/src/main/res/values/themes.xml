@@ -1,0 +1,6 @@
+<resources>
+
+    <style name="Theme.Crane" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+
+    </style>
+</resources>

@@ -25,6 +25,7 @@
             <option value="$PROJECT_DIR$/basil" />
             <option value="$PROJECT_DIR$/build-logic" />
             <option value="$PROJECT_DIR$/build-logic/convention" />
+            <option value="$PROJECT_DIR$/crane" />
             <option value="$PROJECT_DIR$/shared" />
           </set>
         </option>

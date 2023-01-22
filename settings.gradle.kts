@@ -19,4 +19,5 @@ dependencyResolutionManagement {
 rootProject.name = "material-studies"
 
 include(":basil")
+include(":crane")
 include(":shared")
